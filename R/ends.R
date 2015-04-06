@@ -1,0 +1,229 @@
+#==============================================================================
+#
+#  internal functions                                                [The Ends]
+#
+#==============================================================================
+
+
+#==============================================================================
+#
+# End of vegetation priod according to von Wilpert
+#
+# orthodox are 3 criteria: short day, temperature & drought criterion
+#
+# here as usual only short day and temperature citerion are considered
+#
+# temperature criterion
+# - 7 day moving average of daily mean temperatures at least
+#   5 consecutive days under under 10° C
+# - if afterwards more than 5 consecutive days 7 day moving average over 10°C
+#   vegetation period is restarted
+#
+# short day criterion
+# - last day of the vegetation period is DOY 279 (5th of October in leap years)
+#
+# Reference:
+#   von Wilpert, K (1990): Die Jahrringstruktur von Fichten in Abhängigkeit vom
+#   Bodenwasserhaushalt auf Pseudogley un Parabraunerde: Ein Methodenkonzept
+#   zur Erfassung standortsspezifischer Wasserstreßdispostion. Freiburger
+#   Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691. Seiten: 106-108
+#
+#==============================================================================
+.end_vonWilpert <- function(df, Treshold=10, LastDOY=279){
+  # Assumptions:
+  # - data.frame 'df' contains year, DOY, Tavg
+  # - time range covers at least veg.start till 279 (save side DOY 1-279)
+
+  # Preparation
+  #----------------------------------------------------------------------------
+  # moving average with windows size 7 (symetric)
+  df$TmovAvg <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=2))
+
+  # mark periods ('cold', 'warm') before LastDOY and 'ignore' the rest
+  df$period <- ifelse(df$DOY > LastDOY, 'ignore',
+                      ifelse(df$TmovAvg < Treshold, 'cold', 'warm'))
+
+  # determine continous strides of warm/cold by using run length encoding
+  # cold period if stride at least 5
+  # warm period if stride more than 5
+  temp <- rle(df$period)
+  temp$values[temp$lengths < 5] <- 'ignore'
+  temp$values[temp$values == 'warm' & temp$lengths < 6] <- 'ignore'
+  temp$values[is.na(temp$values)] <- 'ignore'
+  df$period <- inverse.rle(temp)
+
+
+  # Searching for the end
+  #----------------------------------------------------------------------------
+  # last warm period per year
+  last.warm <- tapply(df$DOY[df$period == 'warm'],
+                      df$year[df$period == 'warm'],
+                      FUN=max)
+  last.warm <- data.frame(year=as.integer(row.names(last.warm)), DOY=last.warm)
+
+  # loop over all years
+  years <- unique(df$year)
+  end <- sapply(years,
+                # cold period after last.warm? (yes: min(cold)+4; no: LastDOY)
+                FUN=function(x) {
+                  # cold period after warm period?
+                  temp <- df[df$year == x & df$period == 'cold', 'DOY']
+                  temp <- temp[temp > last.warm[last.warm$year == x, 'DOY']]
+                  if(length(temp) > 0){
+                    # 5th day of cold period is the end
+                    min(temp) + 4
+                  } else {
+                    # no colds after last.warm ->  default end
+                    LastDOY
+                  }
+                }
+  )
+
+  return(end)
+}
+
+
+
+#==============================================================================
+#
+# End of vegetation periode according to LWF-BROOK90
+#
+# - starting search at June 1st
+# - propose end if 7-day moving average temperature is below 10°C
+#   on 5 consecutive days
+# - restart search for end if there is a warm periode (7-day moving average
+#   temperature above 10°C for 5 consecutive days
+# - nevertheless the vegetation periode stops latest at DOY 279
+#============================================================================
+.end_LWF_BROOK90 <- function(df, Tmin=10, LastDOY=279){
+  # Assumptions:
+  # - data.frame 'df' contains year, DOY, Tavg
+  # - time range covers at least veg.start till 279 (save side DOY 1-279)
+
+  # moving average with windows size 7 (only backwards looking)
+  df$movAvgT <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=1))
+
+  # introduce 2 counters 'cold' and 'warm'  ('ignore' the rest)
+  df$period <- ifelse(df$month > 5 & df$DOY <= LastDOY,
+                      ifelse(df$movAvgT <= Tmin, 'cold', 'warm'),
+                      'ignore')
+
+  # reset one counter if the other enters the stage by using run length encoding
+  # cold/warm periode only valid if >4    => ignore all counts below 5
+  temp <- rle(df$period)
+  temp$values[temp$lengths < 5] <- 'ignore'
+  temp$values[is.na(temp$values)] <- 'ignore'
+  df$period <- inverse.rle(temp)
+
+
+  # Searching the end
+  #----------------------------------------------------------------------------
+  # last warm period per year
+  last.warm <- tapply(df$DOY[df$period == 'warm'],
+                      df$year[df$period == 'warm'],
+                      FUN=max)
+  last.warm <- data.frame(year=as.integer(row.names(last.warm)), DOY=last.warm)
+
+  # loop over all years
+  years <- unique(df$year)
+  end <- sapply(years,
+                # cold period after last.warm? (yes: min(cold)+4; no: LastDOY)
+                FUN=function(x) {
+                  # cold period after warm period?
+                  temp <- df[df$year == x & df$period == 'cold', 'DOY']
+                  temp <- temp[temp > last.warm[last.warm$year == x, 'DOY']]
+                  if(length(temp) > 0){
+                    # 5th day of cold period is the end
+                    min(temp) + 4
+                  } else {
+                    # no colds after last.warm ->  default end
+                    LastDOY
+                  }
+                }
+  )
+  return(end)
+}
+
+
+
+#==============================================================================
+# End of vegetation priod according to Nuske & Albert
+#
+# 2 criteria: temperature & short day criterion
+#
+# temperature criterion
+# 7 day moving average of daily mean temperatures
+# end if 5 consecutive days under under 5° C
+# start the search at 1st of July / vegetation start
+#
+# short day criterion
+# last day of the vegetation period is 5th of October
+#==============================================================================
+.end_NuskeAlbert <- function(df, start, Tmin=5){
+  # Assumptions:
+  # - data.frame 'df' contains year, DOY, Tavg
+  # - time range covers at least veg.start/jul1 till oct5 (save side DOY 1-279)
+
+
+  # Calculate correct DOYs
+  # 1. July is DOY 182 and DOY 183 in leap years
+  # 5. October is DOY 278 and 279 in leap years
+  years <- unique(df$year)
+  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183, 182)
+
+  searchstart = ifelse(!is.na(start) & start > jul1,
+                       start, jul1)
+  oct5 = ifelse((years%%4==0 & years%%100!=0) |
+                  years%%400==0, 279, 278)
+
+  # 7 day moving average under 5° and after 1 July / vegperiod start
+  # moving average with windows size 7 (symetric window)
+  df$TmovAvg <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=2))
+  df$period <- ifelse(df$TmovAvg < Tmin, 1, 0)
+
+  # ends on the 5th day  if no 5 day streak end on 5oct
+  end <- oct5
+  for(i in 1:length(years)){
+    temp <- df[df$year == years[i] & df$DOY >= searchstart[i] & df$DOY <= oct5[i], ]
+
+    temp$five <-  as.numeric(filter(temp$period, rep(1, 5), sides=1))
+    possible.end <- temp[!is.na(temp$five) & temp$five == 5, "DOY"]
+    if(length(possible.end) > 0)
+      end[i] <- min(possible.end)
+  }
+  return(end)
+}
+
+
+#==============================================================================
+#
+# End of vegetation periode according to standard climatology procedure
+#
+# - temperature below 5°C on 5 consecutive days
+#
+# Reference:
+#  e.g.  FORMAYER, H., HAAS, P., HOFSTÄTTER, M., RADANOVICS, S. & KROMP-KOLB,
+#        H. (2007): Räumlich und zeitlich hochaufgelöste Temperaturszenarien
+#        für Wien und ausgewählte Analysen bezüglich Adaptionsstrategien.
+#        – BOKU-Met Bericht, 82 S.
+#==============================================================================
+.end_std_climatology <- function(df, Tmin=5){
+  # Assumptions:
+  # - data.frame 'df' contains year, DOY, Tavg
+
+  # mark days colder than 5°C
+  df$period <- ifelse(df$Tavg < Tmin, 1, 0)
+
+  # find first five day streak per year
+  years <- unique(df$year)
+  end <- integer(length(years))
+  for(i in 1:length(years)){
+    temp <- df[df$year == years[i], ]
+    temp$five <-  as.numeric(filter(temp$period, rep(1, 5), sides=1))
+    possible.end <- temp[!is.na(temp$five) & temp$five == 5, "DOY"]
+    if(length(possible.end) > 0)
+      end[i] <- min(possible.end)
+  }
+
+  return(end)
+}

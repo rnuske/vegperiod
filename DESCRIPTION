@@ -1,0 +1,16 @@
+Package: vegperiod
+Type: Package
+Title: Vegetation Period
+Author: Robert Nuske <robert.nuske@nw-fva.de>
+Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
+Depends: R (>= 3.1.0)
+Description: Calculate start/end of vegetation period of forest trees.
+License: GPL (>= 3)
+Encoding: UTF-8
+LazyLoad: yes
+URL: http://computerfoerster.de/r-pkgs
+Authors@R: c(person(given="Robert", family="Nuske",
+        email="robert.nuske@nw-fva.de", role=c("aut", "cre")))
+Version: 0.1.0
+Date: 2015-04-06
+Packaged: 2015-04-06 20:02:57 UTC; rnuske

@@ -1,0 +1,5 @@
+.gitignore
+NEWS.md
+^\.Rproj\.user$
+^.*\.Rproj$
+^\.directory$
