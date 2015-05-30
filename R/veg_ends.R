@@ -27,12 +27,11 @@
 #   Bodenwasserhaushalt auf Pseudogley un Parabraunerde: Ein Methodenkonzept
 #   zur Erfassung standortsspezifischer Wasserstreßdispostion. Freiburger
 #   Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691. Seiten: 106-108
-#
 #==============================================================================
 .end_vonWilpert <- function(df, Treshold=10, LastDOY=279){
   # Assumptions:
-  # - data.frame 'df' contains year, DOY, Tavg
-  # - time range covers at least veg.start till 279 (save side DOY 1-279)
+  # - data.frame 'df' contains month, DOY, Tavg
+  # - DOYs at least till 279
 
   # Preparation
   #----------------------------------------------------------------------------
@@ -51,7 +50,6 @@
   temp$values[temp$values == 'warm' & temp$lengths < 6] <- 'ignore'
   temp$values[is.na(temp$values)] <- 'ignore'
   df$period <- inverse.rle(temp)
-
 
   # Searching for the end
   #----------------------------------------------------------------------------
@@ -78,10 +76,8 @@
                   }
                 }
   )
-
   return(end)
 }
-
 
 
 #==============================================================================
@@ -94,18 +90,25 @@
 # - restart search for end if there is a warm periode (7-day moving average
 #   temperature above 10°C for 5 consecutive days
 # - nevertheless the vegetation periode stops latest at DOY 279
-#============================================================================
+#
+# Reference (commonly used):
+#  Hammel, K. & Kennel, M. (2001): Charakterisierung und Analyse der
+#  Wasserverfügbarkeit und des Wasserhaushalts von Waldstandorten in Bayern mit
+#  dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München, 185.
+#==============================================================================
 .end_LWF_BROOK90 <- function(df, Tmin=10, LastDOY=279){
   # Assumptions:
-  # - data.frame 'df' contains year, DOY, Tavg
-  # - time range covers at least veg.start till 279 (save side DOY 1-279)
+  # - data.frame 'df' contains month, DOY, Tavg
+  # - DOYs at least till 279
 
-  # moving average with windows size 7 (only backwards looking)
-  df$movAvgT <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=1))
+  # moving average with windows size 7 (only backward looking)
+  #   round to mimic lower precision of VBA version
+  #   (14 digits might be okay, 10 is on the save side)
+  df$movAvgT <- round(as.numeric(filter(df$Tavg, rep(1/7,7), sides=1)), 10)
 
   # introduce 2 counters 'cold' and 'warm'  ('ignore' the rest)
   df$period <- ifelse(df$month > 5 & df$DOY <= LastDOY,
-                      ifelse(df$movAvgT <= Tmin, 'cold', 'warm'),
+                      ifelse(df$movAvgT < Tmin, 'cold', 'warm'),
                       'ignore')
 
   # reset one counter if the other enters the stage by using run length encoding
@@ -158,10 +161,14 @@
 #
 # short day criterion
 # last day of the vegetation period is 5th of October
+#
+# Reference for Tmin=5:
+#  Walther, A. and Linderholm, H.W. (2006) A comparison of growing season
+#  indices for the Greater Baltic Area. Int J Biometeorol 51: 107-118
 #==============================================================================
 .end_NuskeAlbert <- function(df, start, Tmin=5){
   # Assumptions:
-  # - data.frame 'df' contains year, DOY, Tavg
+  # - data.frame 'df' contains month, DOY, Tavg
   # - time range covers at least veg.start/jul1 till oct5 (save side DOY 1-279)
 
 
@@ -197,30 +204,43 @@
 
 #==============================================================================
 #
-# End of vegetation periode according to standard climatology procedure
+# End of vegetation periode according to standard meteo procedure
+#  aka 'ETCCDI' indix
 #
-# - temperature below 5°C on 5 consecutive days
+# first span of at least 6 consecutive days with daily mean temperature TG > 5°C
+# and first span after July 1st of 6 consecutive days with TG < 5°C.
 #
 # Reference:
-#  e.g.  FORMAYER, H., HAAS, P., HOFSTÄTTER, M., RADANOVICS, S. & KROMP-KOLB,
-#        H. (2007): Räumlich und zeitlich hochaufgelöste Temperaturszenarien
-#        für Wien und ausgewählte Analysen bezüglich Adaptionsstrategien.
-#        – BOKU-Met Bericht, 82 S.
+#  often known as Growing season Length (GSL) e.g.
+#   - Definition recommended by the CCl/CLIVAR/JCOMM Expert Team on Climate
+#     Change Detection and Indices (ETCCDI)
+#     http://etccdi.pacificclimate.org/list_27_indices.shtml
+#     http://www.climdex.org/indices.html
+#   - European Climate Assessment (ECA)
+#     http://eca.knmi.nl/indicesextremes/indicesdictionary.php
+#   - Frich, P. et al. (2002): Observed coherent changes in climatic extremes
+#     during the second half of the twentieth century. Climate Research (19):
+#     193-212.   http://www.climateknowledge.org/heat_waves/
+#     Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf
 #==============================================================================
-.end_std_climatology <- function(df, Tmin=5){
+.end_std_meteo <- function(df, Tmin=5){
   # Assumptions:
-  # - data.frame 'df' contains year, DOY, Tavg
+  # - data.frame 'df' contains month, DOY, Tavg
+  # - full years
+
+  # 1. July is DOY 182 and DOY 183 in leap years
+  years <- unique(df$year)
+  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183, 182)
 
   # mark days colder than 5°C
   df$period <- ifelse(df$Tavg < Tmin, 1, 0)
 
-  # find first five day streak per year
-  years <- unique(df$year)
+  # find first six day span per year
   end <- integer(length(years))
   for(i in 1:length(years)){
-    temp <- df[df$year == years[i], ]
-    temp$five <-  as.numeric(filter(temp$period, rep(1, 5), sides=1))
-    possible.end <- temp[!is.na(temp$five) & temp$five == 5, "DOY"]
+    temp <- df[df$year == years[i] & df$DOY > jul1[i], ]
+    temp$six <-  as.numeric(filter(temp$period, rep(1, 6), sides=1))
+    possible.end <- temp[!is.na(temp$six) & temp$six == 6, "DOY"]
     if(length(possible.end) > 0)
       end[i] <- min(possible.end)
   }

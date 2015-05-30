@@ -2,61 +2,129 @@
 % Please edit documentation in R/vegperiod.R
 \name{vegperiod}
 \alias{vegperiod}
-\title{Determine vegetation period.}
+\title{Determine start & end of vegetation periods.}
 \usage{
-vegperiod(dates, Tavg, species, method.start, method.end, first.avg = 0,
-  temp.sum = FALSE)
+vegperiod(dates, Tavg, start.method, end.method, est.prev = 0,
+  Tsum.out = FALSE, ...)
 }
 \arguments{
-\item{dates}{vector calender dates as object of class \code{Date}.
-Same length as Tavg.}
+\item{dates}{vector of calender dates (objects of class \code{Date}
+or something understood by \code{\link[base]{as.Date}}). Must contain
+entire years if \code{est.prev > 0} else the first year may
+comprise only November and December.}
 
-\item{Tavg}{vector of daily average air temperatures. Same length as dates.}
+\item{Tavg}{vector of daily average air temperatures. Same length as
+\code{dates}.}
 
-\item{species}{name of tree species. Needed for start of vegetation
-calculation according to Menzel (1997). Must be one of "Larix decidua",
-"Picea abies (frueh)", "Picea abies (spaet)",
-"Picea abies (noerdl.)", "Picea omorika", "Pinus sylvestris",
-"Betula pubescens", "Quercus robur", "Quercus petraea",
-"Fagus sylvatica".}
+\item{start.method}{name of method to use for vegetation start.
+One of \samp{"Menzel"} (needs additional argument
+\code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
+For further discussion see Details.}
 
-\item{method.start}{name of method used to calculate the start of vegetation
-period. At the moment one of "StdClimatology", "Menzel".}
+\item{end.method}{name of method to use for vegetation end.
+One of \samp{"vonWilpert"}, \samp{"LWF-BROOK90"},
+\samp{"NuskeAlbert"} and \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
+For further discussion see Details.}
 
-\item{method.end}{name method used to calculate the end of vegetaion period.
-At the moment one of "vonWilpert", "LWF-BROOK90", "NuskeAlbert" and
-"StdClimatology".}
+\item{est.prev}{number of years to \strong{est}imate \strong{prev}ious year's
+       chill days for the first year
+       [required if \code{start.method='Menzel'} ignored otherwise].
 
-\item{first.avg}{integer. Guesstimate number of previous years'
-\code{cold days} (needed by Menzel, 1997) from the \code{first.avg}
-first years. If \code{first.avg=0}, first year is only used for
-calculating \code{cold days} and discarded afterwards ->
-losing one year from the provided data.}
+       \samp{Menzel} requires the number of chill days of previous November &
+       December. If \code{est.prev = 0} the first year is used to get
+       the previous year's chill days and dropped afterwards. Thus, a year
+       from the time series is lost. To circumvent the loss,
+       \code{est.prev = n} estimates the previous year's chill days for the
+       first year from the average of \code{n} first years of the time series.}
 
-\item{temp.sum}{boolean. Return the sum of day degrees for the vegetation
-  period.}
+\item{Tsum.out}{boolean. Return the sum of day degrees within
+vegetation period.}
+
+\item{species}{name of a tree species [required if
+       \code{start.method='Menzel'}].
+       Menzel's method is species specific.
+       The argument must be one of \samp{"Larix decidua"},
+       \samp{"Picea abies (frueh)"}, \samp{"Picea abies (spaet)"},
+       \samp{"Picea abies (noerdl.)"}, \samp{"Picea omorika"},
+       \samp{"Pinus sylvestris"}, \samp{"Betula pubescens"},
+       \samp{"Quercus robur"}, \samp{"Quercus petraea"},
+       \samp{"Fagus sylvatica"}.}
 }
 \value{
 Returns a data.frame with year and DOY of start and end day of
-  vegetation period. If \code{temp.sum=TRUE}, the data.frame contains an
-  additional column with the sum of day degree within the vegetation period.
+  vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
+  additional column with the sum of day degrees within vegetation periods.
 }
 \description{
-\code{vegperiod} calculates start and end day of vegetation period based on
-daily average air temperature and the day of the year (DOY).
+Calculate start and end date of vegetation periods based on daily average
+air temperature and the day of the year (DOY).
+The sum of day degrees within vegetation periods is calcuated for
+convenience sake.
 }
 \details{
-Implemented are at moment the simple standard procedure used in climatology
-(FORMAYER et al., 2007), vegetation start according to Menzel (1997) and
-vegetation end accodring to von Wilpert (1990), a reimplementation of
-vonWilpert found in LWF-BROOK90 and a very simple method by Nuske & Albert.
+The method \samp{"Menzel"} to determine vegetation start dates implements
+the algorithm described in Menzel (1997). The method is parameterized for
+10 common tree species.
+\samp{"StdMeteo"} resp. \samp{"ETCCDI"} is a simple threshold based
+procedure as defined by the Expert Team on Climate Change Detection and
+Indices (cf. ETCCDI and Ferch et al., 2002) leading to quite early
+vegetation starts.
 
-The LWF-BROOK90 reimplementation was tested against the original code using
-data from a range of different climate stations.
+The end method \samp{"vonWilpert"} is based on von Wilpert (1990). It was
+originally developed for "Picea abies" in the Black Forest but is currently
+used for all tree species throughout Germany. As usual, the rules regarding
+the soilmatrix are neglected in this implementation.
+\samp{"LWF-BROOK90"} is -for the sake of convinience- a reimplementation of
+the LWF-BROOK90 VBA version (Hammel & Kennel, 2001). Their interpretation of
+von Wilpert  (1990) and the somewhat lower precision of VBA was mimicked.
+This implementation was tested against version 3.4 (no deviation!).
+\samp{"NuskeAlbert"} provide a very simple method which is inspired by
+standard climatological procedures but employes a 7 day moving average and a
+5 °C threshold (cf. Walther & Linderholm, 2006).
+\samp{"StdMeteo"} resp. \samp{"ETCCDI"} is a simple threshold based
+procedure as defined by the Expert Team on Climate Change Detection and
+Indices (cf. ETCCDI and Ferch et al., 2002) leading to quite late vegetation
+ends.
 }
 \examples{
 data(goe)
 vegperiod(dates=goe$date, Tavg=goe$t, species="Picea abies (frueh)",
-  first.avg=5, method.start="Menzel", method.end="vonWilpert")
+          start.method="Menzel", end.method="vonWilpert", est.prev=5)
+
+# take chill days from first year, which is then dropped
+g.short <- goe[goe$date >= as.Date('2001-11-01') &
+               goe$date <= as.Date('2003-12-31'), ]
+vegperiod(dates=g.short$date, Tavg=g.short$t, species="Picea abies (frueh)",
+          start="Menzel", end="vonWilpert", est.prev=0)
+
+# sum of day degrees in vegetation periods
+vegperiod(dates=goe$date, Tavg=goe$t, Tsum.out=TRUE,
+          start="StdMeteo", end="StdMeteo")
+}
+\references{
+CCl/CLIVAR/JCOMM Expert Team on Climate Change Detection and Indices
+  (ETCCDI): \href{http://etccdi.pacificclimate.org/list_27_indices.shtml}{List of 27 indicators}
+
+  Frich, P. et al. (2002): Observed coherent changes in climatic extremes
+  during the second half of the twentieth century.
+  \href{http://www.climateknowledge.org/heat_waves/Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf}{Climate Research (19): 193-212.}
+
+  Hammel, K. & Kennel, M. (2001): Charakterisierung und Analyse der
+  Wasserverfügbarkeit und des Wasserhaushalts von Waldstandorten in Bayern
+  mit dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München,
+  185 S.
+
+  Menzel, A. (1997): Phänologie von Waldbäumen unter sich ändernden
+  Klimabedingungen - Auswertung der Beobachtungen in den Internationalen
+  Phänologischen Gärten und Möglichkeiten der Modellierung von Phänodaten.
+  Forstliche Forschungsberichte München 164: 147 S.
+
+  von Wilpert, K. (1990): Die Jahrringstruktur von Fichten in Abhängigkeit
+  vom Bodenwasserhaushalt auf Pseudogley und Parabraunerde: Ein
+  Methodenkonzept zur Erfassung standortsspezifischer Wasserstreßdispostion.
+  Freiburger Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691.
+
+  Walther, A. & Linderholm, H.W. (2006): A comparison of growing season
+  indices for the Greater Baltic Area. Int J Biometeorol 51: 107-118.
 }
 
