@@ -129,28 +129,29 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   end.method <- match.arg(end.method,
                           choices=c('vonWilpert', 'LWF-BROOK90', 'NuskeAlbert',
                                     'StdMeteo', 'ETCCDI'))
-
+  
   if(length(dates) != length(Tavg))
     stop("The arguments dates and Tavg must be of same length!")
-
+  
   if(!is(dates, "Date")){
     tryCatch(dates <- as.Date(dates),
              error=function(c) stop(paste("'dates' could not be coerced to",
-                                          "class Date by as.Date(dates)."), call.=FALSE)
+                                          "class Date by as.Date(dates)."), 
+                                    call.=FALSE)
     )
   }
-
+  
   # set up the workhorse data.frame
   df <- data.frame(year  = as.integer(format(dates, "%Y")),
                    month = as.integer(format(dates, "%m")),
                    DOY   = as.integer(format(dates, "%j")),
                    Tavg)
   rm(dates, Tavg)
-
+  
   # determine leap years
   years <- unique(df$year)
   leap <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, TRUE, FALSE)
-
+  
   # est.prev in valid range?
   if(start.method == 'Menzel'){
     est.prev <- as.integer(est.prev)
@@ -159,7 +160,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   } else {
     est.prev <- 999
   }
-
+  
   # Do the provided years have the correct length (considering leap years)?
   # last year only till October 5th (DOY=279) needed
   if(est.prev == 0){
@@ -171,12 +172,12 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   }
   if(!all(tapply(df$DOY, df$year, FUN=length) >= year.length))
     stop("Not all years in 'dates' have expected length.")
-
+  
   if(est.prev == 0 &&
      length(df[df$year == years[1] & df$month >= 11, "DOY"]) != 61)
     stop("First year must at least contain full November & December")
-
-
+  
+  
   # calculating start and end
   #----------------------------------------------------------------------------
   start <- switch(start.method,
@@ -184,26 +185,26 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
                   'ETCCDI'   = .start_std_meteo(df),
                   'Menzel'   = .start_menzel(df=df,
                                              est.prev=est.prev, ...))
-
+  
   # if first year only used for getting previous cold days -> drop it now
   if(est.prev == 0){
     df <- df[df$year != years[1], ]
     years <- years[-1]
   }
-
+  
   end <- switch(end.method,
                 'vonWilpert'  = .end_vonWilpert(df),
                 'LWF-BROOK90' = .end_LWF_BROOK90(df),
                 'NuskeAlbert' = .end_NuskeAlbert(df, start),
                 'StdMeteo'    = ,
                 'ETCCDI'      = .end_std_meteo(df))
-
-
+  
+  
   # collect results
   #----------------------------------------------------------------------------
   # if indicated calculate day degrees in vegperiod also
   res <- data.frame(year=years, start=start, end=end)
-
+  
   if(Tsum.out){
     res$Tsum <- numeric(nrow(res))
     for(i in 1:nrow(res)){
@@ -212,6 +213,6 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
                                    df$DOY <= end[i]])
     }
   }
-
+  
   return(res)
 }
