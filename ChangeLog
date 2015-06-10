@@ -1,5 +1,11 @@
 ChangeLog for package vegperiod
 
+changes in version 0.2.1 (2015-06-10)
+fixed:
+  - cleaned up mangled output of start.method='StdMeteo'. StdMeteo now behaves properly and returns a vector.
+changed:
+  - use stats::filter() to protected filter() against getting run over by package dplyr
+
 changes in version 0.2.0 (2015-05-30)
 fixed:
   - fixed bug leading to crash of vegperiod if argument "first.avg=0" (thanks

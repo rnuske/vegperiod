@@ -1,3 +1,11 @@
+# CHANGES in vegperiod VERSION 0.2.1
+
+## BUG FIXES AND MINOR IMPROVEMENTS
+* cleaned up mangled output of start.method='StdMeteo'. StdMeteo now behaves properly and returns a vector.
+* use stats::filter() to protected filter() against getting run over by package dplyr
+
+
+
 # CHANGES in vegperiod VERSION 0.2.0
 
 ## NEW FEATURES
