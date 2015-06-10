@@ -138,5 +138,5 @@
     ifelse(length(doy) == 0, NA, min(doy))
   })
 
-  return(start)
+  return(as.vector(start))
 }
