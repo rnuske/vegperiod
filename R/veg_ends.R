@@ -36,7 +36,7 @@
   # Preparation
   #----------------------------------------------------------------------------
   # moving average with windows size 7 (symetric)
-  df$TmovAvg <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=2))
+  df$TmovAvg <- as.numeric(stats::filter(df$Tavg, rep(1/7,7), sides=2))
 
   # mark periods ('cold', 'warm') before LastDOY and 'ignore' the rest
   df$period <- ifelse(df$DOY > LastDOY, 'ignore',
@@ -104,7 +104,7 @@
   # moving average with windows size 7 (only backward looking)
   #   round to mimic lower precision of VBA version
   #   (14 digits might be okay, 10 is on the save side)
-  df$movAvgT <- round(as.numeric(filter(df$Tavg, rep(1/7,7), sides=1)), 10)
+  df$movAvgT <- round(as.numeric(stats::filter(df$Tavg, rep(1/7,7), sides=1)), 10)
 
   # introduce 2 counters 'cold' and 'warm'  ('ignore' the rest)
   df$period <- ifelse(df$month > 5 & df$DOY <= LastDOY,
@@ -185,7 +185,7 @@
 
   # 7 day moving average under 5° and after 1 July / vegperiod start
   # moving average with windows size 7 (symetric window)
-  df$TmovAvg <- as.numeric(filter(df$Tavg, rep(1/7,7), sides=2))
+  df$TmovAvg <- as.numeric(stats::filter(df$Tavg, rep(1/7,7), sides=2))
   df$period <- ifelse(df$TmovAvg < Tmin, 1, 0)
 
   # ends on the 5th day  if no 5 day streak end on 5oct
@@ -193,7 +193,7 @@
   for(i in 1:length(years)){
     temp <- df[df$year == years[i] & df$DOY >= searchstart[i] & df$DOY <= oct5[i], ]
 
-    temp$five <-  as.numeric(filter(temp$period, rep(1, 5), sides=1))
+    temp$five <-  as.numeric(stats::filter(temp$period, rep(1, 5), sides=1))
     possible.end <- temp[!is.na(temp$five) & temp$five == 5, "DOY"]
     if(length(possible.end) > 0)
       end[i] <- min(possible.end)
@@ -239,7 +239,7 @@
   end <- integer(length(years))
   for(i in 1:length(years)){
     temp <- df[df$year == years[i] & df$DOY > jul1[i], ]
-    temp$six <-  as.numeric(filter(temp$period, rep(1, 6), sides=1))
+    temp$six <-  as.numeric(stats::filter(temp$period, rep(1, 6), sides=1))
     possible.end <- temp[!is.na(temp$six) & temp$six == 6, "DOY"]
     if(length(possible.end) > 0)
       end[i] <- min(possible.end)

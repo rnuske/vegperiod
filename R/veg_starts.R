@@ -133,7 +133,7 @@
 
   # find first six day span per year
   start <- tapply(df$period, df$year, FUN=function(x){
-    sixer <- as.numeric(filter(x, rep(1, 6), sides=1))
+    sixer <- as.numeric(stats::filter(x, rep(1, 6), sides=1))
     doy <- which(!is.na(sixer) & sixer == 6)
     ifelse(length(doy) == 0, NA, min(doy))
   })
