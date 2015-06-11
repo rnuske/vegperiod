@@ -4,14 +4,14 @@ Title: Determine Vegetation Period of Forest Trees
 Author: Robert Nuske <robert.nuske@nw-fva.de>
 Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
 Depends: R (>= 3.1.0)
-Suggests: RCurl
 Description: Calculate start and end date of vegetation period based on daily average air temperature and the day of the year (DOY). Functions for summing day degrees within vegetation period and reading freely available meteo data from DWD's ftp-Server are provided on top.
 License: GPL (>= 3)
 Encoding: UTF-8
 LazyLoad: yes
 URL: http://computerfoerster.de/r-pkgs
-Authors@R: c(person(given="Robert", family="Nuske",
+Author@R: c(person(given="Robert", family="Nuske",
         email="robert.nuske@nw-fva.de", role=c("aut", "cre")))
-Version: 0.2.0
-Date: 2015-05-30
-Packaged: 2015-05-30 10:30:47 UTC; rnuske
+Version: 0.2.1
+Date: 2015-06-11
+NeedsCompilation: no
+Packaged: 2015-06-11 10:12:52 UTC; rnuske

@@ -11,8 +11,8 @@ Determine Vegetation Period of Forest Trees.
 \tabular{ll}{
 Package: \tab vegperiod\cr
 Type: \tab Package\cr
-Version: \tab 0.2.0\cr
-Date: \tab 2015-05-30\cr
+Version: \tab 0.2.1\cr
+Date: \tab 2015-06-11\cr
 Depends: \tab R (>= 3.1.0)\cr
 Encoding: \tab UTF-8\cr
 License: \tab GPL (>= 3)\cr
