@@ -16,11 +16,17 @@
 #'
 #' The method \samp{"Menzel"} to determine vegetation start dates implements
 #' the algorithm described in Menzel (1997). The method is parameterized for
-#' 10 common tree species.
+#' 10 common tree species. \samp{"Menzel"} is the most commonly used method.
 #' \samp{"StdMeteo"} resp. \samp{"ETCCDI"} is a simple threshold based
 #' procedure as defined by the Expert Team on Climate Change Detection and
 #' Indices (cf. ETCCDI and Ferch et al., 2002) leading to quite early
-#' vegetation starts.
+#' vegetation starts. This method is widely used in climate change studies.
+#' The method \samp{"Ribes uva-crispa"} is based on leaf-out of gooseberry
+#' (Janssen 2009).  It was developed by the German Weather Service (Deutscher
+#' Wetterdienst, DWD) and is part of the section forestry of DWD's
+#' \href{http://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German Climate Atlas}.
+#' It is more robust against early starts than common simple
+#' meteorological procedures.
 #'
 #' The end method \samp{"vonWilpert"} is based on von Wilpert (1990). It was
 #' originally developed for "Picea abies" in the Black Forest but is currently
@@ -46,11 +52,13 @@
 #'        \code{dates}.
 #' @param start.method name of method to use for vegetation start.
 #'        One of \samp{"Menzel"} (needs additional argument
-#'        \code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
+#'        \code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"},
+#'        \samp{"Ribes uva-crispa"}. Can be abbreviated (partial matching).
 #'        For further discussion see Details.
 #' @param end.method name of method to use for vegetation end.
 #'        One of \samp{"vonWilpert"}, \samp{"LWF-BROOK90"},
 #'        \samp{"NuskeAlbert"} and \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
+#'        Can be abbreviated (partial matching).
 #'        For further discussion see Details.
 #' @param est.prev number of years to \strong{est}imate \strong{prev}ious year's
 #'        chill days for the first year
@@ -91,6 +99,9 @@
 #'   mit dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München,
 #'   185 S.
 #'
+#'   Janssen, W (2009): Definition des Vegetationsanfanges. Internal Report,
+#'   Deutscher Wetterdienst, Abteilung Agrarmeteorologie, 10p.
+#'
 #'   Menzel, A. (1997): Phänologie von Waldbäumen unter sich ändernden
 #'   Klimabedingungen - Auswertung der Beobachtungen in den Internationalen
 #'   Phänologischen Gärten und Möglichkeiten der Modellierung von Phänodaten.
@@ -125,7 +136,8 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   # Checks
   #----------------------------------------------------------------------------
   start.method <- match.arg(start.method,
-                            choices=c('Menzel', 'StdMeteo', 'ETCCDI'))
+                            choices=c('Menzel', 'StdMeteo', 'ETCCDI',
+                                      'Ribes uva-crispa'))
   end.method <- match.arg(end.method,
                           choices=c('vonWilpert', 'LWF-BROOK90', 'NuskeAlbert',
                                     'StdMeteo', 'ETCCDI'))
@@ -187,10 +199,10 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   # calculating start and end
   #----------------------------------------------------------------------------
   start <- switch(start.method,
+                  'Menzel'   = .start_menzel(df=df, est.prev=est.prev, ...),
                   'StdMeteo' = ,
                   'ETCCDI'   = .start_std_meteo(df),
-                  'Menzel'   = .start_menzel(df=df,
-                                             est.prev=est.prev, ...))
+                  'Ribes uva-crispa' = .start_ribes(df))
 
   # if first year only used for getting previous cold days -> drop it now
   if(est.prev == 0){

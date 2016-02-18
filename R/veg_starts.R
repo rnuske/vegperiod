@@ -4,7 +4,7 @@
 #
 #==============================================================================
 #
-# Start of vegetation periode according to Menzel (1997)
+# Start of vegetation period according to Menzel (1997)
 #
 # - counting chill days in Nov & dec of previous year
 # - count chill days in current year
@@ -138,5 +138,34 @@
     ifelse(length(doy) == 0, NA, min(doy))
   })
 
+  return(as.vector(start))
+}
+
+
+#==============================================================================
+#
+# Start of vegetation periode according to DWD (Gooseberry, Ribes uva-crispa)
+#  published in the klimaatlas under forest parameters
+#
+# starting from 18th February sum all day degrees above 0 °C (daily average air
+#   temperature). Vegetetaion period starts at the day when 164 is crossed.
+#
+# Devloped by Wolfgang Janssen, Deutscher Wetterdienst, Abt. Agrarmeteorologie
+#==============================================================================
+
+.start_ribes <- function(df){
+  # Assumptions:
+  # - data.frame 'df' contains year, DOY, Tavg
+  # - full years
+
+  # start day: February 18th == 49 doy
+  # only Tavg over 0°C are summed
+  df[df$DOY < 49 | df$Tavg < 0, 'Tavg'] <- 0
+
+  # find day where cum day degrees cross 164
+  start <- tapply(df$Tavg, df$year, FUN=function(x){
+    x <- cumsum(x)
+    min(which(x > 164))
+  })
   return(as.vector(start))
 }
