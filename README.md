@@ -9,6 +9,11 @@ species.
 * **StdMeteo** / **ETCCDI** a simple threshold based procedure as defined by 
 the Expert Team on Climate Change Detection and Indices (cf. ETCCDI and Ferch 
 et al., 2002) leading to quite early vegetation starts.
+* **Ribes uva-crispa** using leaf out of gooseberry as indicator. 
+It was developed by the German Weather Service (Deutscher Wetterdienst, DWD) 
+and is part of the section forestry of DWD's
+[German Climate Atlas](http://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html).
+It is more robust against early starts than common simple meteorological procedures.
 
 ### end.method
 * **vonWilpert** based on von Wilpert (1990). Originally developed for 

@@ -1,5 +1,12 @@
 ChangeLog for package vegperiod
 
+changes in version 0.2.2 (2016-02-18)
+fixed:
+  - est.prev can now be equal to number of years provided
+  - proper error message if only one year of data provided and previous year's chill days reqested
+added:
+  - start.method='Ribes uva-crispa' using leaf out of gooseberry as indicator. Developed by the German Weather Service.
+
 changes in version 0.2.1 (2015-06-10)
 fixed:
   - cleaned up mangled output of start.method='StdMeteo'. StdMeteo now behaves properly and returns a vector.
@@ -17,15 +24,15 @@ fixed:
     renamed to "StdMeteo")
 changed:
   - renamed arguments in function vegperiod to clarify meaning / easier tab
-    completion:  
-    first.avg -> est.prev, 
-    temp.sum -> Tsum.out, 
-    method.start -> start.method, 
+    completion:
+    first.avg -> est.prev,
+    temp.sum -> Tsum.out,
+    method.start -> start.method,
     method.end -> end.method
   - renamed method "StdClimatolgy" to "StdMeteo" resp. "ETCCDI" in function
     vegperiod and rebased implementation on international standard
   - the argument "dates" of function vegperiod accepts now also character
-    strings understood by as.Date() 
+    strings understood by as.Date()
   - rewrote help page of vegperiod and added references for all methods
 added:
   - read.DWDdata() reads meteo data from the freely accessable stations of

@@ -1,6 +1,19 @@
 \name{NEWS}
 \title{News for Package 'vegperiod'}
 \encoding{UTF-8}
+\section{Changes in vegperiod version 0.2.2 (2016-02-18)}{
+  \subsection{fixed}{
+    \itemize{
+      \item est.prev can now be equal to number of years provided
+      \item proper error message if only one year of data provided and previous year's chill days reqested
+    }
+  }
+  \subsection{added}{
+    \itemize{
+      \item start.method='Ribes uva-crispa' using leaf out of gooseberry as indicator. Developed by the German Weather Service.
+    }
+  }
+}
 \section{Changes in vegperiod version 0.2.1 (2015-06-10)}{
   \subsection{fixed}{
     \itemize{
@@ -28,15 +41,15 @@
   \subsection{changed}{
     \itemize{
       \item renamed arguments in function vegperiod to clarify meaning / easier tab
-        completion:  
-        first.avg -> est.prev, 
-        temp.sum -> Tsum.out, 
-        method.start -> start.method, 
+        completion:
+        first.avg -> est.prev,
+        temp.sum -> Tsum.out,
+        method.start -> start.method,
         method.end -> end.method
       \item renamed method \code{"StdClimatolgy"} to \code{"StdMeteo"} resp. \code{"ETCCDI"} in function
         vegperiod and rebased implementation on international standard
       \item the argument \code{"dates"} of function vegperiod accepts now also character
-        strings understood by \code{as.Date()} 
+        strings understood by \code{as.Date()}
       \item rewrote help page of vegperiod and added references for all methods
     }
   }

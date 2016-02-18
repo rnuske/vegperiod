@@ -1,3 +1,12 @@
+# CHANGES in vegperiod VERSION 0.2.2
+
+## BUG FIXES AND MINOR IMPROVEMENTS
+* start.method='Ribes uva-crispa' using leaf out of gooseberry as indicator. Developed by the German Weather Service.
+* est.prev can now be equal to number of years provided
+* proper error message if only one year of data provided and previous year's chill days reqested
+
+
+
 # CHANGES in vegperiod VERSION 0.2.1
 
 ## BUG FIXES AND MINOR IMPROVEMENTS
