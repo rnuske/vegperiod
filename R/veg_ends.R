@@ -32,6 +32,7 @@
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
   # - DOYs at least till 279
+  LastDOY <- as.integer(LastDOY)
 
   # Preparation
   #----------------------------------------------------------------------------
@@ -69,7 +70,7 @@
                   temp <- temp[temp > last.warm[last.warm$year == x, 'DOY']]
                   if(length(temp) > 0){
                     # 5th day of cold period is the end
-                    min(temp) + 4
+                    min(temp) + 4L
                   } else {
                     # no colds after last.warm ->  default end
                     LastDOY
@@ -100,6 +101,7 @@
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
   # - DOYs at least till 279
+  LastDOY <- as.integer(LastDOY)
 
   # moving average with windows size 7 (only backward looking)
   #   round to mimic lower precision of VBA version
@@ -137,7 +139,7 @@
                   temp <- temp[temp > last.warm[last.warm$year == x, 'DOY']]
                   if(length(temp) > 0){
                     # 5th day of cold period is the end
-                    min(temp) + 4
+                    min(temp) + 4L
                   } else {
                     # no colds after last.warm ->  default end
                     LastDOY
@@ -176,12 +178,12 @@
   # 1. July is DOY 182 and DOY 183 in leap years
   # 5. October is DOY 278 and 279 in leap years
   years <- unique(df$year)
-  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183, 182)
+  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183L, 182L)
 
   searchstart = ifelse(!is.na(start) & start > jul1,
                        start, jul1)
   oct5 = ifelse((years%%4==0 & years%%100!=0) |
-                  years%%400==0, 279, 278)
+                  years%%400==0, 279L, 278L)
 
   # 7 day moving average under 5° and after 1 July / vegperiod start
   # moving average with windows size 7 (symetric window)
@@ -230,7 +232,7 @@
 
   # 1. July is DOY 182 and DOY 183 in leap years
   years <- unique(df$year)
-  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183, 182)
+  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183L, 182L)
 
   # mark days colder than 5°C
   df$period <- ifelse(df$Tavg < Tmin, 1, 0)
