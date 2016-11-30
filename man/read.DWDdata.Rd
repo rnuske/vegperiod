@@ -5,7 +5,7 @@
 \title{Fetch meteo data of DWD weather stations}
 \usage{
 read.DWDdata(id, type = "climate", period = "recent",
-  resolution = "daily", file = NULL, destdir = NULL)
+  resolution = "daily", file = NULL, destdir = NULL, quiet = FALSE)
 }
 \arguments{
 \item{id}{integer. A valid station id (cf. \link{read.DWDstations}).}
@@ -38,6 +38,8 @@ file) are stored. If it is NULL (the default) a subdirectory
 It might be advisable to keep the .zip file since it contains the
 stations documentation and metadata (eg. station shift, used devices,
 downtimes etc.).}
+
+\item{quiet}{If TRUE, suppress status messages (if any), and the progress bar.}
 }
 \value{
 A data.frame with the observed weather data. Be aware there might be

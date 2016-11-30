@@ -164,6 +164,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #'   stations documentation and metadata (eg. station shift, used devices,
 #'   downtimes etc.).
 #'
+#' @param quiet If TRUE, suppress status messages (if any), and the progress bar.
+#'
 #' @return A data.frame with the observed weather data. Be aware there might be
 #'   gaps and inhomogeneities! \samp{colnames} contains the original header and
 #'   hence German terms. Translation of usual column names:
@@ -219,7 +221,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #'
 #' @export
 read.DWDdata <- function(id, type='climate', period='recent',
-                         resolution='daily',  file=NULL, destdir=NULL){
+                         resolution='daily', file=NULL, destdir=NULL,
+                         quiet=FALSE){
 
   if(is.null(file)){
       # construct url from provided pieces of information
@@ -261,7 +264,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
         }
       }
       url <- file.path(myURL, fname)
-      pathToZip <- .download_from_ftp(url, destdir, fname)
+      pathToZip <- .download_from_ftp(url, destdir, fname, quiet)
       file <- .connection_to_target_within_zip(pathToZip)
 
     } else {
@@ -270,7 +273,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
       if(substr(file, 1, 6) == "ftp://"){
         # a url to an ftp service
         fname <- basename(file)
-        pathToZip <- .download_from_ftp(file, destdir, fname)
+        pathToZip <- .download_from_ftp(file, destdir, fname, quiet)
         file <- .connection_to_target_within_zip(pathToZip)
       } else {
         # path in local file system
@@ -299,7 +302,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
 # Download data from FTP Server
 #--------------------------------------------------------------------------
-.download_from_ftp <- function(url, destdir, fname){
+.download_from_ftp <- function(url, destdir, fname, quiet){
   # where to put the zip file ?
   if(is.null(destdir)){
     pathToZip <- file.path(tempdir(), fname)
@@ -312,7 +315,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
   # download
   tryCatch(
-    download.file(url, destfile=pathToZip),
+    download.file(url, destfile=pathToZip, quiet=quiet),
     error=function(e)
       stop(paste("Could not download file. Try the URL", sQuote(url),
                  "in a Web-Browser. \nPlease inform the package maintainer",
