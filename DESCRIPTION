@@ -5,7 +5,7 @@ Title: Determine Vegetation Periods of Forest Trees
 Author: Robert Nuske
 Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
 Depends: R (>= 2.15.0)
-Suggests: RCurl
+Suggests: RCurl, testthat
 Description: Calculate start and end date of vegetation periods based on
     daily average air temperature and the day of the year (DOY). A sum
     of day degrees within vegetation period and functions for reading
