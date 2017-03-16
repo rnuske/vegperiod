@@ -7,17 +7,16 @@
 
 #==============================================================================
 #
-# End of vegetation priod according to von Wilpert
+# End of vegetation priod according to von Wilpert (1990)
 #
 # orthodox are 3 criteria: short day, temperature & drought criterion
-#
-# here as usual only short day and temperature citerion are considered
+# we consider -as usual- only short day and temperature citerion
 #
 # temperature criterion
-# - 7 day moving average of daily mean temperatures at least
-#   5 consecutive days under under 10° C
+# - 7 day moving average of daily mean temperatures
+#     at least 5 consecutive days under 10°C
 # - if afterwards more than 5 consecutive days 7 day moving average over 10°C
-#   vegetation period is restarted
+#     vegetation period gets restarted
 #
 # short day criterion
 # - last day of the vegetation period is DOY 279 (5th of October in leap years)
@@ -31,7 +30,7 @@
 .end_vonWilpert <- function(df, Treshold=10, LastDOY=279){
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
-  # - DOYs at least till 279
+  # - DOYs at least till LastDOY
   LastDOY <- as.integer(LastDOY)
 
   # Preparation
