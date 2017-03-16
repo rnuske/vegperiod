@@ -72,10 +72,9 @@
 #'        first year from the average of \code{n} first years of the time series.
 #' @param Tsum.out boolean. Return the sum of day degrees within
 #'        vegetation period.
-#' @param species name of a tree species [required if
-#'        \code{start.method='Menzel'}].
-#'        Menzel's method is species specific.
-#'        The argument must be one of \samp{"Larix decidua"},
+#' @param ... pass additional required arguments if using
+#'        \code{start.method='Menzel'} since Menzel's method is species specific.
+#'        The argument \code{species} must be one of \samp{"Larix decidua"},
 #'        \samp{"Picea abies (frueh)"}, \samp{"Picea abies (spaet)"},
 #'        \samp{"Picea abies (noerdl.)"}, \samp{"Picea omorika"},
 #'        \samp{"Pinus sylvestris"}, \samp{"Betula pubescens"},
