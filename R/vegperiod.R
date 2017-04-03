@@ -144,7 +144,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   if(length(dates) != length(Tavg))
     stop("The arguments dates and Tavg must be of same length!")
 
-  if(!is(dates, "Date")){
+  if(!methods::is(dates, "Date")){
     tryCatch(dates <- as.Date(dates),
              error=function(c) stop(paste("'dates' could not be coerced to",
                                           "class Date by as.Date(dates)."),

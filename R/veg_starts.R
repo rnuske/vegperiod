@@ -25,6 +25,7 @@
   # - full years
   # - last year at least till DOY 279
   # - and previous Nov & Dec if est.prev==0
+  # - est.prev >= 0 and <= number of years
 
   possible.species <- c("Larix decidua", "Picea abies (frueh)",
                         "Picea abies (spaet)", "Picea abies (noerdl.)",
@@ -54,7 +55,7 @@
   # Chill Days
   #----------------------------------------------------------------------------
   # number of chill days in Nov and Dec trigger next years bud burst
-  CDNovDec <- stack(tapply(df[(df$month >= 11 & df$Tavg <= Mp$TbCD), "Tavg"],
+  CDNovDec <- utils::stack(tapply(df[(df$month >= 11 & df$Tavg <= Mp$TbCD), "Tavg"],
                            df[(df$month >= 11 & df$Tavg <= Mp$TbCD), "year"],
                            FUN=length))
 
@@ -74,7 +75,7 @@
 
   # cumulative sums of chill days per year
   df$CD <- ifelse(df$Tavg <=  Mp$TbCD, 1, 0)
-  ChillDays <- stack(tapply(df$CD, df$year, FUN=cumsum))
+  ChillDays <- utils::stack(tapply(df$CD, df$year, FUN=cumsum))
   names(ChillDays) <- c("CDcumsum", "year")
 
   # merge and add to workhorse df
@@ -90,13 +91,13 @@
   # cumsum of degrees above threshold
   #  (start in Feb and use only degree above thresh)
   df$HeatSum <- ifelse(df$month >= 2 & df$Tavg > Mp$TbH, df$Tavg - Mp$TbH, 0)
-  df$HeatSum <- stack(tapply(df$HeatSum, df$year, FUN=cumsum))$values
+  df$HeatSum <- utils::stack(tapply(df$HeatSum, df$year, FUN=cumsum))$values
 
   # start of vegetation periode if HeatSum >= TCrit
   df$start <- df$HeatSum >= df$TCrit
 
   # determine first start and transfer to result data.frame
-  start <- stack(tapply(df$DOY[df$start],
+  start <- utils::stack(tapply(df$DOY[df$start],
                         df$year[df$start], FUN=min))$values
   return(start)
 }

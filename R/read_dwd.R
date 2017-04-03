@@ -91,7 +91,7 @@ read.DWDstations <- function(type='climate', period='recent',
 
   options(warn=-1) # the warning about last line is wrong -> don't show it
   # treat EOF as comment
-  df <- read.fwf(myURL, widths=myWidths, skip=2, comment.char="\032",
+  df <- utils::read.fwf(myURL, widths=myWidths, skip=2, comment.char="\032",
                  strip.white=TRUE, na.strings='-999',
                  fileEncoding='ISO-8859-1', col.names=myCols,
                  stringsAsFactors=FALSE)
@@ -315,7 +315,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
   # download
   tryCatch(
-    download.file(url, destfile=pathToZip, quiet=quiet),
+    utils::download.file(url, destfile=pathToZip, quiet=quiet),
     error=function(e)
       stop(paste("Could not download file. Try the URL", sQuote(url),
                  "in a Web-Browser. \nPlease inform the package maintainer",
@@ -330,7 +330,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 # create connection to target file in zip file
 #------------------------------------------------------------------------------
 .connection_to_target_within_zip <- function(pathToZip){
-  file.list <- unzip(pathToZip, list=TRUE)
+  file.list <- utils::unzip(pathToZip, list=TRUE)
   hidden.file <- grep('^produkt', file.list$Name, value=TRUE)
   tryCatch(connection <- unz(pathToZip, hidden.file),
            error=function(e)
@@ -350,7 +350,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 #------------------------------------------------------------------------------
 .read.obscureDWDfiles <- function(file){
   # treat EOF as comment
-  df <- read.table(file, sep=";", dec=".", header=TRUE, comment.char="\032",
+  df <- utils::read.table(file, sep=";", dec=".", header=TRUE, comment.char="\032",
                    strip.white=TRUE, na.strings='-999')
   df$eor <- NULL
   return(df)
@@ -362,7 +362,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
   binaer <- readBin(file, what="raw", n=10000000)
   binaer <- binaer[binaer != 0x1a]
   writeBin(binaer, temp)
-  df <- read.table(temp, sep=";", dec=".", header=TRUE,
+  df <- utils::read.table(temp, sep=";", dec=".", header=TRUE,
                    strip.white=TRUE, na.strings="-999")
   df$eor <- NULL
   return(df)
@@ -373,7 +373,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
   f <- file(file, "rb")
   zeilen <- readLines(f)
   close(f)
-  df <- read.table(textConnection(gsub("\\\032", '', zeilen)),
+  df <- utils::read.table(textConnection(gsub("\\\032", '', zeilen)),
                    sep=";", dec=".", header=TRUE, strip.white=TRUE,
                    na.strings="-999")
   df$eor <- NULL
