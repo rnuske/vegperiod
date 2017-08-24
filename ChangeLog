@@ -1,5 +1,13 @@
 ChangeLog for package vegperiod
 
+changes in version 0.2.3 (2017-08-24)
+fixed:
+  - end of vegetation period  as reported by vegperiod() now always integer
+  - DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
+added:
+  - new parameter 'quiet' to readDWDdata to suppress messages and progessbar of download
+  - started unit testing with package 'testthat'
+
 changes in version 0.2.2 (2016-02-18)
 fixed:
   - est.prev can now be equal to number of years provided

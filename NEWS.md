@@ -1,3 +1,13 @@
+# CHANGES in vegperiod VERSION 0.2.3
+
+## BUG FIXES AND MINOR IMPROVEMENTS
+* end of vegetation period  as reported by vegperiod() now always integer
+* DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
+* new parameter 'quiet' to readDWDdata to suppress messages and progessbar of download
+* started unit testing with package 'testthat'
+
+
+
 # CHANGES in vegperiod VERSION 0.2.2
 
 ## BUG FIXES AND MINOR IMPROVEMENTS

@@ -34,4 +34,3 @@ Orlowsky, B.; Gerstengarbe, F.W.; Werner, P.C. (2008): A resampling scheme
   for regional climate simulations and its performance compared to a
   dynamical RCM. Theor Appl Climatol 92(3–4): 209-223
 }
-

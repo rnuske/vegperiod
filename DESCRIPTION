@@ -1,5 +1,5 @@
 Package: vegperiod
-Version: 0.2.2
+Version: 0.2.3
 Title: Determine Vegetation Periods of Forest Trees
 Authors@R: c(person("Robert", "Nuske", role=c("aut", "cre"), 
              email="robert.nuske@nw-fva.de"))
@@ -13,6 +13,9 @@ Description: Calculate start and end date of vegetation periods based on
   of day degrees within vegetation period and functions for reading
   freely accessible meteo data from DWD's ftp-Server are provided on top.
 URL: https://www.nw-fva.de/r-pkgs
+BugReports: via email to <robert.nuske@nw-fva.de>
 Encoding: UTF-8
 License: GPL (>= 3)
-RoxygenNote: 5.0.1
+RoxygenNote: 6.0.1
+NeedsCompilation: no
+Packaged: 2017-08-24 13:59:21 UTC; rnuske

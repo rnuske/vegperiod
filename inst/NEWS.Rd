@@ -1,6 +1,20 @@
 \name{NEWS}
 \title{News for Package 'vegperiod'}
 \encoding{UTF-8}
+\section{Changes in vegperiod version 0.2.3 (2017-08-24)}{
+  \subsection{fixed}{
+    \itemize{
+      \item end of vegetation period  as reported by \code{vegperiod()} now always integer
+      \item DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
+    }
+  }
+  \subsection{added}{
+    \itemize{
+      \item new parameter 'quiet' to readDWDdata to suppress messages and progessbar of download
+      \item started unit testing with package 'testthat'
+    }
+  }
+}
 \section{Changes in vegperiod version 0.2.2 (2016-02-18)}{
   \subsection{fixed}{
     \itemize{

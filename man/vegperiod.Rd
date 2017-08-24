@@ -42,10 +42,9 @@ For further discussion see Details.}
 \item{Tsum.out}{boolean. Return the sum of day degrees within
 vegetation period.}
 
-\item{species}{name of a tree species [required if
-\code{start.method='Menzel'}].
-Menzel's method is species specific.
-The argument must be one of \samp{"Larix decidua"},
+\item{...}{pass additional required arguments if using
+\code{start.method='Menzel'} since Menzel's method is species specific.
+The argument \code{species} must be one of \samp{"Larix decidua"},
 \samp{"Picea abies (frueh)"}, \samp{"Picea abies (spaet)"},
 \samp{"Picea abies (noerdl.)"}, \samp{"Picea omorika"},
 \samp{"Pinus sylvestris"}, \samp{"Betula pubescens"},
@@ -139,4 +138,3 @@ CCl/CLIVAR/JCOMM Expert Team on Climate Change Detection and Indices
   Walther, A. & Linderholm, H.W. (2006): A comparison of growing season
   indices for the Greater Baltic Area. Int J Biometeorol 51: 107-118.
 }
-

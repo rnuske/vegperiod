@@ -127,4 +127,3 @@ rnd.clim <- read.DWDdata(file=paste0(dwdURL, rnd.station))
 Freely accessible DWD data are available via the
   \href{http://www.dwd.de/cdc}{Climate Data Center}.
 }
-
