@@ -50,7 +50,7 @@ Beware there might be missing values.
 ## Installation 
 
 ### Install released package via
-install.packages("vegperiod", repo="http://computerfoerster.de/r-pkgs")
+install.packages("vegperiod", repo="https://www.nw-fva.de/r-pkgs")
 
 ### Install from source
 Download source code and install locally e.g. via devtools::install_local() or
