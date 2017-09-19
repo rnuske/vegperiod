@@ -1,5 +1,5 @@
 Package: vegperiod
-Version: 0.2.3
+Version: 0.2.4
 Title: Determine Vegetation Periods of Forest Trees
 Authors@R: c(person("Robert", "Nuske", role=c("aut", "cre"), 
              email="robert.nuske@nw-fva.de"))
@@ -18,4 +18,3 @@ Encoding: UTF-8
 License: GPL (>= 3)
 RoxygenNote: 6.0.1
 NeedsCompilation: no
-Packaged: 2017-08-24 13:59:21 UTC; rnuske

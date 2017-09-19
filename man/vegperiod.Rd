@@ -13,8 +13,9 @@ or something understood by \code{\link[base]{as.Date}}). Must contain
 entire years if \code{est.prev > 0} else the first year may
 comprise only November and December.}
 
-\item{Tavg}{vector of daily average air temperatures. Same length as
-\code{dates}.}
+\item{Tavg}{vector of daily average air temperatures in degree Celsius.
+Beware not to feed values stored as integer (multiplied by 10)!
+Same length as \code{dates}.}
 
 \item{start.method}{name of method to use for vegetation start.
 One of \samp{"Menzel"} (needs additional argument

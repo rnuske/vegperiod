@@ -1,10 +1,17 @@
 \name{NEWS}
 \title{News for Package 'vegperiod'}
 \encoding{UTF-8}
+\section{Changes in vegperiod version 0.2.4 (2017-09-19)}{
+  \subsection{fixed}{
+    \itemize{
+      \item \code{vegperiod()} now checks if Tavg (daily mean temperature) is between -25 and 35 to catch temperatures stored as integers multiplied by 10. Thanks to Ronald Bialozyt, who reported \code{vegperiod()} crashes if fed long time series of such temperatures.
+    }
+  }
+}
 \section{Changes in vegperiod version 0.2.3 (2017-08-24)}{
   \subsection{fixed}{
     \itemize{
-      \item end of vegetation period  as reported by \code{vegperiod()} now always integer
+      \item end of vegetation period as reported by \code{vegperiod()} now always integer
       \item DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
     }
   }

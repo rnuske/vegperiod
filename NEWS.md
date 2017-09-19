@@ -1,3 +1,10 @@
+# CHANGES in vegperiod VERSION 0.2.4
+
+## BUG FIXES AND MINOR IMPROVEMENTS
+* vegperiod() now checks if Tavg (daily mean temperature) is between -25 and 35 to catch temperatures stored as integers multiplied by 10. Thanks to Ronald Bialozyt, who reported vegperiod() crashes if fed long time series of such temperatures.
+
+
+
 # CHANGES in vegperiod VERSION 0.2.3
 
 ## BUG FIXES AND MINOR IMPROVEMENTS

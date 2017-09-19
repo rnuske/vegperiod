@@ -1,8 +1,12 @@
 ChangeLog for package vegperiod
 
+changes in version 0.2.4 (2017-09-19)
+fixed:
+  - vegperiod() now checks if Tavg (daily mean temperature) is between -25 and 35 to catch temperatures stored as integers multiplied by 10. Thanks to Ronald Bialozyt, who reported vegperiod() crashes if fed long time series of such temperatures.
+
 changes in version 0.2.3 (2017-08-24)
 fixed:
-  - end of vegetation period  as reported by vegperiod() now always integer
+  - end of vegetation period as reported by vegperiod() now always integer
   - DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
 added:
   - new parameter 'quiet' to readDWDdata to suppress messages and progessbar of download

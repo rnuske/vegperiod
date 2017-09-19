@@ -48,8 +48,9 @@
 #'        or something understood by \code{\link[base]{as.Date}}). Must contain
 #'        entire years if \code{est.prev > 0} else the first year may
 #'        comprise only November and December.
-#' @param Tavg vector of daily average air temperatures. Same length as
-#'        \code{dates}.
+#' @param Tavg vector of daily average air temperatures in degree Celsius.
+#'        Beware not to feed values stored as integer (multiplied by 10)!
+#'        Same length as \code{dates}.
 #' @param start.method name of method to use for vegetation start.
 #'        One of \samp{"Menzel"} (needs additional argument
 #'        \code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"},
@@ -143,6 +144,12 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
 
   if(length(dates) != length(Tavg))
     stop("The arguments dates and Tavg must be of same length!")
+
+  # are the temperatures sound
+  minimax <- range(Tavg)
+  if(minimax[1] < -25 | minimax[2] > 35)
+    stop("Daily mean temperatures are too small/large (<-25 or >+35).\n",
+         "Were they multiplied by 10 for storage?")
 
   if(!methods::is(dates, "Date")){
     tryCatch(dates <- as.Date(dates),
