@@ -208,11 +208,11 @@ read.DWDstations <- function(type='climate', period='recent',
 #' clim.brocken <- read.DWDdata(id=brocken.id, period='historical')
 #'
 #' # get recent meteorological data fom a randomly selected station
-#' require('RCurl')
+#' require('curl')
 #' dwdURL <- paste0("ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/",
 #'                  "climate/daily/kl/recent/")
-#' filenames <- getURL(dwdURL, ftp.use.epsv=FALSE, dirlistonly=TRUE)
-#' filenames <- strsplit(filenames, '\r*\n')[[1]]
+#' h <- new_handle(dirlistonly=1, ftp_use_epsv=0)
+#' filenames <- readLines(curl(dwdURL, handle=h))
 #' stations <- grep("Beschreibung_Stationen.txt$", filenames,
 #'                  invert=TRUE, value=TRUE)
 #' rnd.station <- sample(stations, 1)
@@ -385,14 +385,12 @@ read.DWDdata <- function(id, type='climate', period='recent',
 #------------------------------------------------------------------------------
 .list_available_via_FTP <- function(url){
 
-  if(!requireNamespace('RCurl', quietly=TRUE))
-    stop("Please install RCurl, eg. install.packages('RCurl')")
+  if(!requireNamespace('curl', quietly=TRUE))
+    stop("Please install curl, eg. install.packages('curl')")
 
   # get a list of all files within a directory
-  filenames <- RCurl::getURL(url, ftp.use.epsv=FALSE, dirlistonly=TRUE)
-
-  # deal with newlines as \n or \r\n
-  filenames <- strsplit(filenames, "\r*\n")[[1]]
+  h <- curl::new_handle(dirlistonly=1, ftp_use_epsv=0)
+  filenames <- readLines(curl::curl(url, handle=h))
 
   return(filenames)
 }

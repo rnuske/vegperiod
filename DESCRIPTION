@@ -7,7 +7,7 @@ Author: Robert Nuske
 Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
 Depends: R (>= 2.15.0)
 Imports: methods, utils
-Suggests: RCurl, testthat (>= 1.0.0)
+Suggests: curl, testthat (>= 1.0.0)
 Description: Calculate start and end date of vegetation periods based on
   daily average air temperature and the day of the year (DOY). A sum
   of day degrees within vegetation period and functions for reading
@@ -16,5 +16,5 @@ URL: https://www.nw-fva.de/r-pkgs
 BugReports: via email to <robert.nuske@nw-fva.de>
 Encoding: UTF-8
 License: GPL (>= 3)
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.0
 NeedsCompilation: no

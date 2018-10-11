@@ -111,11 +111,11 @@ brocken.id <- stat.hist[grep("^Brock", stat.hist$name), ]$id
 clim.brocken <- read.DWDdata(id=brocken.id, period='historical')
 
 # get recent meteorological data fom a randomly selected station
-require('RCurl')
+require('curl')
 dwdURL <- paste0("ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/",
                  "climate/daily/kl/recent/")
-filenames <- getURL(dwdURL, ftp.use.epsv=FALSE, dirlistonly=TRUE)
-filenames <- strsplit(filenames, '\\r*\\n')[[1]]
+h <- new_handle(dirlistonly=1, ftp_use_epsv=0)
+filenames <- readLines(curl(dwdURL, handle=h))
 stations <- grep("Beschreibung_Stationen.txt$", filenames,
                  invert=TRUE, value=TRUE)
 rnd.station <- sample(stations, 1)

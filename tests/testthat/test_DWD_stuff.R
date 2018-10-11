@@ -27,7 +27,7 @@ test_that("download of data works", {
   expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
 
   # download historical data from the Brocken
-  skip_if_not_installed('RCurl')
+  skip_if_not_installed('curl')
   {
     climb <- read.DWDdata(722, period='historical', quiet=TRUE)
     expect_is(climb, 'data.frame')
