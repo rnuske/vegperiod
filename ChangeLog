@@ -2,54 +2,59 @@ ChangeLog for package vegperiod
 
 changes in version 0.2.4 (2017-09-19)
 fixed:
-  - vegperiod() now checks if Tavg (daily mean temperature) is between -25 and 35 to catch temperatures stored as integers multiplied by 10. Thanks to Ronald Bialozyt, who reported vegperiod() crashes if fed long time series of such temperatures.
+  - vegperiod() checks if Tavg (daily mean temperature) is between
+    -25 and 35 to catch temperatures multiplied by 10. Sometimes done to store
+    as integers. (thanks to Ronald Bialozyt for reporting a crash)
 
 changes in version 0.2.3 (2017-08-24)
 fixed:
-  - end of vegetation period as reported by vegperiod() now always integer
-  - DESCRIPTION now reflects new home at https://www.nw-fva.de/r-pkgs
+  - vegperiod() reports end of vegetation period always as integer
 added:
-  - new parameter 'quiet' to readDWDdata to suppress messages and progessbar of download
+  - new parameter 'quiet' to readDWDdata() to suppress messages and progessbar
+    of download
   - started unit testing with package 'testthat'
 
 changes in version 0.2.2 (2016-02-18)
 fixed:
-  - est.prev can now be equal to number of years provided
-  - proper error message if only one year of data provided and previous year's chill days reqested
+  - est.prev can now be equal to number of provided years
+  - proper error message if only one year of data provided and previous year's
+    chill days requested
 added:
-  - start.method='Ribes uva-crispa' using leaf out of gooseberry as indicator. Developed by the German Weather Service.
+  - start.method='Ribes uva-crispa' using leaf out of gooseberry as indicator.
+    Developed by the Germany's National Meteorological Service (DWD).
 
 changes in version 0.2.1 (2015-06-10)
 fixed:
-  - cleaned up mangled output of start.method='StdMeteo'. StdMeteo now behaves properly and returns a vector.
+  - cleaned up mangled output of start.method='StdMeteo'. StdMeteo now behaves
+    properly and returns a vector.
 changed:
-  - use stats::filter() to protected filter() against getting run over by package dplyr
+  - use stats::filter() in the package to protected filter() against getting
+    run over by package dplyr (thanks to Cristabel Duran for reporting)
 
 changes in version 0.2.0 (2015-05-30)
 fixed:
-  - fixed bug leading to crash of vegperiod if argument "first.avg=0" (thanks
-    to Ronald Bialozyt for pointing it out)
-  - added a hack to method "LWF-BROOK90" in function vegperiod to adjust for
+  - fixed bug leading to crash of vegperiod() if argument "first.avg=0" (thanks
+    to Ronald Bialozyt for reporting)
+  - added a hack to method "LWF-BROOK90" in vegperiod() to adjust for
     different arithmetic precision in VBA (thanks to Paul Schmidt-Walter for
     providing climate.in files for comparison and help finding the bug)
-  - fixed problems in method "StdClimatolgy" in function vegperiod (now
+  - fixed problems in method "StdClimatolgy" in vegperiod() (now
     renamed to "StdMeteo")
 changed:
-  - renamed arguments in function vegperiod to clarify meaning / easier tab
+  - renamed arguments in vegperiod() to clarify meaning / easier tab
     completion:
-    first.avg -> est.prev,
-    temp.sum -> Tsum.out,
-    method.start -> start.method,
-    method.end -> end.method
-  - renamed method "StdClimatolgy" to "StdMeteo" resp. "ETCCDI" in function
-    vegperiod and rebased implementation on international standard
-  - the argument "dates" of function vegperiod accepts now also character
+      first.avg -> est.prev,
+      temp.sum -> Tsum.out,
+      method.start -> start.method,
+      method.end -> end.method
+  - renamed method "StdClimatolgy" to "StdMeteo" / "ETCCDI" in vegperiod()
+    and brought calculations into compliance with ETCCDI standard
+  - the argument "dates" of vegperiod() accepts now also character
     strings understood by as.Date()
-  - rewrote help page of vegperiod and added references for all methods
+  - rewrote help page of vegperiod() and added references for all methods
 added:
-  - read.DWDdata() reads meteo data from the freely accessable stations of
-    the Climate Data Center of the German Weather Service (Deutscher
-    Wetterdienst, DWD).
+  - read.DWDdata() reads open meteo data from the Climate Data Center
+    of Germany's National Meteorological Service (Deutscher Wetterdienst, DWD).
   - read.DWDstations() fetches information about available DWD stations
 
 changes in version 0.1.0 (2015-04-06)
