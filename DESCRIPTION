@@ -6,7 +6,7 @@ Authors@R: c(person("Robert", "Nuske", role=c("aut", "cre"),
 Author: Robert Nuske
 Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
 Depends: R (>= 2.15.0)
-Imports: methods, utils
+Imports: utils
 Suggests: curl, testthat (>= 1.0.0)
 Description: Calculate start and end date of vegetation periods based on
   daily average air temperature and the day of the year (DOY). A sum

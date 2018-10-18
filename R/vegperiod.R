@@ -151,7 +151,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
     stop("Daily mean temperatures are too small/large (<-25 or >+35).\n",
          "Were they multiplied by 10 for storage?")
 
-  if(!methods::is(dates, "Date")){
+  if(!inherits(dates, "Date")){
     tryCatch(dates <- as.Date(dates),
              error=function(c) stop(paste("'dates' could not be coerced to",
                                           "class Date by as.Date(dates)."),
