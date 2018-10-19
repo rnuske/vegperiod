@@ -390,7 +390,9 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
   # get a list of all files within a directory
   h <- curl::new_handle(dirlistonly=1, ftp_use_epsv=0)
-  filenames <- readLines(curl::curl(url, handle=h))
+  con <- curl::curl(url, handle=h)
+  filenames <- readLines(con)
+  close(con)
 
   return(filenames)
 }
