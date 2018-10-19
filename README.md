@@ -1,9 +1,25 @@
 # vegperiod
 
-Calculate start and end date of vegetation period of forest trees based on daily average air temperature and the day of the year (DOY). Functions for summing day degrees within vegetation period and reading freely available meteo data from DWD's ftp-Server are provided on top.
+The length of the vegetation period is increasingly used to model plant growth. The vegetation period gains further importance in climate change impact models trying to grasp the change of growing conditions, usually along with a measure of temperature and precipitation.
 
-## Available Methods for determinig vegetation period
-### start.method
+To determine start and end date of the vegetation period in a simple manner, this package uses only mean daily temperature and the day of the year (DOY). Since the geographical position is not taken into account (at the moment), the area of application is determined by the area used to parameterize the start and end methods, which is currently roughly Western Europe.
+
+The package also includes functions for downloading open meteo data from the [Climate Data Center](https://www.dwd.de/EN/climate_environment/cdc/cdc.html) of Germany's National Meteorological Service (Deutscher Wetterdienst, DWD).
+
+
+## Usage
+Vegetation periods a calculated using the function `vegperiod()`.  One has to choose a start and end method. Some methods, such as 'Menzel', need additional arguments.
+
+```
+data(goe)
+vegperiod(dates=goe$date, Tavg=goe$t, species="Picea abies (frueh)",
+          start.method="Menzel", end.method="vonWilpert", est.prev=5)
+```
+
+### Implemented start and end methods
+Some common methods for determining the start and end date of the vegetation period are already implemented. Popular choices with regard to forest trees are 'Menzel' and 'vonWilpert'.
+
+#### `start.method`
 * **Menzel** described in Menzel (1997). Parameterized for 10 common tree 
 species.
 * **StdMeteo** / **ETCCDI** a simple threshold based procedure as defined by 
@@ -15,7 +31,7 @@ and is part of the section forestry of DWD's
 [German Climate Atlas](http://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html).
 It is more robust against early starts than common simple meteorological procedures.
 
-### end.method
+#### `end.method`
 * **vonWilpert** based on von Wilpert (1990). Originally developed for 
 "Picea abies" in the Black Forest but currently used for all tree species 
 throughout Germany.
@@ -27,33 +43,13 @@ climatological procedures.
 the Expert Team on Climate Change Detection and Indices (cf. ETCCDI and Ferch 
 et al., 2002) leading to quite late vegetation ends.
 
-### The usual suspects
-Most commonly used are **Menzel** and **vonWilpert**.
+### Downloading data from DWD
+Germany's National Meteorological Service offers open meteo data as text files on an FTP-Server. The 
+files are organized in deep folder structures and end with arcane/legacy EOF character. 
+The Function `read.DWDdata()`deals with all of that and returns a data.frame. Beware there might be missing values.
+
+Note: Downloading 'historical' data from DWD with read.DWDdata() requires the package 'curl'.
 
 
-## Downloading data from DWD
-The German Weather Service offers meteo data as text files on a FTP-Server. The 
-files are organized in deep folder structures and end with arcane/legacy EOF. 
-The Function `read.DWDdata()`deals with all of that and provides data.frame. 
-Beware there might be missing values.
-
-
-## ToDo
-* enhance formal testing (using testthat)
-* Get rid of dependence on curl. Think harder about downloading historical data from DWD without curl. Problem: The file name can not be constructed from information in the station list and `download.file()` does not accept wildcards.
-    + file name: `tageswerte_01691_19470101_20141231_hist.zip`
-    + corresponding record in 'KL_Tageswerte_Beschreibung_Stationen.txt' `1691 19470101 20150422            167     51.5003    9.9506 Göttingen`
-* Add further vegperiod methods (cf. CSC collection of vegetation periods)
-* Consider Brandenburger variation of 'Menzel'
-
-
-## Installation 
-
-### Install released package via
-install.packages("vegperiod", repo="https://www.nw-fva.de/r-pkgs")
-
-### Install from source
-Download source code and install locally e.g. via devtools::install_local() or
-RStudio. Another possibility is to try devtools::install_git(). It might be a 
-little complicated because one has to deal with user and password of the 
-private repository.
+## Contributions
+Further start and end methods or download functions are more than welcome! 
