@@ -10,8 +10,8 @@ Suggests: curl, testthat (>= 1.0.2)
 Description: Collection of common methods to determine growing season length in
   a simple manner. Start and end dates of the vegetaion periods are calculated
   solely based on daily mean temperatures and the day of the year (DOY).
-URL: https://www.nw-fva.de/r-pkgs
-BugReports: via email to <robert.nuske@nw-fva.de>
+URL: https://github.com/rnuske/vegperiod
+BugReports: https://github.com/rnuske/vegperiod/issues
 Encoding: UTF-8
 License: GPL (>= 3)
 RoxygenNote: 6.1.0

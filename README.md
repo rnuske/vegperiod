@@ -7,6 +7,14 @@ To determine start and end date of the vegetation period in a simple manner, thi
 The package also includes functions for downloading open meteo data from the [Climate Data Center](https://www.dwd.de/EN/climate_environment/cdc/cdc.html) of Germany's National Meteorological Service (Deutscher Wetterdienst, DWD).
 
 
+## Installation
+A development version of the package vegperiod can be installed from Github using the package devtools.
+
+```r
+# install.packages("devtools")
+devtools::install_github("rnuske/vegperiod")
+```
+
 ## Usage
 Vegetation periods a calculated using the function `vegperiod()`.  One has to choose a start and end method. Some methods, such as 'Menzel', need additional arguments.
 
