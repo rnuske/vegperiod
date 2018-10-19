@@ -240,7 +240,8 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
       if(period == "historical"){
         # historical filenames can't be guessed -> list all files & filter
-        message('Searching for correct file name in list of available files...')
+        if(!quiet)
+          message('Searching for correct file name in list of available files...')
         files <- .list_available_via_FTP(paste0(myURL, '/'))
         fname <- grep(formatC(id, width=5, flag='0'), files, value=TRUE)
         if(length(fname) == 0)
