@@ -1,5 +1,9 @@
 # News for Package vegperiod
 
+## Version 0.2.5
+  * replaced package RCurl with curl for downloading DWD Data
+  * stopped importing package methods
+
 
 ## Version 0.2.4
   * vegperiod() checks if Tavg (daily mean temperature) is between -25 and 35 to catch temperatures multiplied by 10. Sometimes done to store as integers. (thanks to Ronald Bialozyt for reporting a crash)
