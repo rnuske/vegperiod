@@ -1,6 +1,8 @@
 context("DWD stuff")
 
 test_that("download of list of stations works", {
+  # don't run download tests on cran
+  skip_on_cran()
 
   # stations with daily climate data from the last year
   expect_silent(stations <- read.DWDstations())
@@ -19,6 +21,9 @@ test_that("download of list of stations works", {
 
 
 test_that("download of data works", {
+  # don't run download tests on cran
+  skip_on_cran()
+
   # fetch last 500 days worth of data from station Göttingen
   clim <- read.DWDdata(id=1691, quiet=TRUE)
   expect_is(clim, 'data.frame')
@@ -26,13 +31,12 @@ test_that("download of data works", {
   expect_gt(nrow(clim), 366)
   expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
 
-  # download historical data from the Brocken
+  # download historical data from the Brocken if curl available
   skip_if_not_installed('curl')
-  {
-    climb <- read.DWDdata(722, period='historical', quiet=TRUE)
-    expect_is(climb, 'data.frame')
-    expect_length(climb, 18)
-    expect_gt(nrow(climb), 366)
-    expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
-  }
+
+  climb <- read.DWDdata(722, period='historical', quiet=TRUE)
+  expect_is(climb, 'data.frame')
+  expect_length(climb, 18)
+  expect_gt(nrow(climb), 366)
+  expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
 })
