@@ -1,0 +1,13 @@
+citHeader("To cite vegperiod in publications, please use:")
+
+citEntry(
+  entry = "Unpublished",
+  title = "vegperiod: Determine Thermal Vegetation Periods",
+  author = person("Robert", "Nuske"),
+  year = "2017",
+  doi = "10.5281/zenodo.1466541",
+  note = "[Software]",
+  textVersion = paste("Nuske, R. (2017): vegperiod: Determine Thermal",
+    "Vegetation Periods [Software]. Zenodo.",
+    "https://doi.org/10.5281/zenodo.1466541")
+)
