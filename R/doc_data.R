@@ -7,8 +7,8 @@
 #'
 #' @format A data frame with 3652 rows and 6 variables:
 #'   \tabular{ll}{
-#'    \strong{variable} \tab \strong{description}\cr
-#'    date              \tab calender date as object of class Date\cr
+#'    \strong{Variable} \tab \strong{Description}\cr
+#'    date              \tab calendar date as object of class Date\cr
 #'    year              \tab years as integer\cr
 #'    month             \tab month as integer \cr
 #'    day               \tab day of month as integer\cr
