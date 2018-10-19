@@ -1,8 +1,9 @@
 context("DWD stuff")
 
 test_that("download of list of stations works", {
-  # don't run download tests on cran
-  skip_on_cran()
+  # don't run download tests on cran, travis, appveyor
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
+
 
   # stations with daily climate data from the last year
   expect_silent(stations <- read.DWDstations())
@@ -21,8 +22,8 @@ test_that("download of list of stations works", {
 
 
 test_that("download of data works", {
-  # don't run download tests on cran
-  skip_on_cran()
+  # don't run download tests on cran, travis, appveyor
+  skip_on_cran(); skip_on_travis(); skip_on_appveyor()
 
   # fetch last 500 days worth of data from station Göttingen
   clim <- read.DWDdata(id=1691, quiet=TRUE)
