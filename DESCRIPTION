@@ -1,17 +1,15 @@
 Package: vegperiod
-Version: 0.2.4
-Title: Determine Vegetation Periods of Forest Trees
-Authors@R: c(person("Robert", "Nuske", role=c("aut", "cre"), 
-             email="robert.nuske@nw-fva.de"))
-Author: Robert Nuske
-Maintainer: Robert Nuske <robert.nuske@nw-fva.de>
+Version: 0.2.5
+Title: Determine Thermal Vegetation Periods
+Authors@R: person("Robert", "Nuske", role=c("aut", "cre"),
+  email="robert.nuske@mailbox.org", comment=c(ORCID="0000-0001-9773-2061"))
+Maintainer: Robert Nuske <robert.nuske@mailbox.org>
 Depends: R (>= 2.15.0)
 Imports: utils
-Suggests: curl, testthat (>= 1.0.0)
-Description: Calculate start and end date of vegetation periods based on
-  daily average air temperature and the day of the year (DOY). A sum
-  of day degrees within vegetation period and functions for reading
-  freely accessible meteo data from DWD's ftp-Server are provided on top.
+Suggests: curl, testthat (>= 1.0.2)
+Description: Collection of common methods to determine growing season length in
+  a simple manner. Start and end dates of the vegetaion periods are calculated
+  solely based on daily mean temperatures and the day of the year (DOY).
 URL: https://www.nw-fva.de/r-pkgs
 BugReports: via email to <robert.nuske@nw-fva.de>
 Encoding: UTF-8
