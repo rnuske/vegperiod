@@ -25,18 +25,18 @@ A data.frame with all advertised weather stations. The data.frame
 contains the variables id, from, to, elev, lat, long, name, state.
 }
 \description{
-Get a listing of advertised stations of the German Weather Service (Deutscher
-Wetterdienst, DWD). The list differs for station type, time period and
-resolution. The list of advertised stations is usually not identical with
-the currently available stations.
+Get a listing of advertised stations of Germany's National Meteorological
+Service (Deutscher Wetterdienst, DWD). The list differs for station type,
+time period and resolution. The list of advertised stations is usually not
+identical with the currently available stations.
 }
 \details{
-The freely accessible part of the Climate Data Center of the German Weather
-Service (Deutscher Wetterdienst, DWD) is part of the DWD's mandate for
-basic supply of information (termed "Grundversorgung"). These services may
-be used without any restrictions (no fees will be charged and in general
-there are no restrictions for the use the data), provided that the source is
-indicated as laid down in the
+The freely accessible part of the Climate Data Center of Germany's National
+Meteorological Service (Deutscher Wetterdienst, DWD) is part of DWD's
+mandate for basic supply of information (termed "Grundversorgung").
+These services may be used without any restrictions (no fees will be
+charged and in general there are no restrictions for the use the data),
+provided that the source is indicated as laid down in the
 \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
 ordinance. The source reference shall meet the following rules:
 \itemize{
@@ -55,7 +55,7 @@ or the translated \href{../doc/Terms_of_use.pdf}{Terms of use}.
 # stations with daily climate data from the last year
 stations <- read.DWDstations()
 
-# precipitation stations with monthly histrical data
+# precipitation stations with monthly historical data
 precip <- read.DWDstations(type='precip', period='historical',
                            resolution='monthly')
 
@@ -67,5 +67,5 @@ stat.daily.recent <- stat.daily[stat.daily$to > (Sys.Date() - 7), ]
 }
 \references{
 Freely accessible DWD data are available via the
-  \href{http://www.dwd.de/cdc}{Climate Data Center}
+  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}
 }

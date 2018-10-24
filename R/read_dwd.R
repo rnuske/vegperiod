@@ -8,18 +8,18 @@
 
 #' Fetch information about DWD weather stations
 #'
-#' Get a listing of advertised stations of the German Weather Service (Deutscher
-#' Wetterdienst, DWD). The list differs for station type, time period and
-#' resolution. The list of advertised stations is usually not identical with
-#' the currently available stations.
+#' Get a listing of advertised stations of Germany's National Meteorological
+#' Service (Deutscher Wetterdienst, DWD). The list differs for station type,
+#' time period and resolution. The list of advertised stations is usually not
+#' identical with the currently available stations.
 #'
 #'
-#' The freely accessible part of the Climate Data Center of the German Weather
-#' Service (Deutscher Wetterdienst, DWD) is part of the DWD's mandate for
-#' basic supply of information (termed "Grundversorgung"). These services may
-#' be used without any restrictions (no fees will be charged and in general
-#' there are no restrictions for the use the data), provided that the source is
-#' indicated as laid down in the
+#' The freely accessible part of the Climate Data Center of Germany's National
+#' Meteorological Service (Deutscher Wetterdienst, DWD) is part of DWD's
+#' mandate for basic supply of information (termed "Grundversorgung").
+#' These services may be used without any restrictions (no fees will be
+#' charged and in general there are no restrictions for the use the data),
+#' provided that the source is indicated as laid down in the
 #' \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
 #' ordinance. The source reference shall meet the following rules:
 #' \itemize{
@@ -50,14 +50,14 @@
 #'
 #' @references
 #'   Freely accessible DWD data are available via the
-#'   \href{http://www.dwd.de/cdc}{Climate Data Center}
+#'   \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}
 #'
 #' @examples
 #' \dontrun{
 #' # stations with daily climate data from the last year
 #' stations <- read.DWDstations()
 #'
-#' # precipitation stations with monthly histrical data
+#' # precipitation stations with monthly historical data
 #' precip <- read.DWDstations(type='precip', period='historical',
 #'                            resolution='monthly')
 #'
@@ -85,9 +85,9 @@ read.DWDstations <- function(type='climate', period='recent',
   myURL <- paste(baseURL, resolution, url.type, period, fname, sep='/')
 
   myCols <- c('id', 'from', 'to', 'elev', 'lat', 'long', 'name', 'state')
-  myWidths <- switch(type,
-                     'climate'=c(11, 9, 9, 15, 12, 10, 41, 23),
-                     'precipitation'=c(5, 9, 9, 15, 12, 10, 41, 23))
+  myWidths <- switch(resolution,
+                     'daily'   = c(6, 9, 9, 15, 12, 10, 41, 24),
+                     'monthly' = c(6, 9, 9, 14, 12, 10, 41, 24))
 
   options(warn=-1) # the warning about last line is wrong -> don't show it
   # treat EOF as comment

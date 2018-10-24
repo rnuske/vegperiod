@@ -3,6 +3,7 @@
 ## Version 0.2.5
   * replaced package RCurl with curl for downloading DWD Data
   * stopped importing package methods
+  * DWD changed layout of station description files: fixed read.DWDstations() 
 
 
 ## Version 0.2.4
