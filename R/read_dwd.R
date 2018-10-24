@@ -105,8 +105,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #' Fetch meteo data of DWD weather stations
 #'
 #' Fetch observed meteorological data of German weather stations from freely
-#' accessible part of the Climate Data Center of the German Weather Service
-#' (Deutscher Wetterdienst, DWD).
+#' accessible part of the Climate Data Center of Germany's National
+#' Meteorological Service (Deutscher Wetterdienst, DWD).
 #'
 #' An introduction to the data available at the Climate Data Center can be
 #' found in the German
@@ -114,12 +114,12 @@ read.DWDstations <- function(type='climate', period='recent',
 #' or the translated
 #' \href{../doc/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
 #'
-#' The freely accessible part of the Climate Data Center of the German Weather
-#' Service (Deutscher Wetterdienst, DWD) is part of the DWD's mandate for
-#' basic supply of information (termed "Grundversorgung"). These services may
-#' be used without any restrictions (no fees will be charged and in general
-#' there are no restrictions for the use the data), provided that the source is
-#' indicated as laid down in the
+#' The freely accessible part of the Climate Data Center of  Germany's National
+#' Meteorological Service (Deutscher Wetterdienst, DWD) is part of the DWD's
+#' mandate for basic supply of information (termed "Grundversorgung").
+#' These services may be used without any restrictions (no fees will be charged
+#' and in general there are no restrictions for the use the data), provided
+#' that the source is indicated as laid down in the
 #' \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
 #' ordinance. The source reference shall meet the following rules:
 #' \itemize{
@@ -154,7 +154,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #' @param file a string specifying the location of a dataset. \samp{"file"}
 #'   may point to a file on a FTP-server or on the local file system.
 #'   If the file lives on a FTP-server the string must start with
-#'   \code{'ftp://'}.
+#'   \code{'ftp://'}. If no file provided, data will be downloaded from DWD
+#'   FTP Server.
 #'
 #' @param destdir directory (string) where intermediate data (downloaded *.zip
 #'   file) are stored. If it is NULL (the default) a subdirectory
@@ -166,28 +167,29 @@ read.DWDstations <- function(type='climate', period='recent',
 #'
 #' @param quiet If TRUE, suppress status messages (if any), and the progress bar.
 #'
-#' @return A data.frame with the observed weather data. Be aware there might be
-#'   gaps and inhomogeneities! \samp{colnames} contains the original header and
-#'   hence German terms. Translation of usual column names:
+#' @return A data.frame with the observed weather data. Beware of gaps and
+#'   inhomogeneities! \samp{colnames} contains the original header and
+#'   hence German terms.
 #'   \tabular{ll}{
-#'    \strong{original name} \tab \strong{translation}\cr
-#'    STATIONS_ID              \tab id\cr
-#'    MESS_DATUM               \tab date\cr
-#'    QUALITAETS_NIVEAU        \tab quality level\cr
-#'    LUFTTEMPERATUR           \tab average temperature\cr
-#'    DAMPFDRUCK               \tab vapor pressure\cr
-#'    BEDECKUNGSGRAD           \tab cloud cover\cr
-#'    LUFTDRUCK_STATIONSHOEHE  \tab air pressure\cr
-#'    REL_FEUCHTE              \tab humidity\cr
-#'    WINDGESCHWINDIGKEIT      \tab wind speed\cr
-#'    LUFTTEMPERATUR_MAXIMUM   \tab max temperature\cr
-#'    LUFTTEMPERATUR_MINIMUM   \tab min temperature\cr
-#'    LUFTTEMP_AM_ERDB_MINIMUM \tab min temperature at ground level\cr
-#'    WINDSPITZE_MAXIMUM       \tab max wind speed\cr
-#'    NIEDERSCHLAGSHOEHE       \tab precipitation\cr
-#'    NIEDERSCHLAGSHOEHE_IND   \tab type of precipitation\cr
-#'    SONNENSCHEINDAUER        \tab sunshine duration\cr
-#'    SCHNEEHOEHE              \tab snow height
+#'    \strong{Name} \tab \strong{Description}\cr
+#'    STATIONS_ID \tab station id\cr
+#'    MESS_DATUM  \tab date\cr
+#'    QN_3        \tab quality level of next columns (-)\cr
+#'    FX          \tab daily maximum of wind gust (m/s)\cr
+#'    FM          \tab daily mean of wind velocity (m/s)\cr
+#'    QN_4        \tab quality level of next columns (-)\cr
+#'    RSK         \tab daily precipitation height (mm)\cr
+#'    RSKF        \tab precipitation form (-)\cr
+#'    SDK         \tab daily sunshine duration (h)\cr
+#'    SHK_TAG     \tab daily snow depth (cm)\cr
+#'    NM          \tab daily mean of cloud cover (1/8)\cr
+#'    VPM         \tab daily mean of vapor pressure (hPa)\cr
+#'    PM          \tab daily mean of pressure (hPa)\cr
+#'    TMK         \tab daily mean of temperature (°C)\cr
+#'    UPM         \tab daily mean of relative humidity (\%)\cr
+#'    TXK         \tab daily maximum of temperature at 2m height (°C)\cr
+#'    TNK         \tab daily minimum of temperature at 2m height (°C)\cr
+#'    TGK         \tab daily minimum of air temperature at 5cm above ground (°C)
 #'   }
 #'
 #' @references

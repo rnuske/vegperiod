@@ -103,19 +103,36 @@ test_that("download of data works", {
   # don't run download tests on cran, travis, appveyor
   skip_on_cran(); skip_on_travis(); skip_on_appveyor()
 
-  # fetch last 500 days worth of data from station Göttingen
-  clim <- read.DWDdata(id=1691, quiet=TRUE)
+  # fetch last 500 days worth of data from station Göttingen ------------------
+  expect_silent(clim <- read.DWDdata(id=1691, quiet=TRUE))
+  expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
+
   expect_is(clim, 'data.frame')
   expect_length(clim, 18)
-  expect_gt(nrow(clim), 366)
-  expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
+  expect_equal(nrow(clim), 550)
 
-  # download historical data from the Brocken if curl available
+  expect_is(clim$STATIONS_ID, 'integer')
+  expect_equal(unique(clim$STATIONS_ID), 1691L)
+  expect_is(clim$MESS_DATUM,  'Date')
+  expect_is(clim$QN_3,        'integer')
+  expect_is(clim$RSK,         'numeric')
+  expect_is(clim$RSKF,        'integer')
+  expect_is(clim$TMK,         'numeric')
+
+
+  # download historical data from the Brocken if curl available ---------------
   skip_if_not_installed('curl')
 
-  climb <- read.DWDdata(722, period='historical', quiet=TRUE)
+  expect_silent(climb <- read.DWDdata(722, period='historical', quiet=TRUE))
   expect_is(climb, 'data.frame')
   expect_length(climb, 18)
-  expect_gt(nrow(climb), 366)
-  expect_true(file.exists(file.path(tempdir(), "tageswerte_KL_01691_akt.zip")))
+  expect_gt(nrow(climb), 550)
+
+  expect_is(climb$STATIONS_ID, 'integer')
+  expect_equal(unique(climb$STATIONS_ID), 722L)
+  expect_is(climb$MESS_DATUM,  'Date')
+  expect_is(climb$QN_3,        'integer')
+  expect_is(climb$RSK,         'numeric')
+  expect_is(climb$RSKF,        'integer')
+  expect_is(climb$TMK,         'numeric')
 })
