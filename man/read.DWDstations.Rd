@@ -47,8 +47,8 @@ ordinance. The source reference shall meet the following rules:
     Deutscher Wetterdienst, figures rounded".
 }
 A more detailed description of the rules can be found in the official German
-\href{../doc/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-or the translated \href{../doc/Terms_of_use.pdf}{Terms of use}.
+\href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
+or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
 }
 \examples{
 \dontrun{

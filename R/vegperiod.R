@@ -24,7 +24,7 @@
 #' The method \samp{"Ribes uva-crispa"} is based on leaf-out of gooseberry
 #' (Janssen 2009).  It was developed by the German Weather Service (Deutscher
 #' Wetterdienst, DWD) and is part of the section forestry of DWD's
-#' \href{http://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German Climate Atlas}.
+#' \href{https://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German Climate Atlas}.
 #' It is more robust against early starts than common simple
 #' meteorological procedures.
 #'

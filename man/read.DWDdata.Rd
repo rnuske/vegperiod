@@ -76,9 +76,9 @@ Meteorological Service (Deutscher Wetterdienst, DWD).
 \details{
 An introduction to the data available at the Climate Data Center can be
 found in the German
-\href{../doc/Liesmich_intro_CDC_ftp.pdf}{Liesmich_intro_CDC_ftp}
+\href{ftp://ftp-cdc.dwd.de/pub/CDC/Liesmich_intro_CDC-FTP.pdf}{Liesmich_intro_CDC_ftp}
 or the translated
-\href{../doc/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
+\href{ftp://ftp-cdc.dwd.de/pub/CDC/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
 
 The freely accessible part of the Climate Data Center of  Germany's National
 Meteorological Service (Deutscher Wetterdienst, DWD) is part of the DWD's
@@ -96,8 +96,8 @@ ordinance. The source reference shall meet the following rules:
     Deutscher Wetterdienst, figures rounded".
 }
 A more detailed description of the rules can be found in the official German
-\href{../doc/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-or the translated \href{../doc/Terms_of_use.pdf}{Terms of use}.
+\href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
+or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
 }
 \examples{
 \dontrun{
