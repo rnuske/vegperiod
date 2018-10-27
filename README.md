@@ -1,6 +1,7 @@
 # vegperiod
 
 [![Travis-CI Build Status](https://travis-ci.org/rnuske/vegperiod.svg?branch=master)](https://travis-ci.org/rnuske/vegperiod) 
+[![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rnuske/vegperiod?branch=master&svg=true)](https://ci.appveyor.com/project/rnuske/vegperiod) 
 [![Package-License](http://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
 
