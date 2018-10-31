@@ -30,7 +30,9 @@ data(goe)
 str(goe)
 }
 \references{
-Orlowsky, B.; Gerstengarbe, F.W.; Werner, P.C. (2008): A resampling scheme
-  for regional climate simulations and its performance compared to a
-  dynamical RCM. Theor Appl Climatol 92(3–4): 209-223
+Orlowsky, B., Gerstengarbe, F. W., Werner, P. C. (2008)
+  A resampling scheme for regional climate simulations and its performance
+  compared to a dynamical RCM.
+  \emph{Theoretical and Applied Climatology}, \bold{92}(3–4), 209--223.
+  \doi{10.1007/s00704-007-0352-y}
 }

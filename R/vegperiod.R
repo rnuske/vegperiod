@@ -14,35 +14,36 @@
 #' The sum of day degrees within vegetation periods is calcuated for
 #' convenience sake.
 #'
-#' The method \samp{"Menzel"} to determine vegetation start dates implements
-#' the algorithm described in Menzel (1997). The method is parameterized for
-#' 10 common tree species. \samp{"Menzel"} is the most commonly used method.
-#' \samp{"StdMeteo"} resp. \samp{"ETCCDI"} is a simple threshold based
-#' procedure as defined by the Expert Team on Climate Change Detection and
-#' Indices (cf. ETCCDI and Ferch et al., 2002) leading to quite early
-#' vegetation starts. This method is widely used in climate change studies.
-#' The method \samp{"Ribes uva-crispa"} is based on leaf-out of gooseberry
-#' (Janssen 2009).  It was developed by the German Weather Service (Deutscher
-#' Wetterdienst, DWD) and is part of the section forestry of DWD's
-#' \href{https://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German Climate Atlas}.
-#' It is more robust against early starts than common simple
+#' @section Start methods:
+#' The often used method \bold{\samp{"Menzel"}} implements the algorithm
+#' described in Menzel (1997). The method is parameterized for 10 common tree
+#' species. \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"} is a simple threshold
+#' based procedure as defined by the Expert Team on Climate Change Detection and
+#' Indices (cf. ETCCDI 2009, Frich et al. 2002, Zhang et al. 2011) leading to
+#' quite early vegetation starts. This method is widely used in climate change
+#' studies. The method \bold{\samp{"Ribes uva-crispa"}} is based on leaf-out of
+#' gooseberry (Janssen 2009). It was developed by the German Weather Service
+#' (Deutscher Wetterdienst, DWD) and is part of the section forestry of DWD's
+#' \href{https://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German
+#' Climate Atlas}. It is more robust against early starts than common simple
 #' meteorological procedures.
 #'
-#' The end method \samp{"vonWilpert"} is based on von Wilpert (1990). It was
-#' originally developed for "Picea abies" in the Black Forest but is currently
-#' used for all tree species throughout Germany. As usual, the rules regarding
-#' the soilmatrix are neglected in this implementation.
-#' \samp{"LWF-BROOK90"} is -for the sake of convinience- a reimplementation of
-#' the LWF-BROOK90 VBA version (Hammel & Kennel, 2001). Their interpretation of
-#' von Wilpert  (1990) and the somewhat lower precision of VBA was mimicked.
-#' This implementation was tested against version 3.4 (no deviation!).
-#' \samp{"NuskeAlbert"} provide a very simple method which is inspired by
-#' standard climatological procedures but employes a 7 day moving average and a
-#' 5 °C threshold (cf. Walther & Linderholm, 2006).
-#' \samp{"StdMeteo"} resp. \samp{"ETCCDI"} is a simple threshold based
+#' @section End methods:
+#' The end method \bold{\samp{"vonWilpert"}} is based on von Wilpert (1990). It
+#' was originally developed for "Picea abies" in the Black Forest but is
+#' commonaly used for all tree species throughout Germany. As usual, the rules
+#' regarding the soilmatrix are neglected in this implementation.
+#' \bold{\samp{"LWF-BROOK90"}} is -for the sake of convinience- a
+#' reimplementation of the LWF-BROOK90 VBA version (Hammel and Kennel 2001).
+#' Their interpretation of von Wilpert (1990) and the somewhat lower precision
+#' of VBA was mimicked. This implementation was tested against version 3.4 (no
+#' deviation!). \bold{\samp{"NuskeAlbert"}} provide a very simple method which
+#' is inspired by standard climatological procedures but employes a 7 day moving
+#' average and a 5 °C threshold (cf. Walther and Linderholm 2006).
+#' \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"} is a simple threshold based
 #' procedure as defined by the Expert Team on Climate Change Detection and
-#' Indices (cf. ETCCDI and Ferch et al., 2002) leading to quite late vegetation
-#' ends.
+#' Indices (cf. ETCCDI 2009, Frich et al. 2002, Zhang et al. 2011) leading to
+#' quite late vegetation ends.
 #'
 #' @param dates vector of calender dates (objects of class \code{Date}
 #'        or something understood by \code{\link[base]{as.Date}}). Must contain
@@ -87,33 +88,49 @@
 #'   additional column with the sum of day degrees within vegetation periods.
 #'
 #' @references
-#'   CCl/CLIVAR/JCOMM Expert Team on Climate Change Detection and Indices
-#'   (ETCCDI): \href{http://etccdi.pacificclimate.org/list_27_indices.shtml}{List of 27 indicators}
+#'   ETCCDI (2009)
+#'   Climate Change Indices: Definitions of the 27 core indices.
+#'   \url{http://etccdi.pacificclimate.org/list_27_indices.shtml}
 #'
-#'   Frich, P. et al. (2002): Observed coherent changes in climatic extremes
-#'   during the second half of the twentieth century.
-#'   \href{http://www.climateknowledge.org/heat_waves/Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf}{Climate Research (19): 193-212.}
+#'   Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
+#'   Klein Tank, A., & Peterson, T. (2002)
+#'   Observed coherent changes in climatic extremes during the second half of
+#'   the twentieth century.
+#'   \emph{Climate Research}, \bold{19}, 193--212.
+#'   \doi{10.3354/cr019193}.
 #'
-#'   Hammel, K. & Kennel, M. (2001): Charakterisierung und Analyse der
-#'   Wasserverfügbarkeit und des Wasserhaushalts von Waldstandorten in Bayern
-#'   mit dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München,
-#'   185 S.
+#'   Hammel, K. and Kennel, M. (2001)
+#'   Charakterisierung und Analyse der Wasserverfügbarkeit und des
+#'   Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
+#'   BROOK90.
+#'   \emph{Forstliche Forschungsberichte München}.
 #'
-#'   Janssen, W (2009): Definition des Vegetationsanfanges. Internal Report,
-#'   Deutscher Wetterdienst, Abteilung Agrarmeteorologie, 10p.
+#'   Janssen, W. (2009)
+#'   Definition des Vegetationsanfanges.
+#'   \emph{Internal Report, Deutscher Wetterdienst, Abteilung Agrarmeteorologie}.
 #'
-#'   Menzel, A. (1997): Phänologie von Waldbäumen unter sich ändernden
-#'   Klimabedingungen - Auswertung der Beobachtungen in den Internationalen
-#'   Phänologischen Gärten und Möglichkeiten der Modellierung von Phänodaten.
-#'   Forstliche Forschungsberichte München 164: 147 S.
+#'   Menzel, A. (1997)
+#'   Phänologie von Waldbäumen unter sich ändernden Klimabedingungen -
+#'   Auswertung der Beobachtungen in den Internationalen Phänologischen Gärten
+#'   und Möglichkeiten der Modellierung von Phänodaten.
+#'   \emph{Forstliche Forschungsberichte München}.
 #'
-#'   von Wilpert, K. (1990): Die Jahrringstruktur von Fichten in Abhängigkeit
-#'   vom Bodenwasserhaushalt auf Pseudogley und Parabraunerde: Ein
-#'   Methodenkonzept zur Erfassung standortsspezifischer Wasserstreßdispostion.
-#'   Freiburger Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691.
+#'   von Wilpert, K. (1990)
+#'   Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
+#'   auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
+#'   standortsspezifischer Wasserstreßdispostion.
+#'   \emph{Freiburger Bodenkundliche Abhandlungen}.
 #'
-#'   Walther, A. & Linderholm, H.W. (2006): A comparison of growing season
-#'   indices for the Greater Baltic Area. Int J Biometeorol 51: 107-118.
+#'   Walther, A. and Linderholm, H. W. (2006)
+#'   A comparison of growing season indices for the Greater Baltic Area.
+#'   \emph{International Journal of Biometeorology}, \bold{51}(2), 107--118.
+#'   \doi{10.1007/s00484-006-0048-5}.
+#'
+#'   Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
+#'   Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
+#'   Indices for monitoring changes in extremes based on daily temperature and precipitation data.
+#'   \emph{Wiley Interdisciplinary Reviews: Climate Change}, \bold{2}(6), 851--870.
+#'   \doi{10.1002/wcc.147}.
 #'
 #' @examples
 #' data(goe)

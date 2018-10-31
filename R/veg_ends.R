@@ -22,7 +22,7 @@
 # - last day of the vegetation period is DOY 279 (5th of October in leap years)
 #
 # Reference:
-#   von Wilpert, K (1990): Die Jahrringstruktur von Fichten in Abhängigkeit vom
+#   von Wilpert, K (1990) Die Jahrringstruktur von Fichten in Abhängigkeit vom
 #   Bodenwasserhaushalt auf Pseudogley un Parabraunerde: Ein Methodenkonzept
 #   zur Erfassung standortsspezifischer Wasserstreßdispostion. Freiburger
 #   Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691. Seiten: 106-108
@@ -92,7 +92,7 @@
 # - nevertheless the vegetation periode stops latest at DOY 279
 #
 # Reference (commonly used):
-#  Hammel, K. & Kennel, M. (2001): Charakterisierung und Analyse der
+#  Hammel, K. & Kennel, M. (2001) Charakterisierung und Analyse der
 #  Wasserverfügbarkeit und des Wasserhaushalts von Waldstandorten in Bayern mit
 #  dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München, 185.
 #==============================================================================
@@ -219,7 +219,7 @@
 #     http://www.climdex.org/indices.html
 #   - European Climate Assessment (ECA)
 #     http://eca.knmi.nl/indicesextremes/indicesdictionary.php
-#   - Frich, P. et al. (2002): Observed coherent changes in climatic extremes
+#   - Frich, P. et al. (2002) Observed coherent changes in climatic extremes
 #     during the second half of the twentieth century. Climate Research (19):
 #     193-212.   http://www.climateknowledge.org/heat_waves/
 #     Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf

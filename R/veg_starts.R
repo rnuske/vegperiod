@@ -14,7 +14,7 @@
 # - vegetaion start if HeatSum >= criticalTemp
 #
 # References:
-#   MENZEL,, A. (1997): Phänologie von Waldbäumen unter sich ändernden Klima-
+#   MENZEL,, A. (1997) Phänologie von Waldbäumen unter sich ändernden Klima-
 #   bedingungen – Auswertung der Beobachtungen in den Internationalen
 #   Phänologischen Gärten und Möglichkeiten der Modellierung von Phänodaten.
 #   - Forstliche Forschungsberichte München, 164, 147 S.
@@ -119,7 +119,7 @@
 #     http://www.climdex.org/indices.html
 #   - European Climate Assessment (ECA)
 #     http://eca.knmi.nl/indicesextremes/indicesdictionary.php
-#   - Frich, P. et al. (2002): Observed coherent changes in climatic extremes
+#   - Frich, P. et al. (2002) Observed coherent changes in climatic extremes
 #     during the second half of the twentieth century. Climate Research (19):
 #     193-212.   http://www.climateknowledge.org/heat_waves/
 #     Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf
