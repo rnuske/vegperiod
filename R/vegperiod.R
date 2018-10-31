@@ -62,6 +62,16 @@
 #'        \samp{"NuskeAlbert"} and \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
 #'        Can be abbreviated (partial matching).
 #'        For further discussion see Details.
+#' @param Tsum.out boolean. Return the sum of day degrees within
+#'        vegetation period.
+#' @param species name of tree species [required if \code{start.method='Menzel'}
+#'        ignored otherwise].
+#'
+#'        Must be one of \samp{"Larix decidua"}, \samp{"Picea abies (frueh)"},
+#'        \samp{"Picea abies (spaet)"}, \samp{"Picea abies (noerdl.)"},
+#'        \samp{"Picea omorika"}, \samp{"Pinus sylvestris"}, \samp{"Betula
+#'        pubescens"}, \samp{"Quercus robur"}, \samp{"Quercus petraea"},
+#'        \samp{"Fagus sylvatica"}.
 #' @param est.prev number of years to \strong{est}imate \strong{prev}ious year's
 #'        chill days for the first year
 #'        [required if \code{start.method='Menzel'} ignored otherwise].
@@ -72,16 +82,6 @@
 #'        from the time series is lost. To circumvent the loss,
 #'        \code{est.prev = n} estimates the previous year's chill days for the
 #'        first year from the average of \code{n} first years of the time series.
-#' @param Tsum.out boolean. Return the sum of day degrees within
-#'        vegetation period.
-#' @param ... pass additional required arguments if using
-#'        \code{start.method='Menzel'} since Menzel's method is species specific.
-#'        The argument \code{species} must be one of \samp{"Larix decidua"},
-#'        \samp{"Picea abies (frueh)"}, \samp{"Picea abies (spaet)"},
-#'        \samp{"Picea abies (noerdl.)"}, \samp{"Picea omorika"},
-#'        \samp{"Pinus sylvestris"}, \samp{"Betula pubescens"},
-#'        \samp{"Quercus robur"}, \samp{"Quercus petraea"},
-#'        \samp{"Fagus sylvatica"}.
 #'
 #' @return Returns a data.frame with year and DOY of start and end day of
 #'   vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
@@ -148,8 +148,8 @@
 #'           start="StdMeteo", end="StdMeteo")
 #'
 #' @export
-vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
-                      Tsum.out=FALSE, ...){
+vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
+                      species=NULL, est.prev=0){
   # Checks
   #----------------------------------------------------------------------------
   start.method <- match.arg(start.method,
@@ -158,6 +158,19 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   end.method <- match.arg(end.method,
                           choices=c('vonWilpert', 'LWF-BROOK90', 'NuskeAlbert',
                                     'StdMeteo', 'ETCCDI'))
+
+  if(start.method == 'Menzel'){
+    possible.species <- c("Larix decidua", "Picea abies (frueh)",
+                          "Picea abies (spaet)", "Picea abies (noerdl.)",
+                          "Picea omorika", "Pinus sylvestris",
+                          "Betula pubescens", "Quercus robur", "Quercus petraea",
+                          "Fagus sylvatica")
+    if(is.null(species))
+      stop(paste0("If start.method='Menzel', species must be one of '",
+                  paste(possible.species, collapse="', '"), "'."))
+
+    species <- match.arg(species, choices=possible.species)
+  }
 
   if(length(dates) != length(Tavg))
     stop("The arguments dates and Tavg must be of same length!")
@@ -222,7 +235,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, est.prev=0,
   # calculating start and end
   #----------------------------------------------------------------------------
   start <- switch(start.method,
-                  'Menzel'   = .start_menzel(df=df, est.prev=est.prev, ...),
+                  'Menzel'   = .start_menzel(df=df, est.prev=est.prev, species=species),
                   'StdMeteo' = ,
                   'ETCCDI'   = .start_std_meteo(df),
                   'Ribes uva-crispa' = .start_ribes(df))

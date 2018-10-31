@@ -4,8 +4,8 @@
 \alias{vegperiod}
 \title{Determine start & end of vegetation periods.}
 \usage{
-vegperiod(dates, Tavg, start.method, end.method, est.prev = 0,
-  Tsum.out = FALSE, ...)
+vegperiod(dates, Tavg, start.method, end.method, Tsum.out = FALSE,
+  species = NULL, est.prev = 0)
 }
 \arguments{
 \item{dates}{vector of calender dates (objects of class \code{Date}
@@ -29,6 +29,18 @@ One of \samp{"vonWilpert"}, \samp{"LWF-BROOK90"},
 Can be abbreviated (partial matching).
 For further discussion see Details.}
 
+\item{Tsum.out}{boolean. Return the sum of day degrees within
+vegetation period.}
+
+\item{species}{name of tree species [required if \code{start.method='Menzel'}
+       ignored otherwise].
+
+       Must be one of \samp{"Larix decidua"}, \samp{"Picea abies (frueh)"},
+       \samp{"Picea abies (spaet)"}, \samp{"Picea abies (noerdl.)"},
+       \samp{"Picea omorika"}, \samp{"Pinus sylvestris"}, \samp{"Betula
+       pubescens"}, \samp{"Quercus robur"}, \samp{"Quercus petraea"},
+       \samp{"Fagus sylvatica"}.}
+
 \item{est.prev}{number of years to \strong{est}imate \strong{prev}ious year's
        chill days for the first year
        [required if \code{start.method='Menzel'} ignored otherwise].
@@ -39,18 +51,6 @@ For further discussion see Details.}
        from the time series is lost. To circumvent the loss,
        \code{est.prev = n} estimates the previous year's chill days for the
        first year from the average of \code{n} first years of the time series.}
-
-\item{Tsum.out}{boolean. Return the sum of day degrees within
-vegetation period.}
-
-\item{...}{pass additional required arguments if using
-\code{start.method='Menzel'} since Menzel's method is species specific.
-The argument \code{species} must be one of \samp{"Larix decidua"},
-\samp{"Picea abies (frueh)"}, \samp{"Picea abies (spaet)"},
-\samp{"Picea abies (noerdl.)"}, \samp{"Picea omorika"},
-\samp{"Pinus sylvestris"}, \samp{"Betula pubescens"},
-\samp{"Quercus robur"}, \samp{"Quercus petraea"},
-\samp{"Fagus sylvatica"}.}
 }
 \value{
 Returns a data.frame with year and DOY of start and end day of

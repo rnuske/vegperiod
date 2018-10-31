@@ -26,17 +26,8 @@
   # - last year at least till DOY 279
   # - and previous Nov & Dec if est.prev==0
   # - est.prev >= 0 and <= number of years
+  # - species contains a known name
 
-  possible.species <- c("Larix decidua", "Picea abies (frueh)",
-                        "Picea abies (spaet)", "Picea abies (noerdl.)",
-                        "Picea omorika", "Pinus sylvestris",
-                        "Betula pubescens", "Quercus robur", "Quercus petraea",
-                        "Fagus sylvatica")
-  if(missing(species))
-    stop(paste0("Argument 'species' is missing. It must be one of '",
-               paste(possible.species, collapse="', '"), "'."))
-
-  species <- match.arg(species, choices=possible.species)
   years <- unique(df$year)
 
   # Menzel's Parameter
