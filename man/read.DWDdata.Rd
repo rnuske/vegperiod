@@ -27,17 +27,17 @@ control. But be aware there still might be gaps and inhomogeneities.}
 resolution.}
 
 \item{file}{a string specifying the location of a dataset. \samp{"file"}
-may point to a file on a FTP-server or on the local file system.
-If the file lives on a FTP-server the string must start with
-\code{'ftp://'}. If no file provided, data will be downloaded from DWD
-FTP Server.}
+may point to a file on a FTP server or on the local file system.
+If the file lives on a FTP server the string must start with
+\code{'ftp://'}. If it is NULL (the default), data will be downloaded
+from DWD's FTP server.}
 
 \item{destdir}{directory (string) where intermediate data (downloaded *.zip
 file) are stored. If it is NULL (the default) a subdirectory
 \samp{downloaded_packages} of the session temporary directory will be used
 (and the files will be deleted at the end of the session).
 It might be advisable to keep the .zip file since it contains the
-stations documentation and metadata (eg. station shift, used devices,
+stations documentation and metadata (e.g. station shift, used devices,
 downtimes etc.).}
 
 \item{quiet}{If TRUE, suppress status messages (if any), and the progress bar.}
@@ -46,6 +46,8 @@ downtimes etc.).}
 A data.frame with the observed weather data. Beware of gaps and
   inhomogeneities! \samp{colnames} contains the original header and
   hence German terms.
+
+  Content of 'climate'-data.frame:
   \tabular{ll}{
    \strong{Name} \tab \strong{Description}\cr
    STATIONS_ID \tab station id\cr
@@ -67,6 +69,17 @@ A data.frame with the observed weather data. Beware of gaps and
    TNK         \tab daily minimum of temperature at 2m height (°C)\cr
    TGK         \tab daily minimum of air temperature at 5cm above ground (°C)
   }
+
+  Content of 'precipitation'-data.frame:
+  \tabular{ll}{
+   \strong{Name} \tab \strong{Description}\cr
+   STATIONS_ID \tab station id\cr
+   MESS_DATUM  \tab date\cr
+   QN_6        \tab quality level of next columns (-)\cr
+   RS          \tab daily precipitation height (mm)\cr
+   RSF         \tab precipitation form (-)\cr
+   SH_TAG      \tab daily height of snow pack (cm)\cr
+  }
 }
 \description{
 Fetch observed meteorological data of German weather stations from freely
@@ -80,24 +93,26 @@ found in the German
 or the translated
 \href{ftp://ftp-cdc.dwd.de/pub/CDC/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
 
-The freely accessible part of the Climate Data Center of  Germany's National
+The freely accessible part of the Climate Data Center of Germany's National
 Meteorological Service (Deutscher Wetterdienst, DWD) is part of the DWD's
 mandate for basic supply of information (termed "Grundversorgung").
 These services may be used without any restrictions (no fees will be charged
 and in general there are no restrictions for the use the data), provided
 that the source is indicated as laid down in the
 \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
-ordinance. The source reference shall meet the following rules:
+ordinance. The source reference shall roughly meet the following rules:
 \itemize{
   \item Where data are used without modification, the source reference shall
     read "Source: Deutscher Wetterdienst" or just consist of the DWD logo.
-  \item If the data are modifyed, the source reference shall specify as
+  \item If the data are modified, the source reference shall specify as
     precisely as possible the extent of such, e.g. "Based on data from
     Deutscher Wetterdienst, figures rounded".
 }
-A more detailed description of the rules can be found in the official German
+A more detailed description of the rules can be found in the official and
+legally binding German
 \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
+or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+of use}.
 }
 \examples{
 \dontrun{
@@ -111,21 +126,10 @@ clim <- read.DWDdata(id=1691, destdir='.')
 stat.hist <- read.DWDstations(period='historical')
 brocken.id <- stat.hist[grep("^Brock", stat.hist$name), ]$id
 clim.brocken <- read.DWDdata(id=brocken.id, period='historical')
-
-# get recent meteorological data fom a randomly selected station
-require('curl')
-dwdURL <- paste0("ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/",
-                 "climate/daily/kl/recent/")
-h <- new_handle(dirlistonly=1, ftp_use_epsv=0)
-filenames <- readLines(curl(dwdURL, handle=h))
-stations <- grep("Beschreibung_Stationen.txt$", filenames,
-                 invert=TRUE, value=TRUE)
-rnd.station <- sample(stations, 1)
-rnd.clim <- read.DWDdata(file=paste0(dwdURL, rnd.station))
 }
 
 }
 \references{
-Freely accessible DWD data are available via the
-  \href{http://www.dwd.de/cdc}{Climate Data Center}.
+Freely accessible DWD data available via the
+  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
 }

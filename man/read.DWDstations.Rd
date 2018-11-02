@@ -2,7 +2,7 @@
 % Please edit documentation in R/read_dwd.R
 \name{read.DWDstations}
 \alias{read.DWDstations}
-\title{Fetch information about DWD weather stations}
+\title{Fetch list of DWD weather stations}
 \usage{
 read.DWDstations(type = "climate", period = "recent",
   resolution = "daily")
@@ -21,51 +21,56 @@ up to a year ago are labelled \samp{"historical"}.}
 resolution.}
 }
 \value{
-A data.frame with all advertised weather stations. The data.frame
-contains the variables id, from, to, elev, lat, long, name, state.
+A data.frame with all weather stations. It's not guaranteed that all
+  advertised staions are available for download. Watch out for the end data
+  of observation. Stations with recent data have a current end date.
+  The data.frame contains the variables id, from, to, elev, lat, long, name,
+  state.
 }
 \description{
 Get a listing of advertised stations of Germany's National Meteorological
 Service (Deutscher Wetterdienst, DWD). The list differs for station type,
 time period and resolution. The list of advertised stations is usually not
-identical with the currently available stations.
+identical with currently available stations.
 }
 \details{
 The freely accessible part of the Climate Data Center of Germany's National
 Meteorological Service (Deutscher Wetterdienst, DWD) is part of DWD's
 mandate for basic supply of information (termed "Grundversorgung").
-These services may be used without any restrictions (no fees will be
+This service may be used without any restrictions (no fees will be
 charged and in general there are no restrictions for the use the data),
 provided that the source is indicated as laid down in the
 \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
-ordinance. The source reference shall meet the following rules:
+ordinance. The source reference shall roughly meet the following rules:
 \itemize{
   \item Where data are used without modification, the source reference shall
     read "Source: Deutscher Wetterdienst" or just consist of the DWD logo.
-  \item If the data are modifyed, the source reference shall specify as
+  \item If the data are modified, the source reference shall specify as
     precisely as possible the extent of such, e.g. "Based on data from
     Deutscher Wetterdienst, figures rounded".
 }
-A more detailed description of the rules can be found in the official German
+A more detailed description of the rules can be found in the official and
+legally binding German
 \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
+or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+of use}.
 }
 \examples{
 \dontrun{
-# stations with daily climate data from the last year
+# stations with daily climate data
 stations <- read.DWDstations()
 
 # precipitation stations with monthly historical data
 precip <- read.DWDstations(type='precip', period='historical',
                            resolution='monthly')
 
-# list stations updated within last week
+# list stations with daily data updated within last week
 stat.daily <- read.DWDstations(period='recent')
 stat.daily.recent <- stat.daily[stat.daily$to > (Sys.Date() - 7), ]
 }
 
 }
 \references{
-Freely accessible DWD data are available via the
-  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}
+Freely accessible DWD data available via the
+  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
 }

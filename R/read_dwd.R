@@ -6,32 +6,33 @@
 #==============================================================================
 
 
-#' Fetch information about DWD weather stations
+#' Fetch list of DWD weather stations
 #'
 #' Get a listing of advertised stations of Germany's National Meteorological
 #' Service (Deutscher Wetterdienst, DWD). The list differs for station type,
 #' time period and resolution. The list of advertised stations is usually not
-#' identical with the currently available stations.
-#'
+#' identical with currently available stations.
 #'
 #' The freely accessible part of the Climate Data Center of Germany's National
 #' Meteorological Service (Deutscher Wetterdienst, DWD) is part of DWD's
 #' mandate for basic supply of information (termed "Grundversorgung").
-#' These services may be used without any restrictions (no fees will be
+#' This service may be used without any restrictions (no fees will be
 #' charged and in general there are no restrictions for the use the data),
 #' provided that the source is indicated as laid down in the
 #' \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
-#' ordinance. The source reference shall meet the following rules:
+#' ordinance. The source reference shall roughly meet the following rules:
 #' \itemize{
 #'   \item Where data are used without modification, the source reference shall
 #'     read "Source: Deutscher Wetterdienst" or just consist of the DWD logo.
-#'   \item If the data are modifyed, the source reference shall specify as
+#'   \item If the data are modified, the source reference shall specify as
 #'     precisely as possible the extent of such, e.g. "Based on data from
 #'     Deutscher Wetterdienst, figures rounded".
 #' }
-#' A more detailed description of the rules can be found in the official German
+#' A more detailed description of the rules can be found in the official and
+#' legally binding German
 #' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
+#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+#' of use}.
 #'
 #' @param type string. Stations can be of type \samp{"climate"} offering a range
 #'   of meteorological parameters or of type \samp{"precipitation"} solely
@@ -45,23 +46,26 @@
 #'   \samp{"daily"} or \samp{"monthly"}. \samp{"daily"} being the common
 #'   resolution.
 #'
-#' @return A data.frame with all advertised weather stations. The data.frame
-#' contains the variables id, from, to, elev, lat, long, name, state.
+#' @return A data.frame with all weather stations. It's not guaranteed that all
+#'   advertised staions are available for download. Watch out for the end data
+#'   of observation. Stations with recent data have a current end date.
+#'   The data.frame contains the variables id, from, to, elev, lat, long, name,
+#'   state.
 #'
 #' @references
-#'   Freely accessible DWD data are available via the
-#'   \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}
+#'   Freely accessible DWD data available via the
+#'   \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
 #'
 #' @examples
 #' \dontrun{
-#' # stations with daily climate data from the last year
+#' # stations with daily climate data
 #' stations <- read.DWDstations()
 #'
 #' # precipitation stations with monthly historical data
 #' precip <- read.DWDstations(type='precip', period='historical',
 #'                            resolution='monthly')
 #'
-#' # list stations updated within last week
+#' # list stations with daily data updated within last week
 #' stat.daily <- read.DWDstations(period='recent')
 #' stat.daily.recent <- stat.daily[stat.daily$to > (Sys.Date() - 7), ]
 #' }
@@ -114,24 +118,26 @@ read.DWDstations <- function(type='climate', period='recent',
 #' or the translated
 #' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
 #'
-#' The freely accessible part of the Climate Data Center of  Germany's National
+#' The freely accessible part of the Climate Data Center of Germany's National
 #' Meteorological Service (Deutscher Wetterdienst, DWD) is part of the DWD's
 #' mandate for basic supply of information (termed "Grundversorgung").
 #' These services may be used without any restrictions (no fees will be charged
 #' and in general there are no restrictions for the use the data), provided
 #' that the source is indicated as laid down in the
 #' \href{http://www.gesetze-im-internet.de/geonutzv/BJNR054700013.html}{"GeoNutzV"}
-#' ordinance. The source reference shall meet the following rules:
+#' ordinance. The source reference shall roughly meet the following rules:
 #' \itemize{
 #'   \item Where data are used without modification, the source reference shall
 #'     read "Source: Deutscher Wetterdienst" or just consist of the DWD logo.
-#'   \item If the data are modifyed, the source reference shall specify as
+#'   \item If the data are modified, the source reference shall specify as
 #'     precisely as possible the extent of such, e.g. "Based on data from
 #'     Deutscher Wetterdienst, figures rounded".
 #' }
-#' A more detailed description of the rules can be found in the official German
+#' A more detailed description of the rules can be found in the official and
+#' legally binding German
 #' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms of use}.
+#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+#' of use}.
 #'
 #' @param id integer. A valid station id (cf. \link{read.DWDstations}).
 #'
@@ -152,17 +158,17 @@ read.DWDstations <- function(type='climate', period='recent',
 #'   resolution.
 #'
 #' @param file a string specifying the location of a dataset. \samp{"file"}
-#'   may point to a file on a FTP-server or on the local file system.
-#'   If the file lives on a FTP-server the string must start with
-#'   \code{'ftp://'}. If no file provided, data will be downloaded from DWD
-#'   FTP Server.
+#'   may point to a file on a FTP server or on the local file system.
+#'   If the file lives on a FTP server the string must start with
+#'   \code{'ftp://'}. If it is NULL (the default), data will be downloaded
+#'   from DWD's FTP server.
 #'
 #' @param destdir directory (string) where intermediate data (downloaded *.zip
 #'   file) are stored. If it is NULL (the default) a subdirectory
 #'   \samp{downloaded_packages} of the session temporary directory will be used
 #'   (and the files will be deleted at the end of the session).
 #'   It might be advisable to keep the .zip file since it contains the
-#'   stations documentation and metadata (eg. station shift, used devices,
+#'   stations documentation and metadata (e.g. station shift, used devices,
 #'   downtimes etc.).
 #'
 #' @param quiet If TRUE, suppress status messages (if any), and the progress bar.
@@ -170,6 +176,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #' @return A data.frame with the observed weather data. Beware of gaps and
 #'   inhomogeneities! \samp{colnames} contains the original header and
 #'   hence German terms.
+#'
+#'   Content of 'climate'-data.frame:
 #'   \tabular{ll}{
 #'    \strong{Name} \tab \strong{Description}\cr
 #'    STATIONS_ID \tab station id\cr
@@ -192,9 +200,20 @@ read.DWDstations <- function(type='climate', period='recent',
 #'    TGK         \tab daily minimum of air temperature at 5cm above ground (°C)
 #'   }
 #'
+#'   Content of 'precipitation'-data.frame:
+#'   \tabular{ll}{
+#'    \strong{Name} \tab \strong{Description}\cr
+#'    STATIONS_ID \tab station id\cr
+#'    MESS_DATUM  \tab date\cr
+#'    QN_6        \tab quality level of next columns (-)\cr
+#'    RS          \tab daily precipitation height (mm)\cr
+#'    RSF         \tab precipitation form (-)\cr
+#'    SH_TAG      \tab daily height of snow pack (cm)\cr
+#'   }
+#'
 #' @references
-#'   Freely accessible DWD data are available via the
-#'   \href{http://www.dwd.de/cdc}{Climate Data Center}.
+#'   Freely accessible DWD data available via the
+#'   \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
 #'
 #' @examples
 #' \dontrun{
@@ -208,17 +227,6 @@ read.DWDstations <- function(type='climate', period='recent',
 #' stat.hist <- read.DWDstations(period='historical')
 #' brocken.id <- stat.hist[grep("^Brock", stat.hist$name), ]$id
 #' clim.brocken <- read.DWDdata(id=brocken.id, period='historical')
-#'
-#' # get recent meteorological data fom a randomly selected station
-#' require('curl')
-#' dwdURL <- paste0("ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/",
-#'                  "climate/daily/kl/recent/")
-#' h <- new_handle(dirlistonly=1, ftp_use_epsv=0)
-#' filenames <- readLines(curl(dwdURL, handle=h))
-#' stations <- grep("Beschreibung_Stationen.txt$", filenames,
-#'                  invert=TRUE, value=TRUE)
-#' rnd.station <- sample(stations, 1)
-#' rnd.clim <- read.DWDdata(file=paste0(dwdURL, rnd.station))
 #' }
 #'
 #' @export
@@ -312,7 +320,8 @@ read.DWDdata <- function(id, type='climate', period='recent',
   } else {
     if (!dir.exists(destdir)) stop("'destdir' is not a directory")
     if(file.access(destdir, 2) != 0) stop("'destdir' is not writeable")
-    message(paste("Writing downloaded zip to", sQuote(destdir)))
+    if(!quiet)
+      message(paste("Writing downloaded zip to", sQuote(destdir)))
     pathToZip <- file.path(destdir, fname)
   }
 
@@ -389,7 +398,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
 .list_available_via_FTP <- function(url){
 
   if(!requireNamespace('curl', quietly=TRUE))
-    stop("Please install curl, eg. install.packages('curl')")
+    stop("Please install curl, e.g. install.packages('curl')")
 
   # get a list of all files within a directory
   h <- curl::new_handle(dirlistonly=1, ftp_use_epsv=0)

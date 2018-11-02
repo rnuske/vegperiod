@@ -2,19 +2,18 @@
 % Please edit documentation in R/vegperiod.R
 \name{vegperiod}
 \alias{vegperiod}
-\title{Determine start & end of vegetation periods.}
+\title{Determine vegetation period}
 \usage{
 vegperiod(dates, Tavg, start.method, end.method, Tsum.out = FALSE,
   species = NULL, est.prev = 0)
 }
 \arguments{
-\item{dates}{vector of calender dates (objects of class \code{Date}
+\item{dates}{vector of calendar dates (objects of class \code{Date}
 or something understood by \code{\link[base]{as.Date}}). Must contain
 entire years if \code{est.prev > 0} else the first year may
 comprise only November and December.}
 
 \item{Tavg}{vector of daily average air temperatures in degree Celsius.
-Beware not to feed values stored as integer (multiplied by 10)!
 Same length as \code{dates}.}
 
 \item{start.method}{name of method to use for vegetation start.
@@ -45,71 +44,68 @@ vegetation period.}
        chill days for the first year
        [required if \code{start.method='Menzel'} ignored otherwise].
 
-       \samp{Menzel} requires the number of chill days of previous November &
-       December. If \code{est.prev = 0} the first year is used to get
+       \samp{Menzel} requires the number of chill days of previous November
+       and December. If \code{est.prev = 0} the first year is used to get
        the previous year's chill days and dropped afterwards. Thus, a year
-       from the time series is lost. To circumvent the loss,
+       from the time series is lost. To avoid losing a year,
        \code{est.prev = n} estimates the previous year's chill days for the
        first year from the average of \code{n} first years of the time series.}
 }
 \value{
-Returns a data.frame with year and DOY of start and end day of
+A data.frame with year and DOY of start and end day of
   vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
   additional column with the sum of day degrees within vegetation periods.
 }
 \description{
 Calculate start and end date of vegetation periods based on daily average
 air temperature and the day of the year (DOY).
-The sum of day degrees within vegetation periods is calcuated for
+The sum of day degrees within vegetation periods is calculated for
 convenience sake.
 }
 \section{Start methods}{
 
-The often used method \bold{\samp{"Menzel"}} implements the algorithm
-described in Menzel (1997). The method is parameterized for 10 common tree
-species. \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"} is a simple threshold
-based procedure as defined by the Expert Team on Climate Change Detection and
-Indices (cf. ETCCDI 2009, Frich et al. 2002, Zhang et al. 2011) leading to
-quite early vegetation starts. This method is widely used in climate change
-studies. The method \bold{\samp{"Ribes uva-crispa"}} is based on leaf-out of
-gooseberry (Janssen 2009). It was developed by the German Weather Service
-(Deutscher Wetterdienst, DWD) and is part of the section forestry of DWD's
-\href{https://www.dwd.de/EN/climate_environment/climateatlas/climateatlas_node.html}{German
-Climate Atlas}. It is more robust against early starts than common simple
-meteorological procedures.
+The method \bold{\samp{"Menzel"}} implements the algorithm described in
+Menzel (1997). The method is parameterized for 10 common tree species. It
+needs previous year's chill days. \bold{\samp{"ETCCDI"}} resp.
+\samp{"StdMeteo"} is a simple threshold based procedure as defined by the
+Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009, Frich
+et al. 2002, Zhang et al. 2011) leading to quite early vegetation starts.
+This method is widely used in climate change studies. The method
+\bold{\samp{"Ribes uva-crispa"}} is based on leaf-out of gooseberry (Janssen
+2009). It was developed by the Germany's National Meteorological Service
+(Deutscher Wetterdienst, DWD) and is more robust against early starts than
+common simple meteorological procedures.
 }
 
 \section{End methods}{
 
 The end method \bold{\samp{"vonWilpert"}} is based on von Wilpert (1990). It
 was originally developed for "Picea abies" in the Black Forest but is
-commonaly used for all tree species throughout Germany. As usual, the rules
+commonly used for all tree species throughout Germany. As usual, the rules
 regarding the soilmatrix are neglected in this implementation.
-\bold{\samp{"LWF-BROOK90"}} is -for the sake of convinience- a
-reimplementation of the LWF-BROOK90 VBA version (Hammel and Kennel 2001).
-Their interpretation of von Wilpert (1990) and the somewhat lower precision
-of VBA was mimicked. This implementation was tested against version 3.4 (no
-deviation!). \bold{\samp{"NuskeAlbert"}} provide a very simple method which
-is inspired by standard climatological procedures but employes a 7 day moving
-average and a 5 °C threshold (cf. Walther and Linderholm 2006).
-\bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"} is a simple threshold based
-procedure as defined by the Expert Team on Climate Change Detection and
-Indices (cf. ETCCDI 2009, Frich et al. 2002, Zhang et al. 2011) leading to
-quite late vegetation ends.
+\bold{\samp{"LWF-BROOK90"}} is -for the sake of convenience- a
+reimplementation of the LWF-BROOK90 VBA (version 3.4) variant of "vonWilpert"
+(Hammel and Kennel 2001). Their interpretation of von Wilpert (1990) and the
+somewhat lower precision of VBA was mimicked. \bold{\samp{"NuskeAlbert"}}
+provide a very simple method which is inspired by standard climatological
+procedures but employs a 7 day moving average and a 5 °C threshold (cf.
+Walther and Linderholm 2006). \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"}
+is a simple threshold based procedure as defined by the Expert Team on
+Climate Change Detection and Indices (cf. ETCCDI 2009, Frich et al. 2002,
+Zhang et al. 2011) leading to quite late vegetation ends.
 }
 
 \examples{
 data(goe)
-vegperiod(dates=goe$date, Tavg=goe$t, species="Picea abies (frueh)",
-          start.method="Menzel", end.method="vonWilpert", est.prev=5)
+vegperiod(dates=goe$date, Tavg=goe$t,
+          start.method="Menzel", end.method="vonWilpert",
+          species="Picea abies (frueh)", est.prev=5)
 
 # take chill days from first year, which is then dropped
-g.short <- goe[goe$date >= as.Date('2001-11-01') &
-               goe$date <= as.Date('2003-12-31'), ]
-vegperiod(dates=g.short$date, Tavg=g.short$t, species="Picea abies (frueh)",
-          start="Menzel", end="vonWilpert", est.prev=0)
+vegperiod(dates=goe$date, Tavg=goe$t, start="Menzel", end="vonWilpert",
+          species="Picea abies (frueh)", est.prev=0)
 
-# sum of day degrees in vegetation periods
+# add column with sum of day degrees in vegetation periods
 vegperiod(dates=goe$date, Tavg=goe$t, Tsum.out=TRUE,
           start="StdMeteo", end="StdMeteo")
 
@@ -155,7 +151,8 @@ ETCCDI (2009)
 
   Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
   Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
-  Indices for monitoring changes in extremes based on daily temperature and precipitation data.
+  Indices for monitoring changes in extremes based on daily temperature and
+  precipitation data.
   \emph{Wiley Interdisciplinary Reviews: Climate Change}, \bold{2}(6), 851--870.
   \doi{10.1002/wcc.147}.
 }
