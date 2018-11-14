@@ -3,6 +3,7 @@
 [![Travis-CI Build Status](https://travis-ci.org/rnuske/vegperiod.svg?branch=master)](https://travis-ci.org/rnuske/vegperiod) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rnuske/vegperiod?branch=master&svg=true)](https://ci.appveyor.com/project/rnuske/vegperiod) 
 [![Package-License](https://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](http://www.gnu.org/licenses/gpl-3.0.html) 
+[![CRAN](http://www.r-pkg.org/badges/version/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
 
 The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package collects climatological or thermal growing seasons that can be calculated from daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
@@ -13,11 +14,16 @@ The package also includes functions for downloading open meteo data from Germany
 
 
 ## Installation
-A development version of the package `vegperiod` can be installed from Github using the package devtools.
-
+The stable version can be installed from CRAN
 ```r
-# install.packages("devtools")
-devtools::install_github("rnuske/vegperiod")
+install.packages("vegperiod")
+```
+
+
+and the development is available from Github using the package remotes (formerly devtools)
+```r
+if(!require("remotes")) install.packages("remotes")
+remotes::install_github("rnuske/vegperiod")
 ```
 
 ## Usage
