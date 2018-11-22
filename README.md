@@ -6,7 +6,7 @@
 [![CRAN](http://www.r-pkg.org/badges/version/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
 
-The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package collects climatological or thermal growing seasons that can be calculated from daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
+The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package collects methods to calculate climatological or thermal growing seasons solely based on daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
 
 The concept of a temperature driven vegetation period holds mostly for the temperate climate zone. At lower latitudes, other factors such as precipitation and evaporation can be more decisive. Some methods such as GSL of `ETCCDI` are employed globally (with a half year shift in the southern hemisphere). Others have a smaller area of application as they have been parameterized with local to regional observations. `Menzel` and `vonWilpert` are used throughout Germany.
 
