@@ -15,7 +15,9 @@ steps:
 - name: build 'n check
   image: rocker/r-ver:3.5
   commands:
-  - R -e 'install.packages("testthat")'
+  - apt-get update
+  - apt-get -y install libcurl4-openssl-dev
+  - R -e 'install.packages(c("curl", "testthat"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
   - export _R_CHECK_CRAN_INCOMING_=FALSE 
@@ -30,7 +32,9 @@ steps:
 - name: build 'n check
   image: rocker/r-ver:devel
   commands:
-  - R -e 'install.packages("testthat")'
+  - apt-get update
+  - apt-get -y install libcurl4-openssl-dev
+  - R -e 'install.packages(c("curl", "testthat"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
   - export _R_CHECK_CRAN_INCOMING_=FALSE 
