@@ -116,7 +116,7 @@ ETCCDI (2009)
   \url{http://etccdi.pacificclimate.org/list_27_indices.shtml}
 
   Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
-  Klein Tank, A., & Peterson, T. (2002)
+  Klein Tank, A. and Peterson, T. (2002)
   Observed coherent changes in climatic extremes during the second half of
   the twentieth century.
   \emph{Climate Research}, \bold{19}, 193--212.
