@@ -1,5 +1,9 @@
 # News for Package vegperiod
 
+## Version 0.2.5.900
+  * fixed download of recent monthly climate data. Breakage caused by DWD file name schema change (#1). Thanks @rwoerde for reporting.
+
+
 ## Version 0.2.5
   * replaced package 'RCurl' with 'curl' for downloading DWD Data
   * stopped importing package 'methods'

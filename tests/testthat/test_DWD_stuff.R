@@ -120,6 +120,24 @@ test_that("download of data works", {
   expect_is(clim$TMK,         'numeric')
 
 
+  # download monthly climate data from 1270
+  expect_silent(clim <- read.DWDdata(id = 1270, type="climate", period="recent",
+                                     resolution="monthly", quiet=TRUE))
+  expect_true(file.exists(file.path(tempdir(), "monatswerte_KL_01270_akt.zip")))
+
+  expect_is(clim, 'data.frame')
+  expect_length(clim, 16)
+  expect_equal(nrow(clim), 19)
+
+  expect_is(clim$STATIONS_ID, 'integer')
+  expect_equal(unique(clim$STATIONS_ID), 1270L)
+  expect_is(clim$MESS_DATUM_BEGINN, 'Date')
+  expect_is(clim$MESS_DATUM_ENDE, 'Date')
+  expect_is(clim$QN_4,        'integer')
+  expect_is(clim$MO_TN,         'numeric')
+  expect_is(clim$MO_RR,         'numeric')
+
+
   # download historical data from the Brocken if curl available ---------------
   skip_if_not_installed('curl')
 

@@ -259,20 +259,12 @@ read.DWDdata <- function(id, type='climate', period='recent',
                       sQuote(myURL), '.'))
       } else {
         # recent
-        fname <- paste0(formatC(id, width=5, flag='0'), "_akt.zip")
-
-        if(type == 'climate' && resolution == 'monthly'){
-          fname <- paste(
-            switch(resolution, 'daily'='tageswerte', 'monthly'='monatswerte'),
-            fname, sep='_'
-          )
-        } else {
-          fname <- paste(
-            switch(resolution, 'daily'='tageswerte', 'monthly'='monatswerte'),
-            switch(type,'climate'='KL','precipitation'='RR'),
-            fname, sep='_'
-          )
-        }
+        fname <- paste(
+          switch(resolution, 'daily'='tageswerte', 'monthly'='monatswerte'),
+          switch(type,'climate'='KL','precipitation'='RR'),
+          formatC(id, width=5, flag='0'), "akt.zip",
+          sep='_'
+        )
       }
       url <- file.path(myURL, fname)
       pathToZip <- .download_from_ftp(url, destdir, fname, quiet)
@@ -297,8 +289,10 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
   df <- .read.obscureDWDfiles(file)
 
-  if('MESS_DATUM' %in% names(df))
-    df$MESS_DATUM <- as.Date(as.character(df$MESS_DATUM), format="%Y%m%d")
+  md_col <- grep("^MESS_DATUM", names(df))
+  for(i in md_col){
+    df[, i] <- as.Date(as.character(df[, i]), format="%Y%m%d")
+  }
 
   return(df)
 }
