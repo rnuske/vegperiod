@@ -59,7 +59,7 @@
     # drop first year
     df <- df[df$year != years[1], ]
   } else {
-    # mean of "est.prev number of years" as proxy for first year's previous chill days
+    # mean "est.prev number of years" as proxy for first year's previous chill days
     CDNovDec <- rbind(c(mean(CDNovDec$CDprev[est.prev]), years[1]),
                       CDNovDec)
   }

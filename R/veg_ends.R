@@ -105,7 +105,7 @@
   # moving average with windows size 7 (only backward looking)
   #   round to mimic lower precision of VBA version
   #   (14 digits might be okay, 10 is on the save side)
-  df$movAvgT <- round(as.numeric(stats::filter(df$Tavg, rep(1/7,7), sides=1)), 10)
+  df$movAvgT <- round(as.numeric(stats::filter(df$Tavg, rep(1/7, 7), sides=1)), 10)
 
   # introduce 2 counters 'cold' and 'warm'  ('ignore' the rest)
   df$period <- ifelse(df$month > 5 & df$DOY <= LastDOY,
@@ -179,10 +179,8 @@
   years <- unique(df$year)
   jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183L, 182L)
 
-  searchstart = ifelse(!is.na(start) & start > jul1,
-                       start, jul1)
-  oct5 = ifelse((years%%4==0 & years%%100!=0) |
-                  years%%400==0, 279L, 278L)
+  searchstart <- ifelse(!is.na(start) & start > jul1, start, jul1)
+  oct5 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 279L, 278L)
 
   # 7 day moving average under 5° and after 1 July / vegperiod start
   # moving average with windows size 7 (symetric window)
@@ -191,8 +189,11 @@
 
   # ends on the 5th day  if no 5 day streak end on 5oct
   end <- oct5
-  for(i in 1:length(years)){
-    temp <- df[df$year == years[i] & df$DOY >= searchstart[i] & df$DOY <= oct5[i], ]
+  for(i in seq_along(years)){
+    temp <- df[df$year == years[i] &
+               df$DOY  >= searchstart[i] &
+               df$DOY  <= oct5[i],
+              ]
 
     temp$five <-  as.numeric(stats::filter(temp$period, rep(1, 5), sides=1))
     possible.end <- temp[!is.na(temp$five) & temp$five == 5, "DOY"]
@@ -238,7 +239,7 @@
 
   # find first six day span per year
   end <- integer(length(years))
-  for(i in 1:length(years)){
+  for(i in seq_along(years)){
     temp <- df[df$year == years[i] & df$DOY > jul1[i], ]
     temp$six <-  as.numeric(stats::filter(temp$period, rep(1, 6), sides=1))
     possible.end <- temp[!is.na(temp$six) & temp$six == 6, "DOY"]

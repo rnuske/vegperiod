@@ -251,7 +251,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
       if(period == "historical"){
         # historical filenames can't be guessed -> list all files & filter
         if(!quiet)
-          message('Searching for correct file name in list of available files...')
+          message('Searching for file name in list of available files...')
         files <- .list_available_via_FTP(paste0(myURL, '/'))
         fname <- grep(formatC(id, width=5, flag='0'), files, value=TRUE)
         if(length(fname) == 0)
@@ -356,8 +356,9 @@ read.DWDdata <- function(id, type='climate', period='recent',
 #------------------------------------------------------------------------------
 .read.obscureDWDfiles <- function(file){
   # treat EOF as comment
-  df <- utils::read.table(file, sep=";", dec=".", header=TRUE, comment.char="\032",
-                   strip.white=TRUE, na.strings='-999')
+  df <- utils::read.table(file, sep=";", dec=".", header=TRUE,
+                          comment.char="\032", strip.white=TRUE,
+                          na.strings='-999')
   df$eor <- NULL
   return(df)
 }
