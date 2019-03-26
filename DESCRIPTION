@@ -16,7 +16,7 @@ BugReports: https://github.com/rnuske/vegperiod/issues
 Encoding: UTF-8
 NeedsCompilation: no
 Depends:
-  R (>= 2.15.0)
+  R (>= 3.2.0)
 Imports:
   utils
 Suggests:
