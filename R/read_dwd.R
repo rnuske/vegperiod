@@ -403,10 +403,3 @@ read.DWDdata <- function(id, type='climate', period='recent',
 
   return(filenames)
 }
-
-
-# Hack to provide dir.exists in R < 3.2
-#------------------------------------------------------------------------------
-if(!existsFunction('dir.exists')){
-  dir.exists <- function(x){ file.exists(x) & file.info(x)$isdir }
-}
