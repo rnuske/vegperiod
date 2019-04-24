@@ -195,7 +195,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
 
   # determine leap years
   years <- unique(df$year)
-  leap <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, TRUE, FALSE)
+  leap <- (years %% 4 == 0 & years %% 100 != 0) | years %% 400 == 0
 
   # est.prev in valid range?
   # set to a high value if not Menzel
