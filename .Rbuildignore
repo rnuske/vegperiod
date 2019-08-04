@@ -5,3 +5,4 @@
 ^\.drone\.yml$
 ^appveyor\.yml$
 ^.gitattributes$
+^cran-comments\.md$
