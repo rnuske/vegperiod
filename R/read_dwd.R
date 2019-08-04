@@ -79,7 +79,7 @@ read.DWDstations <- function(type='climate', period='recent',
   resolution <- match.arg(resolution, choices=c('daily', 'monthly'))
 
   # construct url
-  baseURL <- "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate"
+  baseURL <- "ftp://opendata.dwd.de/climate_environment/CDC/observations_germany/climate"
 
   url.type <- switch(type,'climate'='kl','precipitation'='more_precip')
   pre.type <- switch(type, 'climate'='KL','precipitation'='RR')
@@ -244,7 +244,7 @@ read.DWDdata <- function(id, type='climate', period='recent',
       resolution <- match.arg(resolution, choices=c('daily', 'monthly'))
 
       # build up URL  & filename
-      baseURL <- "ftp://ftp-cdc.dwd.de/pub/CDC/observations_germany/climate"
+      baseURL <- "ftp://opendata.dwd.de/climate_environment/CDC/observations_germany/climate"
       url.type <- switch(type,'climate'='kl','precipitation'='more_precip')
       myURL <- file.path(baseURL, resolution, url.type, period)
 

@@ -79,7 +79,7 @@ test_that("download of list of stations works", {
   expect_is(stations$id,   'integer')
   expect_is(stations$from, 'Date')
   expect_is(stations$to,   'Date')
-  expect_is(stations$elev, 'numeric')
+  expect_is(stations$elev, 'integer')
   expect_is(stations$lat,  'numeric')
   expect_is(stations$long, 'numeric')
 
@@ -93,7 +93,7 @@ test_that("download of list of stations works", {
   expect_is(precip$id,   'integer')
   expect_is(precip$from, 'Date')
   expect_is(precip$to,   'Date')
-  expect_is(precip$elev, 'numeric')
+  expect_is(precip$elev, 'integer')
   expect_is(precip$lat,  'numeric')
   expect_is(precip$long, 'numeric')
 })
