@@ -1,6 +1,6 @@
 # News for Package vegperiod
 
-## Version 0.2.5.900
+## Version 0.2.6
   * fixed change of base URL of DWD open data (Thanks @ckluss for reporting and pointing in the right direction)
   * fixed download of recent monthly climate data. Breakage caused by DWD file name schema change (#1). Thanks @rwoerde for reporting.
   * corrected minimum R version. Argument `fileEncoding` was introduced to `read.fwf()` in R 3.2
