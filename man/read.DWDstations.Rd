@@ -51,8 +51,8 @@ ordinance. The source reference shall roughly meet the following rules:
 }
 A more detailed description of the rules can be found in the official and
 legally binding German
-\href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+\href{https://opendata.dwd.de/climate_environment/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
+or the translated \href{https://opendata.dwd.de/climate_environment/CDC/Terms_of_use.pdf}{Terms
 of use}.
 }
 \examples{

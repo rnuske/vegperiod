@@ -30,8 +30,8 @@
 #' }
 #' A more detailed description of the rules can be found in the official and
 #' legally binding German
-#' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+#' \href{https://opendata.dwd.de/climate_environment/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
+#' or the translated \href{https://opendata.dwd.de/climate_environment/CDC/Terms_of_use.pdf}{Terms
 #' of use}.
 #'
 #' @param type string. Stations can be of type \samp{"climate"} offering a range
@@ -114,9 +114,9 @@ read.DWDstations <- function(type='climate', period='recent',
 #'
 #' An introduction to the data available at the Climate Data Center can be
 #' found in the German
-#' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Liesmich_intro_CDC-FTP.pdf}{Liesmich_intro_CDC_ftp}
+#' \href{https://opendata.dwd.de/climate_environment/CDC/Liesmich_intro_CDC-FTP.pdf}{Liesmich_intro_CDC_ftp}
 #' or the translated
-#' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
+#' \href{https://opendata.dwd.de/climate_environment/CDC/Readme_intro_CDC_ftp.pdf}{Readme_intro_CDC_ftp}.
 #'
 #' The freely accessible part of the Climate Data Center of Germany's National
 #' Meteorological Service (Deutscher Wetterdienst, DWD) is part of the DWD's
@@ -135,8 +135,8 @@ read.DWDstations <- function(type='climate', period='recent',
 #' }
 #' A more detailed description of the rules can be found in the official and
 #' legally binding German
-#' \href{ftp://ftp-cdc.dwd.de/pub/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
-#' or the translated \href{ftp://ftp-cdc.dwd.de/pub/CDC/Terms_of_use.pdf}{Terms
+#' \href{https://opendata.dwd.de/climate_environment/CDC/Nutzungsbedingungen_German.pdf}{Nutzungsbedingungen}
+#' or the translated \href{https://opendata.dwd.de/climate_environment/CDC/Terms_of_use.pdf}{Terms
 #' of use}.
 #'
 #' @param id integer. A valid station id (cf. \link{read.DWDstations}).
