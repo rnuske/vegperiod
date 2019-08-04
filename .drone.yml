@@ -1,27 +1,34 @@
 kind: pipeline
-name: r-base
-
-steps:
-- name: build
-  image: r-base
-  commands:
-  - R CMD build .
-
----
-kind: pipeline
-name: rocker/r-ver:3.5
+name: rocker/r-ver:3.6
 
 steps:
 - name: build 'n check
-  image: rocker/r-ver:3.5
+  image: rocker/r-ver:3.6
   commands:
   - apt-get update
   - apt-get -y install libcurl4-openssl-dev
   - R -e 'install.packages(c("curl", "testthat"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
-  - export _R_CHECK_CRAN_INCOMING_=FALSE 
-  - export _R_CHECK_FORCE_SUGGESTS_=FALSE 
+  - export _R_CHECK_CRAN_INCOMING_=FALSE
+  - export _R_CHECK_FORCE_SUGGESTS_=FALSE
+  - R CMD check $FILE --no-vignettes --no-manual --as-cran --install-args=--install-tests
+
+---
+kind: pipeline
+name: rocker/r-ver:latest
+
+steps:
+- name: build 'n check
+  image: rocker/r-ver:latest
+  commands:
+  - apt-get update
+  - apt-get -y install libcurl4-openssl-dev
+  - R -e 'install.packages(c("curl", "testthat"))'
+  - R CMD build --no-build-vignettes --no-manual .
+  - FILE=$(ls -1t *.tar.gz | head -n 1)
+  - export _R_CHECK_CRAN_INCOMING_=FALSE
+  - export _R_CHECK_FORCE_SUGGESTS_=FALSE
   - R CMD check $FILE --no-vignettes --no-manual --as-cran --install-args=--install-tests
 
 ---
@@ -37,6 +44,6 @@ steps:
   - R -e 'install.packages(c("curl", "testthat"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
-  - export _R_CHECK_CRAN_INCOMING_=FALSE 
-  - export _R_CHECK_FORCE_SUGGESTS_=FALSE 
-  - R CMD check $FILE --no-vignettes --no-manual --as-cran --install-args=--install-tests    
+  - export _R_CHECK_CRAN_INCOMING_=FALSE
+  - export _R_CHECK_FORCE_SUGGESTS_=FALSE
+  - R CMD check $FILE --no-vignettes --no-manual --as-cran --install-args=--install-tests
