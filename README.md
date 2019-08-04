@@ -1,4 +1,4 @@
-# vegperiod: Determine Thermal Vegetation Periods 
+## vegperiod: Determine Thermal Vegetation Periods 
 
 [![Travis-CI Build Status](https://travis-ci.org/rnuske/vegperiod.svg?branch=master)](https://travis-ci.org/rnuske/vegperiod) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rnuske/vegperiod?branch=master&svg=true)](https://ci.appveyor.com/project/rnuske/vegperiod) 
@@ -15,20 +15,20 @@ The concept of a temperature driven vegetation period holds mostly for the tempe
 The package also includes functions for downloading open meteo data from Germany's National Meteorological Service (Deutscher Wetterdienst, DWD).
 
 
-## Installation
+### Installation
 The stable version can be installed from CRAN
 ```r
 install.packages("vegperiod")
 ```
 
 
-and the development is available from Github using the package remotes (formerly devtools)
+and the development version is available from Github using the package remotes (formerly devtools)
 ```r
 if(!require("remotes")) install.packages("remotes")
 remotes::install_github("rnuske/vegperiod")
 ```
 
-## Usage
+### Usage
 Vegetation periods a calculated using the function `vegperiod()`.  One has to choose at least a start and end method. Some methods, such as 'Menzel', require additional arguments.
 
 ```r
@@ -52,13 +52,13 @@ Some common methods for calculating the onset and end of vegetation periods are 
 * **NuskeAlbert** a very simple method inspired by standard climatological practices.
 * **StdMeteo** / **ETCCDI** a simple threshold based procedure as defined by the Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009 and Frich et al., 2002). Leading to quite late vegetation ends.
 
-### Downloading data from DWD
-Germany's National Meteorological Service offers open meteo data in its [Climate Data Center](https://www.dwd.de/EN/climate_environment/cdc/cdc.html).
+### Download climate data from DWD (German Meteorological Service)
+Germany's National Meteorological Service offers open meteo data in its [Climate Data Center](https://cdc.dwd.de/portal/).
 The files are organized in deep folder structures and end with an arcane/legacy EOF character. 
-The Function `read.DWDdata()`deals with all of that and returns a data.frame. Beware there might be missing values and inhomogeneities.
+The Function `read.DWDdata()`deals with all of that and returns a `data.frame`. Beware there might be missing values and inhomogeneities.
 
 Note: Downloading 'historical' data from DWD with `read.DWDdata()` requires the package 'curl'.
 
 
-## Contributions
+### Contributions
 Further start and end methods or download functions are more than welcome! 
