@@ -15,7 +15,7 @@
 #'    doy               \tab day of year as integer \cr
 #'    t                 \tab average air temperature
 #' }
-#' @source \href{https://www.pik-potsdam.de/members/pcwerner}{Prof. Dr. Peter Werner (PIK)}
+#' @source Prof. Dr. Peter Werner (PIK)
 #' @references
 #'   Orlowsky, B., Gerstengarbe, F. W., Werner, P. C. (2008)
 #'   A resampling scheme for regional climate simulations and its performance

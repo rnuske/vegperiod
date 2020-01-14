@@ -14,7 +14,7 @@
    t                 \tab average air temperature
 }}
 \source{
-\href{https://www.pik-potsdam.de/members/pcwerner}{Prof. Dr. Peter Werner (PIK)}
+Prof. Dr. Peter Werner (PIK)
 }
 \usage{
 data(goe)
