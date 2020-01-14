@@ -4,8 +4,7 @@
 \alias{read.DWDstations}
 \title{Fetch list of DWD weather stations}
 \usage{
-read.DWDstations(type = "climate", period = "recent",
-  resolution = "daily")
+read.DWDstations(type = "climate", period = "recent", resolution = "daily")
 }
 \arguments{
 \item{type}{string. Stations can be of type \samp{"climate"} offering a range

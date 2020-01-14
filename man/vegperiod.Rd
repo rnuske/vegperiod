@@ -4,8 +4,15 @@
 \alias{vegperiod}
 \title{Determine vegetation period}
 \usage{
-vegperiod(dates, Tavg, start.method, end.method, Tsum.out = FALSE,
-  species = NULL, est.prev = 0)
+vegperiod(
+  dates,
+  Tavg,
+  start.method,
+  end.method,
+  Tsum.out = FALSE,
+  species = NULL,
+  est.prev = 0
+)
 }
 \arguments{
 \item{dates}{vector of calendar dates (objects of class \code{Date}

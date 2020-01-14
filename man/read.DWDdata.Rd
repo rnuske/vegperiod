@@ -4,8 +4,15 @@
 \alias{read.DWDdata}
 \title{Fetch meteo data of DWD weather stations}
 \usage{
-read.DWDdata(id, type = "climate", period = "recent",
-  resolution = "daily", file = NULL, destdir = NULL, quiet = FALSE)
+read.DWDdata(
+  id,
+  type = "climate",
+  period = "recent",
+  resolution = "daily",
+  file = NULL,
+  destdir = NULL,
+  quiet = FALSE
+)
 }
 \arguments{
 \item{id}{integer. A valid station id (cf. \link{read.DWDstations}).}
