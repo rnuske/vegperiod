@@ -2,6 +2,7 @@
 
 
 ## Version 0.2.6.900
+  * lowered minimum temperatur in plausibility check because of severe winter 1956 with daily mean temperatures of -27 °C in Germany
 
 
 ## Version 0.2.6
