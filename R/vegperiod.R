@@ -174,7 +174,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
 
   # are the temperatures sound
   minimax <- range(Tavg)
-  if(minimax[1] < -30 | minimax[2] > 35)
+  if(minimax[1] < -35 | minimax[2] > 40)
     stop("Daily mean temperatures are too small/large (<-30 or >+35).\n",
          "Were they multiplied by 10 for storage?")
 

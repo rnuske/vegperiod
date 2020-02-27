@@ -2,7 +2,9 @@
 
 
 ## Version 0.2.6.900
-  * lowered minimum temperatur in plausibility check because of severe winter 1956 with daily mean temperatures of -27 °C in Germany
+  * changed temperature plausibility checks because of severe winter 1956 with
+  daily mean temperatures of -27 °C in Germany and even lower and higher 
+  daily mean temperatures in climate scenarios.
 
 
 ## Version 0.2.6
