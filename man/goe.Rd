@@ -3,7 +3,8 @@
 \name{goe}
 \alias{goe}
 \title{Ten years of daily average air temperature}
-\format{A data frame with 3652 rows and 6 variables:
+\format{
+A data frame with 3652 rows and 6 variables:
   \tabular{ll}{
    \strong{Variable} \tab \strong{Description}\cr
    date              \tab calendar date as object of class Date\cr
@@ -12,7 +13,8 @@
    day               \tab day of month as integer\cr
    doy               \tab day of year as integer \cr
    t                 \tab average air temperature
-}}
+}
+}
 \source{
 Prof. Dr. Peter Werner (PIK)
 }

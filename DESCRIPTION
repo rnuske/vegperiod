@@ -1,11 +1,11 @@
 Package: vegperiod
 Title: Determine Thermal Vegetation Periods
-Version: 0.2.6.900
+Version: 0.2.7
 Authors@R:
   person(given="Robert", 
          family="Nuske", 
          role=c("aut", "cre"),
-         email="robert.nuske@mailbox.org",
+         email="robert.nuske@nw-fva.de",
          comment=c(ORCID="0000-0001-9773-2061"))
 Description: Collection of common methods to determine growing season length in
   a simple manner. Start and end dates of the vegetation periods are calculated
@@ -22,4 +22,4 @@ Imports:
 Suggests:
   curl, 
   testthat (>= 1.0.2)
-RoxygenNote: 7.0.2
+RoxygenNote: 7.1.1

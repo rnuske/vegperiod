@@ -1,7 +1,7 @@
 # News for Package vegperiod
 
 
-## Version 0.2.6.900
+## Version 0.2.7
   * changed temperature plausibility checks because of severe winter 1956 with
   daily mean temperatures of -27 °C in Germany and even lower and higher 
   daily mean temperatures in climate scenarios.
