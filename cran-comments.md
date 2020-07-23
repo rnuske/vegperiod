@@ -1,16 +1,22 @@
+
+Only minor changes and new maintainer's email address because CRAN mails bounced.
+
+
 ## Test environments
-* local ubuntu 18.04, R 3.6.1
-* win-builder (devel, release, oldrelease)
 
-* Ubuntu 14.04, R 3.6.1 [on Travis CI]
-* Debian Stretch, R 3.6.1, devel (2019-08-02 r76913) [on Drone CI]
-* Windows Server 2012 R2 x64, 3.6.1 Patched (2019-08-02 r76913) [on AppVeyor CI]
-
-* R-hub windows-x86_64-devel (r-devel)
-* R-hub ubuntu-gcc-release (r-release)
-* R-hub fedora-clang-devel (r-devel)
+* Ubuntu 18.04, R 4.0.2 [local]
+* Ubuntu 16.04 [on Travis CI], R 4.0.0 (2020-04-24), devel (2020-07-20 r78885)
+* Debian testing [on Drone CI], R 4.0.2 (2020-06-22), devel (2020-07-16 r78868)
+* Windows Server 2012 R2 x64 [on AppVeyor CI], 4.0.2 patched (2020-07-19 r78884)
+* R-hub
+  * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
+  * Ubuntu Linux 16.04 LTS, R-release, GCC
+  * Fedora Linux, R-devel, clang, gfortran
+* win-builder, 4.0.2 (2020-06-22)
 
 
 ## R CMD check results
 
-0 errors | 0 warnings | 0 notes
+0 errors | 0 warnings | 1 note
+
+New maintainer
