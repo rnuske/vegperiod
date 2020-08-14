@@ -46,7 +46,7 @@ test_that("temperature is sound (not multiplied by 10)", {
               est.prev=3, Tsum.out=FALSE),
     data.frame(
       year  = 2021:2050,
-      start = c(138L, 122L, 125L, 137L, 133L, 127L, 121L, 123L, 132L, 120L,
+      start = c(134L, 122L, 125L, 137L, 133L, 127L, 121L, 123L, 132L, 120L,
                 132L, 134L, 116L, 132L, 107L, 119L, 119L, 120L, 120L, 123L,
                 123L, 131L, 128L, 120L, 130L, 117L, 129L, 119L, 125L, 120L),
       end   = c(279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L,
@@ -69,7 +69,7 @@ test_that("temperature is sound (not multiplied by 10)", {
               est.prev=3, Tsum.out=FALSE),
     data.frame(
       year  = 2021:2030,
-      start = c(138L, 122L, 125L, 137L, 133L, 127L, 121L, 123L, 132L, 120L),
+      start = c(134L, 122L, 125L, 137L, 133L, 127L, 121L, 123L, 132L, 120L),
       end   = c(279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L)
     )
   )

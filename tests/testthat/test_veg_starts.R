@@ -52,6 +52,23 @@ test_that("Menzel works", {
     true3 <- list(
       c( 96L, 102L, 102L,  88L, 100L, 101L, 105L, 102L,  93L,  95L),
       c(119L, 127L, 125L, 116L, 124L, 126L, 124L, 125L, 115L, 116L),
+      c(127L, 134L, 131L, 125L, 131L, 135L, 132L, 130L, 121L, 121L),
+      c(130L, 134L, 133L, 125L, 133L, 137L, 136L, 133L, 123L, 123L),
+      c(140L, 140L, 141L, 132L, 139L, 147L, 142L, 142L, 133L, 128L),
+      c(133L, 137L, 135L, 128L, 137L, 140L, 138L, 135L, 126L, 125L),
+      c(105L, 110L, 112L,  96L, 106L, 108L, 113L, 112L,  98L, 108L),
+      c(118L, 126L, 125L, 115L, 124L, 125L, 124L, 124L, 115L, 116L),
+      c(119L, 126L, 126L, 116L, 125L, 126L, 125L, 125L, 116L, 117L),
+      c(127L, 133L, 128L, 124L, 128L, 133L, 126L, 128L, 119L, 120L)
+    )
+    for(i in seq_along(spec)){
+      expect_equal(vegperiod:::.start_menzel(df, est.prev=3, species=spec[i]),
+                   true3[[i]])
+    }
+
+    true10 <- list(
+      c( 96L, 102L, 102L,  88L, 100L, 101L, 105L, 102L,  93L,  95L),
+      c(119L, 127L, 125L, 116L, 124L, 126L, 124L, 125L, 115L, 116L),
       c(128L, 134L, 131L, 125L, 131L, 135L, 132L, 130L, 121L, 121L),
       c(131L, 134L, 133L, 125L, 133L, 137L, 136L, 133L, 123L, 123L),
       c(140L, 140L, 141L, 132L, 139L, 147L, 142L, 142L, 133L, 128L),
@@ -60,23 +77,6 @@ test_that("Menzel works", {
       c(119L, 126L, 125L, 115L, 124L, 125L, 124L, 124L, 115L, 116L),
       c(120L, 126L, 126L, 116L, 125L, 126L, 125L, 125L, 116L, 117L),
       c(128L, 133L, 128L, 124L, 128L, 133L, 126L, 128L, 119L, 120L)
-    )
-    for(i in seq_along(spec)){
-      expect_equal(vegperiod:::.start_menzel(df, est.prev=3, species=spec[i]),
-                   true3[[i]])
-    }
-
-    true10 <- list(
-      c(103L, 102L, 102L,  88L, 100L, 101L, 105L, 102L,  93L,  95L),
-      c(121L, 127L, 125L, 116L, 124L, 126L, 124L, 125L, 115L, 116L),
-      c(130L, 134L, 131L, 125L, 131L, 135L, 132L, 130L, 121L, 121L),
-      c(132L, 134L, 133L, 125L, 133L, 137L, 136L, 133L, 123L, 123L),
-      c(144L, 140L, 141L, 132L, 139L, 147L, 142L, 142L, 133L, 128L),
-      c(133L, 137L, 135L, 128L, 137L, 140L, 138L, 135L, 126L, 125L),
-      c(109L, 110L, 112L,  96L, 106L, 108L, 113L, 112L,  98L, 108L),
-      c(121L, 126L, 125L, 115L, 124L, 125L, 124L, 124L, 115L, 116L),
-      c(122L, 126L, 126L, 116L, 125L, 126L, 125L, 125L, 116L, 117L),
-      c(130L, 133L, 128L, 124L, 128L, 133L, 126L, 128L, 119L, 120L)
     )
     for(i in seq_along(spec)){
       expect_equal(vegperiod:::.start_menzel(df, est.prev=10, species=spec[i]),
