@@ -1,6 +1,6 @@
 Package: vegperiod
 Title: Determine Thermal Vegetation Periods
-Version: 0.2.7
+Version: 0.3.0
 Authors@R:
   person(given="Robert", 
          family="Nuske", 
