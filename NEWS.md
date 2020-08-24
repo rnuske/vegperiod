@@ -1,7 +1,8 @@
 # News for Package vegperiod
 
 ## Version 0.3
-  * fix concerning `est.prev` parameter used in start method Menzel. Now averages as advertised (Thanks to @awellpott for catching).
+  * fix `est.prev` parameter used in start method Menzel. Now averages as advertised (Thanks for catching this bug to @awellpott).
+  * switched to unit testing framework `tinytest`
 
 
 ## Version 0.2.7
