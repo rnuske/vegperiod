@@ -21,28 +21,26 @@ The stable version can be installed from CRAN
 install.packages("vegperiod")
 ```
 
-
-and the development version is available from Github using the package remotes (formerly devtools)
+and the development version is available from Github using the package `remotes`
 ```r
-if(!require("remotes")) install.packages("remotes")
 remotes::install_github("rnuske/vegperiod")
 ```
 
 ### Usage
-Vegetation periods a calculated using the function `vegperiod()`.  One has to choose at least a start and end method. Some methods, such as 'Menzel', require additional arguments.
+Vegetation periods are calculated using the function `vegperiod()`.  One has to choose at least a start and an end method. Some methods, such as 'Menzel', require additional arguments.
 
 ```r
 data(goe)
 vegperiod(dates=goe$date, Tavg=goe$t, 
           start.method="Menzel", end.method="vonWilpert", 
-          species="Picea abies (frueh)", est.prev=5)
+          species="Picea abies (frueh)", est.prev=3)
 ```
 
 ### Implemented start and end methods
 Some common methods for calculating the onset and end of vegetation periods are already implemented. Popular choices with regard to forest trees in Germany are 'Menzel' and 'vonWilpert'.
 
 #### Start methods
-* **Menzel** implemented as described in Menzel (1997). Parameterized for 10 common tree species. Needs previous years chill days.
+* **Menzel** implemented as described in Menzel (1997). Parameterized for 10 common tree species. Requires previous years chill days, which can be substituted by the average of first years.
 * **StdMeteo** / **ETCCDI** a simple threshold based procedure as defined by the Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009 and Frich et al. 2002). Leading to quite early vegetation starts.
 * **Ribes uva-crispa** using leaf out of gooseberry as indicator. Developed by Germany's National Meteorological Service (Deutscher Wetterdienst, DWD). Presented in the section forestry of DWD's 'Climate Atlas'. It is more robust against early starts than common simple meteorological procedures.
 
@@ -61,4 +59,4 @@ Note: Downloading 'historical' data from DWD with `read.DWDdata()` requires the 
 
 
 ### Contributions
-Further start and end methods or download functions are more than welcome! 
+Implementations of further start and end methods or download functions are more than welcome! 
