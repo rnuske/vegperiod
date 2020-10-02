@@ -7,7 +7,7 @@ steps:
   commands:
   - apt-get update
   - apt-get -y install libcurl4-openssl-dev
-  - R -e 'install.packages(c("curl", "testthat"))'
+  - R -e 'install.packages(c("curl", "tinytest"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
   - export _R_CHECK_CRAN_INCOMING_=FALSE
@@ -25,7 +25,7 @@ steps:
   commands:
   - apt-get update
   - apt-get -y install libcurl4-openssl-dev
-  - R -e 'install.packages(c("curl", "testthat"))'
+  - R -e 'install.packages(c("curl", "tinytest"))'
   - R CMD build --no-build-vignettes --no-manual .
   - FILE=$(ls -1t *.tar.gz | head -n 1)
   - export _R_CHECK_CRAN_INCOMING_=FALSE
