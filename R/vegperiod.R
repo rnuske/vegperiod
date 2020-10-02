@@ -175,8 +175,10 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
   # are the temperatures sound
   minimax <- range(Tavg)
   if(minimax[1] < -35 | minimax[2] > 40)
-    stop("Daily mean temperatures are too small/large (<-30 or >+35).\n",
-         "Were they multiplied by 10 for storage?")
+    stop("Daily mean temperatures are too small/large (<-35 or >+40).\n",
+         "Might the temperatures have been multiplied by 10 for storage?",
+         "If you nevertheless consider such extreme daily mean temperatures ",
+         "to be plausible, then please contact the maintainer.")
 
   if(!inherits(dates, "Date")){
     tryCatch(dates <- as.Date(dates),
