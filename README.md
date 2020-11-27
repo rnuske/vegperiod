@@ -1,5 +1,7 @@
 ## vegperiod: Determine Thermal Vegetation Periods 
 
+<!-- badges: start -->
+[![R-CMD-check](https://github.com/rnuske/vegperiod/workflows/R-CMD-check/badge.svg)](https://github.com/rnuske/vegperiod/actions)
 [![Travis-CI Build Status](https://travis-ci.org/rnuske/vegperiod.svg?branch=master)](https://travis-ci.org/rnuske/vegperiod) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rnuske/vegperiod?branch=master&svg=true)](https://ci.appveyor.com/project/rnuske/vegperiod) 
 [![Drone Build Status](https://cloud.drone.io/api/badges/rnuske/vegperiod/status.svg)](https://cloud.drone.io/rnuske/vegperiod) 
@@ -7,6 +9,7 @@
 [![CRAN](https://www.r-pkg.org/badges/version/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![Dependencies](https://tinyverse.netlify.com/badge/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
+<!-- badges: end -->
 
 The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package collects methods to calculate climatological or thermal growing seasons solely based on daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
 
