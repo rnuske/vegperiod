@@ -1,6 +1,6 @@
 ## vegperiod: Determine Thermal Vegetation Periods 
 
-[![Travis-CI Build Status](https://travis-ci.org/rnuske/vegperiod.svg?branch=master)](https://travis-ci.org/rnuske/vegperiod) 
+[![Travis-CI Build Status](https://travis-ci.com/rnuske/vegperiod.svg?branch=master)](https://travis-ci.com/rnuske/vegperiod) 
 [![AppVeyor Build Status](https://ci.appveyor.com/api/projects/status/github/rnuske/vegperiod?branch=master&svg=true)](https://ci.appveyor.com/project/rnuske/vegperiod) 
 [![Drone Build Status](https://cloud.drone.io/api/badges/rnuske/vegperiod/status.svg)](https://cloud.drone.io/rnuske/vegperiod) 
 [![Package-License](https://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html) 
