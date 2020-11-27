@@ -127,7 +127,7 @@ if(at_home()){
 
   expect_true(is.data.frame(clim))
   expect_true(length(clim) == 16)
-  expect_true(nrow(clim) >= 19)
+  expect_true(nrow(clim) >= 18)
 
   expect_true(is.integer(clim$STATIONS_ID))
   expect_equal(unique(clim$STATIONS_ID), 1270L)
