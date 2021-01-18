@@ -2,7 +2,7 @@
 data(goe)
 
 
-# vegperiod throws erors
+# vegperiod throws errors
 expect_equal(vegperiod(dates=goe$date, Tavg=goe$t, start.method="Menzel",
                        end.method="vonWilpert", species="Picea abies (spaet)",
                        est.prev=0, Tsum.out=FALSE),
@@ -69,4 +69,22 @@ expect_equal(
     start = c(134L, 122L, 125L, 137L, 133L, 127L, 121L, 123L, 132L, 120L),
     end   = c(279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L, 279L)
   )
+)
+
+
+# Bug report by S. Timmke
+# StdMeteo did report 0 if it did not find an end (eg. Magdeburg in 2006)
+# now it returns last DOY in that case
+
+load("./md_2006.RData")
+
+expect_equal(
+  vegperiod(dates=md_2006$date, Tavg=md_2006$t, start="StdMeteo", end="StdMeteo",
+            Tsum.out=TRUE),
+  data.frame(
+    year  = 2005:2007,
+    start = c(9L, 89L, 8L),
+    end   = c(324L, 365L, 319L),
+    Tsum  = c(3437.1, 3913.5, 3829.3)
+    )
 )
