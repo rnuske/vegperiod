@@ -232,13 +232,14 @@
 
   # 1. July is DOY 182 and DOY 183 in leap years
   years <- unique(df$year)
-  jul1 <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, 183L, 182L)
+  leap_year <- ifelse((years%%4==0 & years%%100!=0) | years%%400==0, TRUE, FALSE)
+  jul1 <- ifelse(leap_year, 183L, 182L)
 
   # mark days colder than 5°C
   df$period <- ifelse(df$Tavg < Tmin, 1, 0)
 
   # find first six day span per year
-  end <- integer(length(years))
+  end <- ifelse(leap_year, 366L, 365L)
   for(i in seq_along(years)){
     temp <- df[df$year == years[i] & df$DOY > jul1[i], ]
     temp$six <-  as.numeric(stats::filter(temp$period, rep(1, 6), sides=1))

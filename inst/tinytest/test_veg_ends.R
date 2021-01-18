@@ -99,7 +99,7 @@ expect_equal(vegperiod:::.end_std_meteo(df, Tmin = 5),
 
 # low Tmin
 expect_equal(vegperiod:::.end_std_meteo(df, Tmin = 3),
-             c(348L, 348L, 324L, 347L, 327L, 0L, 357L, 323L, 326L, 357L))
+             c(348L, 348L, 324L, 347L, 327L, 365L, 357L, 323L, 326L, 357L))
 
 # high Tmin
 expect_equal(vegperiod:::.end_std_meteo(df, Tmin = 10),

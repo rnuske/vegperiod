@@ -1,5 +1,8 @@
 # News for Package vegperiod
 
+## Version DEVELOPMENT
+  * if `StdMeteo` does not find an end, it now reports the last day of the year instead of 0.
+
 ## Version 0.3
   * fix `est.prev` parameter used in start method Menzel. Now averages as advertised (Thanks for catching this bug to @awellpott).
   * switched to unit testing framework `tinytest`
