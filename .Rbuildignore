@@ -1,9 +1,7 @@
 .gitignore
 ^\.Rproj\.user$
 ^.*\.Rproj$
-^\.travis\.yml$
 ^\.drone\.yml$
-^appveyor\.yml$
 ^.gitattributes$
 ^cran-comments\.md$
 ^\.github$

@@ -1,9 +1,0 @@
-language: r
-r:
-  - release
-  - devel
-
-dist: bionic 
-  
-sudo: false
-cache: packages
