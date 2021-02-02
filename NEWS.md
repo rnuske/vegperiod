@@ -1,5 +1,8 @@
 # News for Package vegperiod
 
+## Version 0.3.1.900
+  * ...
+
 ## Version 0.3.1
   * if `StdMeteo` does not find an end, it now reports the last day of the year instead of 0.
 
