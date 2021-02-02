@@ -1,4 +1,5 @@
-This release contains a small but important fix and a change of unit testing frameworks.
+CRAN Feedback: 
+For future submissions: Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:.....>? 
 
 
 ## Test environments
