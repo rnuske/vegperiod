@@ -9,7 +9,8 @@ on:
     branches:
       - main
       - master
-
+  workflow-dispatch:
+  
 name: R-CMD-check
 
 jobs:
