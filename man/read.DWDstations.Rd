@@ -71,5 +71,5 @@ stat.daily.recent <- stat.daily[stat.daily$to > (Sys.Date() - 7), ]
 }
 \references{
 Freely accessible DWD data available via the
-  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
+  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc_node_en.html}{Climate Data Center}.
 }

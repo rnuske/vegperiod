@@ -138,5 +138,5 @@ clim.brocken <- read.DWDdata(id=brocken.id, period='historical')
 }
 \references{
 Freely accessible DWD data available via the
-  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc.html}{Climate Data Center}.
+  \href{https://www.dwd.de/EN/climate_environment/cdc/cdc_node_en.html}{Climate Data Center}.
 }
