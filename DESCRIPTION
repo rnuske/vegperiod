@@ -13,7 +13,7 @@ Description: Collection of common methods to determine growing season length in
   a simple manner. Start and end dates of the vegetation periods are calculated
   solely based on daily mean temperatures and the day of the year.
 License: GPL (>= 3)
-URL: https://rnuske.github.io/vegperiod, https://github.com/rnuske/vegperiod
+URL: https://rnuske.github.io/vegperiod/, https://github.com/rnuske/vegperiod
 BugReports: https://github.com/rnuske/vegperiod/issues
 Encoding: UTF-8
 NeedsCompilation: no
@@ -24,4 +24,4 @@ Imports:
 Suggests: 
   curl, 
   tinytest
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2

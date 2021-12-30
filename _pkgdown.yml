@@ -1,1 +1,4 @@
 url: https://rnuske.github.io/vegperiod
+
+template:
+  bootstrap: 5
