@@ -66,6 +66,7 @@ convenience sake.</p>
   <span class="va">start.method</span>,
   <span class="va">end.method</span>,
   Tsum.out <span class="op">=</span> <span class="cn">FALSE</span>,
+  Tsum.crit <span class="op">=</span> <span class="fl">0</span>,
   species <span class="op">=</span> <span class="cn">NULL</span>,
   est.prev <span class="op">=</span> <span class="fl">0</span>
 <span class="op">)</span></code></pre></div>
@@ -91,8 +92,13 @@ matching). For further discussion see Details.</p></dd>
 <code>"ETCCDI"</code>. Can be abbreviated (partial matching). For further discussion
 see Details.</p></dd>
 <dt>Tsum.out</dt>
-<dd><p>boolean. Return the sum of day degrees within
-vegetation period.</p></dd>
+<dd><p>boolean. Return the sum of daily mean temperatures above
+<code>Tsum.crit</code> within vegetation period, also known as growing day degrees.</p></dd>
+<dt>Tsum.crit</dt>
+<dd><p>threshold for sum of day degrees. Only daily mean temperatures
+<code>&gt; Tsum.crit</code> will be tallied. The default of <code>0</code> prevents negative
+daily temperatures from reducing the sum. Climate change studies often use
+a threshold of <code>5</code>.</p></dd>
 <dt>species</dt>
 <dd><p>name of tree species (required if <code>start.method="Menzel"</code>
 ignored otherwise).</p>
@@ -232,16 +238,16 @@ doi: <a href="https://doi.org/10.1002/wcc.147" class="external-link">10.1002/wcc
 <span class="r-in"><span class="fu">vegperiod</span><span class="op">(</span>dates<span class="op">=</span><span class="va">goe</span><span class="op">$</span><span class="va">date</span>, Tavg<span class="op">=</span><span class="va">goe</span><span class="op">$</span><span class="va">t</span>, Tsum.out<span class="op">=</span><span class="cn">TRUE</span>,</span>
 <span class="r-in">          start<span class="op">=</span><span class="st">"StdMeteo"</span>, end<span class="op">=</span><span class="st">"StdMeteo"</span><span class="op">)</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    year start end   Tsum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2001    34 347 3449.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2002    36 329 3263.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2003    65 323 3270.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1  2001    34 347 3474.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2  2002    36 329 3273.8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  2003    65 323 3273.7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 4  2004    38 333 3361.4</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5  2005    69 327 3222.8</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6  2006    18 308 2888.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7  2007    84 354 3214.7</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8  2008    64 322 3270.6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9  2009    48 321 3195.5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10 2010    88 356 3359.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5  2005    69 327 3229.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6  2006    18 308 2891.6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7  2007    84 354 3216.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8  2008    64 322 3273.7</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9  2009    48 321 3195.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10 2010    88 356 3359.8</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
