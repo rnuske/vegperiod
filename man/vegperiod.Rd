@@ -15,53 +15,49 @@ vegperiod(
 )
 }
 \arguments{
-\item{dates}{vector of calendar dates (objects of class \code{Date}
-or something understood by \code{\link[base]{as.Date}}). Must contain
-entire years if \code{est.prev > 0} else the first year may
-comprise only November and December.}
+\item{dates}{vector of calendar dates (objects of class \code{Date} or something
+understood by \code{\link[=as.Date]{as.Date()}}). Must contain entire years if \code{est.prev > 0}
+else the first year may comprise only November and December.}
 
 \item{Tavg}{vector of daily average air temperatures in degree Celsius.
 Same length as \code{dates}.}
 
-\item{start.method}{name of method to use for vegetation start.
-One of \samp{"Menzel"} (needs additional argument
-\code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"},
-\samp{"Ribes uva-crispa"}. Can be abbreviated (partial matching).
-For further discussion see Details.}
+\item{start.method}{name of method to use for vegetation start. One of
+\code{"Menzel"} (needs additional argument \code{species}, see below), \code{"StdMeteo"}
+resp. \code{"ETCCDI"}, \code{"Ribes uva-crispa"}. Can be abbreviated (partial
+matching). For further discussion see Details.}
 
-\item{end.method}{name of method to use for vegetation end.
-One of \samp{"vonWilpert"}, \samp{"LWF-BROOK90"},
-\samp{"NuskeAlbert"} and \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
-Can be abbreviated (partial matching).
-For further discussion see Details.}
+\item{end.method}{name of method to use for vegetation end. One of
+\code{"vonWilpert"}, \code{"LWF-BROOK90"}, \code{"NuskeAlbert"} and \code{"StdMeteo"} resp.
+\code{"ETCCDI"}. Can be abbreviated (partial matching). For further discussion
+see Details.}
 
 \item{Tsum.out}{boolean. Return the sum of day degrees within
 vegetation period.}
 
-\item{species}{name of tree species [required if \code{start.method='Menzel'}
-       ignored otherwise].
+\item{species}{name of tree species (required if \code{start.method="Menzel"}
+ignored otherwise).
 
-       Must be one of \samp{"Larix decidua"}, \samp{"Picea abies (frueh)"},
-       \samp{"Picea abies (spaet)"}, \samp{"Picea abies (noerdl.)"},
-       \samp{"Picea omorika"}, \samp{"Pinus sylvestris"}, \samp{"Betula
-       pubescens"}, \samp{"Quercus robur"}, \samp{"Quercus petraea"},
-       \samp{"Fagus sylvatica"}.}
+Must be one of \code{"Larix decidua"}, \code{"Picea abies (frueh)"},
+\code{"Picea abies (spaet)"}, \code{"Picea abies (noerdl.)"}, \code{"Picea omorika"},
+\code{"Pinus sylvestris"}, \code{"Betula pubescens"}, \code{"Quercus robur"},
+\code{"Quercus petraea"}, \code{"Fagus sylvatica"}.}
 
-\item{est.prev}{number of years to \strong{est}imate \strong{prev}ious year's
-       chill days for the first year
-       [required if \code{start.method='Menzel'} ignored otherwise].
+\item{est.prev}{number of years to \strong{est}imate \strong{prev}ious year's chill
+days for the first year (required if \code{start.method="Menzel"} ignored
+otherwise).
 
-       \samp{Menzel} requires the number of chill days of previous November
-       and December. If \code{est.prev = 0} the first year is used to get
-       the previous year's chill days and dropped afterwards. Thus, a year
-       from the time series is lost. To avoid losing a year,
-       \code{est.prev = n} estimates the previous year's chill days for the
-       first year from the average of \code{n} first years of the time series.}
+\code{Menzel} requires the number of chill days of previous November and
+December. If \code{est.prev = 0} the first year is used to get the previous
+year's chill days and dropped afterwards. Thus, a year from the time
+series is lost. To avoid losing a year, \code{est.prev = n} estimates the
+previous year's chill days for the first year from the average of \code{n}
+first years of the time series.}
 }
 \value{
 A data.frame with year and DOY of start and end day of
-  vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
-  additional column with the sum of day degrees within vegetation periods.
+vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
+additional column with the sum of day degrees within vegetation periods.
 }
 \description{
 Calculate start and end date of vegetation periods based on daily average
@@ -71,14 +67,14 @@ convenience sake.
 }
 \section{Start methods}{
 
-The method \bold{\samp{"Menzel"}} implements the algorithm described in
+The method \strong{\code{\link[=method_Menzel]{Menzel}}} implements the algorithm described in
 Menzel (1997). The method is parameterized for 10 common tree species. It
-needs previous year's chill days. \bold{\samp{"ETCCDI"}} resp.
-\samp{"StdMeteo"} is a simple threshold based procedure as defined by the
+needs previous year's chill days. \strong{\code{\link[=method_ETCCDI]{ETCCDI}}} resp.
+\code{StdMeteo} is a simple threshold based procedure as defined by the
 Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009, Frich
 et al. 2002, Zhang et al. 2011) leading to quite early vegetation starts.
 This method is widely used in climate change studies. The method
-\bold{\samp{"Ribes uva-crispa"}} is based on leaf-out of gooseberry (Janssen
+\strong{\code{\link[=method_Ribes]{Ribes uva-crispa}}} is based on leaf-out of gooseberry (Janssen
 2009). It was developed by the Germany's National Meteorological Service
 (Deutscher Wetterdienst, DWD) and is more robust against early starts than
 common simple meteorological procedures.
@@ -86,17 +82,17 @@ common simple meteorological procedures.
 
 \section{End methods}{
 
-The end method \bold{\samp{"vonWilpert"}} is based on von Wilpert (1990). It
-was originally developed for "Picea abies" in the Black Forest but is
+The end method \strong{\code{\link[=method_vonWilpert]{vonWilpert}}} is based on von Wilpert (1990). It
+was originally developed for \emph{Picea abies} in the Black Forest but is
 commonly used for all tree species throughout Germany. As usual, the rules
 regarding the soilmatrix are neglected in this implementation.
-\bold{\samp{"LWF-BROOK90"}} is -for the sake of convenience- a
+\strong{\code{\link[=method_LWF-BROOK90]{LWF-BROOK90}}} is -for the sake of convenience- a
 reimplementation of the LWF-BROOK90 VBA (version 3.4) variant of "vonWilpert"
 (Hammel and Kennel 2001). Their interpretation of von Wilpert (1990) and the
-somewhat lower precision of VBA was mimicked. \bold{\samp{"NuskeAlbert"}}
+somewhat lower precision of VBA was mimicked. \strong{\code{\link[=method_NuskeAlbert]{NuskeAlbert}}}
 provide a very simple method which is inspired by standard climatological
 procedures but employs a 7 day moving average and a 5 °C threshold (cf.
-Walther and Linderholm 2006). \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"}
+Walther and Linderholm 2006). \strong{\code{\link[=method_ETCCDI]{ETCCDI}}} resp. \code{StdMeteo}
 is a simple threshold based procedure as defined by the Expert Team on
 Climate Change Detection and Indices (cf. ETCCDI 2009, Frich et al. 2002,
 Zhang et al. 2011) leading to quite late vegetation ends.
@@ -115,51 +111,50 @@ vegperiod(dates=goe$date, Tavg=goe$t, start="Menzel", end="vonWilpert",
 # add column with sum of day degrees in vegetation periods
 vegperiod(dates=goe$date, Tavg=goe$t, Tsum.out=TRUE,
           start="StdMeteo", end="StdMeteo")
-
 }
 \references{
 ETCCDI (2009)
-  Climate Change Indices: Definitions of the 27 core indices.
-  \url{http://etccdi.pacificclimate.org/list_27_indices.shtml}
+Climate Change Indices: Definitions of the 27 core indices.
+\url{http://etccdi.pacificclimate.org/list_27_indices.shtml}
 
-  Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
-  Klein Tank, A. and Peterson, T. (2002)
-  Observed coherent changes in climatic extremes during the second half of
-  the twentieth century.
-  \emph{Climate Research}, \bold{19}, 193--212.
-  \doi{10.3354/cr019193}.
+Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
+Klein Tank, A. and Peterson, T. (2002)
+Observed coherent changes in climatic extremes during the second half of
+the twentieth century.
+\emph{Climate Research}, \bold{19}, 193--212.
+\doi{10.3354/cr019193}.
 
-  Hammel, K. and Kennel, M. (2001)
-  Charakterisierung und Analyse der Wasserverfügbarkeit und des
-  Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
-  BROOK90.
-  \emph{Forstliche Forschungsberichte München}.
+Hammel, K. and Kennel, M. (2001)
+Charakterisierung und Analyse der Wasserverfügbarkeit und des
+Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
+BROOK90.
+\emph{Forstliche Forschungsberichte München}.
 
-  Janssen, W. (2009)
-  Definition des Vegetationsanfanges.
-  \emph{Internal Report, Deutscher Wetterdienst, Abteilung Agrarmeteorologie}.
+Janssen, W. (2009)
+Definition des Vegetationsanfanges.
+\emph{Internal Report, Deutscher Wetterdienst, Abteilung Agrarmeteorologie}.
 
-  Menzel, A. (1997)
-  Phänologie von Waldbäumen unter sich ändernden Klimabedingungen -
-  Auswertung der Beobachtungen in den Internationalen Phänologischen Gärten
-  und Möglichkeiten der Modellierung von Phänodaten.
-  \emph{Forstliche Forschungsberichte München}.
+Menzel, A. (1997)
+Phänologie von Waldbäumen unter sich ändernden Klimabedingungen -
+Auswertung der Beobachtungen in den Internationalen Phänologischen Gärten
+und Möglichkeiten der Modellierung von Phänodaten.
+\emph{Forstliche Forschungsberichte München}.
 
-  von Wilpert, K. (1990)
-  Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
-  auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
-  standortsspezifischer Wasserstreßdispostion.
-  \emph{Freiburger Bodenkundliche Abhandlungen}.
+von Wilpert, K. (1990)
+Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
+auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
+standortsspezifischer Wasserstreßdispostion.
+\emph{Freiburger Bodenkundliche Abhandlungen}.
 
-  Walther, A. and Linderholm, H. W. (2006)
-  A comparison of growing season indices for the Greater Baltic Area.
-  \emph{International Journal of Biometeorology}, \bold{51}(2), 107--118.
-  \doi{10.1007/s00484-006-0048-5}.
+Walther, A. and Linderholm, H. W. (2006)
+A comparison of growing season indices for the Greater Baltic Area.
+\emph{International Journal of Biometeorology}, \bold{51}(2), 107--118.
+\doi{10.1007/s00484-006-0048-5}.
 
-  Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
-  Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
-  Indices for monitoring changes in extremes based on daily temperature and
-  precipitation data.
-  \emph{Wiley Interdisciplinary Reviews: Climate Change}, \bold{2}(6), 851--870.
-  \doi{10.1002/wcc.147}.
+Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
+Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
+Indices for monitoring changes in extremes based on daily temperature and
+precipitation data.
+\emph{Wiley Interdisciplinary Reviews: Climate Change}, \bold{2}(6), 851--870.
+\doi{10.1002/wcc.147}.
 }

@@ -15,73 +15,69 @@
 #' convenience sake.
 #'
 #' @section Start methods:
-#' The method \bold{\samp{"Menzel"}} implements the algorithm described in
+#' The method **[`Menzel`][method_Menzel]** implements the algorithm described in
 #' Menzel (1997). The method is parameterized for 10 common tree species. It
-#' needs previous year's chill days. \bold{\samp{"ETCCDI"}} resp.
-#' \samp{"StdMeteo"} is a simple threshold based procedure as defined by the
+#' needs previous year's chill days. **[`ETCCDI`][method_ETCCDI]** resp.
+#' `StdMeteo` is a simple threshold based procedure as defined by the
 #' Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009, Frich
 #' et al. 2002, Zhang et al. 2011) leading to quite early vegetation starts.
 #' This method is widely used in climate change studies. The method
-#' \bold{\samp{"Ribes uva-crispa"}} is based on leaf-out of gooseberry (Janssen
+#' **[`Ribes uva-crispa`][method_Ribes]** is based on leaf-out of gooseberry (Janssen
 #' 2009). It was developed by the Germany's National Meteorological Service
 #' (Deutscher Wetterdienst, DWD) and is more robust against early starts than
 #' common simple meteorological procedures.
 #'
 #' @section End methods:
-#' The end method \bold{\samp{"vonWilpert"}} is based on von Wilpert (1990). It
-#' was originally developed for "Picea abies" in the Black Forest but is
+#' The end method **[`vonWilpert`][method_vonWilpert]** is based on von Wilpert (1990). It
+#' was originally developed for *Picea abies* in the Black Forest but is
 #' commonly used for all tree species throughout Germany. As usual, the rules
 #' regarding the soilmatrix are neglected in this implementation.
-#' \bold{\samp{"LWF-BROOK90"}} is -for the sake of convenience- a
+#' **[`LWF-BROOK90`][method_LWF-BROOK90]** is -for the sake of convenience- a
 #' reimplementation of the LWF-BROOK90 VBA (version 3.4) variant of "vonWilpert"
 #' (Hammel and Kennel 2001). Their interpretation of von Wilpert (1990) and the
-#' somewhat lower precision of VBA was mimicked. \bold{\samp{"NuskeAlbert"}}
+#' somewhat lower precision of VBA was mimicked. **[`NuskeAlbert`][method_NuskeAlbert]**
 #' provide a very simple method which is inspired by standard climatological
 #' procedures but employs a 7 day moving average and a 5 °C threshold (cf.
-#' Walther and Linderholm 2006). \bold{\samp{"ETCCDI"}} resp. \samp{"StdMeteo"}
+#' Walther and Linderholm 2006). **[`ETCCDI`][method_ETCCDI]** resp. `StdMeteo`
 #' is a simple threshold based procedure as defined by the Expert Team on
 #' Climate Change Detection and Indices (cf. ETCCDI 2009, Frich et al. 2002,
 #' Zhang et al. 2011) leading to quite late vegetation ends.
 #'
-#' @param dates vector of calendar dates (objects of class \code{Date}
-#'        or something understood by \code{\link[base]{as.Date}}). Must contain
-#'        entire years if \code{est.prev > 0} else the first year may
-#'        comprise only November and December.
+#' @param dates vector of calendar dates (objects of class `Date` or something
+#'   understood by [as.Date()]). Must contain entire years if `est.prev > 0`
+#'   else the first year may comprise only November and December.
 #' @param Tavg vector of daily average air temperatures in degree Celsius.
-#'        Same length as \code{dates}.
-#' @param start.method name of method to use for vegetation start.
-#'        One of \samp{"Menzel"} (needs additional argument
-#'        \code{species}, see below), \samp{"StdMeteo"} resp. \samp{"ETCCDI"},
-#'        \samp{"Ribes uva-crispa"}. Can be abbreviated (partial matching).
-#'        For further discussion see Details.
-#' @param end.method name of method to use for vegetation end.
-#'        One of \samp{"vonWilpert"}, \samp{"LWF-BROOK90"},
-#'        \samp{"NuskeAlbert"} and \samp{"StdMeteo"} resp. \samp{"ETCCDI"}.
-#'        Can be abbreviated (partial matching).
-#'        For further discussion see Details.
+#'   Same length as `dates`.
+#' @param start.method name of method to use for vegetation start. One of
+#'   `"Menzel"` (needs additional argument `species`, see below), `"StdMeteo"`
+#'   resp. `"ETCCDI"`, `"Ribes uva-crispa"`. Can be abbreviated (partial
+#'   matching). For further discussion see Details.
+#' @param end.method name of method to use for vegetation end. One of
+#'   `"vonWilpert"`, `"LWF-BROOK90"`, `"NuskeAlbert"` and `"StdMeteo"` resp.
+#'   `"ETCCDI"`. Can be abbreviated (partial matching). For further discussion
+#'   see Details.
 #' @param Tsum.out boolean. Return the sum of day degrees within
 #'        vegetation period.
-#' @param species name of tree species [required if \code{start.method='Menzel'}
-#'        ignored otherwise].
+#' @param species name of tree species (required if `start.method="Menzel"`
+#'   ignored otherwise).
 #'
-#'        Must be one of \samp{"Larix decidua"}, \samp{"Picea abies (frueh)"},
-#'        \samp{"Picea abies (spaet)"}, \samp{"Picea abies (noerdl.)"},
-#'        \samp{"Picea omorika"}, \samp{"Pinus sylvestris"}, \samp{"Betula
-#'        pubescens"}, \samp{"Quercus robur"}, \samp{"Quercus petraea"},
-#'        \samp{"Fagus sylvatica"}.
-#' @param est.prev number of years to \strong{est}imate \strong{prev}ious year's
-#'        chill days for the first year
-#'        [required if \code{start.method='Menzel'} ignored otherwise].
+#'   Must be one of `"Larix decidua"`, `"Picea abies (frueh)"`,
+#'   `"Picea abies (spaet)"`, `"Picea abies (noerdl.)"`, `"Picea omorika"`,
+#'   `"Pinus sylvestris"`, `"Betula pubescens"`, `"Quercus robur"`,
+#'   `"Quercus petraea"`, `"Fagus sylvatica"`.
+#' @param est.prev number of years to **est**imate **prev**ious year's chill
+#'   days for the first year (required if `start.method="Menzel"` ignored
+#'   otherwise).
 #'
-#'        \samp{Menzel} requires the number of chill days of previous November
-#'        and December. If \code{est.prev = 0} the first year is used to get
-#'        the previous year's chill days and dropped afterwards. Thus, a year
-#'        from the time series is lost. To avoid losing a year,
-#'        \code{est.prev = n} estimates the previous year's chill days for the
-#'        first year from the average of \code{n} first years of the time series.
+#'   `Menzel` requires the number of chill days of previous November and
+#'   December. If `est.prev = 0` the first year is used to get the previous
+#'   year's chill days and dropped afterwards. Thus, a year from the time
+#'   series is lost. To avoid losing a year, `est.prev = n` estimates the
+#'   previous year's chill days for the first year from the average of `n`
+#'   first years of the time series.
 #'
 #' @return A data.frame with year and DOY of start and end day of
-#'   vegetation period. If \code{Tsum.out=TRUE}, the data.frame contains an
+#'   vegetation period. If `Tsum.out=TRUE`, the data.frame contains an
 #'   additional column with the sum of day degrees within vegetation periods.
 #'
 #' @references
@@ -143,7 +139,7 @@
 #' # add column with sum of day degrees in vegetation periods
 #' vegperiod(dates=goe$date, Tavg=goe$t, Tsum.out=TRUE,
 #'           start="StdMeteo", end="StdMeteo")
-#'
+#' @md
 #' @export
 vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
                       species=NULL, est.prev=0){
@@ -264,8 +260,8 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
     res$Tsum <- numeric(nrow(res))
     for(i in seq_along(res$Tsum)){
       res$Tsum[i] <- sum(df$Tavg[df$year == years[i] &
-                                   df$DOY >= start[i] &
-                                   df$DOY <= end[i]])
+                                 df$DOY  >= start[i] &
+                                 df$DOY  <= end[i]])
     }
   }
 

@@ -7,26 +7,43 @@
 
 #==============================================================================
 #
-# End of vegetation priod according to von Wilpert (1990)
+# End of vegetation period according to von Wilpert (1990)
 #
-# orthodox are 3 criteria: short day, temperature & drought criterion
-# we consider -as usual- only short day and temperature citerion
-#
-# temperature criterion
-# - 7 day moving average of daily mean temperatures
-#     at least 5 consecutive days under 10°C
-# - if afterwards more than 5 consecutive days 7 day moving average over 10°C
-#     vegetation period gets restarted
-#
-# short day criterion
-# - last day of the vegetation period is DOY 279 (5th of October in leap years)
-#
-# Reference:
-#   von Wilpert, K (1990) Die Jahrringstruktur von Fichten in Abhängigkeit vom
-#   Bodenwasserhaushalt auf Pseudogley un Parabraunerde: Ein Methodenkonzept
-#   zur Erfassung standortsspezifischer Wasserstreßdispostion. Freiburger
-#   Bodenkundliche Abhandlungen: 24. ISSN: 0344-2691. Seiten: 106-108
 #==============================================================================
+
+#' Vegetation End Method "vonWilpert"
+#'
+#' The method `vonWilpert` is based on von Wilpert (1990). It was originally
+#' developed for "Picea abies" in the Black Forest but is commonly used for all
+#' tree species throughout Germany. As usual, the rules regarding the soilmatrix
+#' are neglected in this implementation.
+#'
+#' @section Calculations:
+#'
+#' Orthodox are 3 criteria: **short day**, **temperature** and **drought criterion**
+#' we consider -as usual- only short day and temperature citerion
+#'
+#' ## Temperature criterion:
+#'  - 7 day moving average of daily mean temperatures
+#'      at least 5 consecutive days under 10°C
+#'  - if afterwards more than 5 consecutive days 7 day moving average over 10°C
+#'     vegetation period gets restarted
+#'
+#' ## Short day criterion
+#' - last day of the vegetation period is DOY 279 (5th of October in leap years)
+#
+#' @references
+#' von Wilpert, K. (1990)
+#'   Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
+#'   auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
+#'   standortsspezifischer Wasserstreßdispostion.
+#'   \emph{Freiburger Bodenkundliche Abhandlungen}. Pages 106--108.
+#'
+#' @md
+#' @name method_vonWilpert
+#' @keywords internal
+NULL
+
 .end_vonWilpert <- function(df, Treshold=10, LastDOY=279){
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
@@ -82,20 +99,46 @@
 
 #==============================================================================
 #
-# End of vegetation periode according to LWF-BROOK90
+# End of vegetation period according to LWF-BROOK90
 #
-# - starting search at June 1st
-# - propose end if 7-day moving average temperature is below 10°C
-#   on 5 consecutive days
-# - restart search for end if there is a warm periode (7-day moving average
-#   temperature above 10°C for 5 consecutive days
-# - nevertheless the vegetation periode stops latest at DOY 279
-#
-# Reference (commonly used):
-#  Hammel, K. & Kennel, M. (2001) Charakterisierung und Analyse der
-#  Wasserverfügbarkeit und des Wasserhaushalts von Waldstandorten in Bayern mit
-#  dem Simulationsmodell BROOK90. Forstliche Forschungsberichte München, 185.
 #==============================================================================
+
+#' Vegetation End Method "LWF-BROOK90"
+#'
+#' The method `LWF-BROOK90` is -for the sake of convenience- a reimplementation
+#' of the LWF-BROOK90 VBA (version 3.4) variant of "vonWilpert" (Hammel and
+#' Kennel 2001). Their interpretation of von Wilpert (1990) and the somewhat
+#' lower precision of VBA was mimicked.
+#'
+#' @section Calculations:
+#'
+#' ```
+#' - starting search at June 1st
+#' - propose end if 7-day moving average temperature is below 10°C
+#'   on 5 consecutive days
+#' - restart search for end if there is a warm periode (7-day moving average
+#'   temperature above 10°C for 5 consecutive days
+#' - nevertheless the vegetation periode stops latest at DOY 279
+#' ```
+#'
+#' @references
+#' Hammel, K. and Kennel, M. (2001)
+#'   Charakterisierung und Analyse der Wasserverfügbarkeit und des
+#'   Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
+#'   BROOK90.
+#'   \emph{Forstliche Forschungsberichte München}.
+#'
+#' von Wilpert, K. (1990)
+#'   Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
+#'   auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
+#'   standortsspezifischer Wasserstreßdispostion.
+#'   \emph{Freiburger Bodenkundliche Abhandlungen}.
+#'
+#' @md
+#' @name method_LWF-BROOK90
+#' @keywords internal
+NULL
+
 .end_LWF_BROOK90 <- function(df, Tmin=10, LastDOY=279){
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
@@ -151,22 +194,39 @@
 
 
 #==============================================================================
-# End of vegetation priod according to Nuske & Albert
 #
-# 2 criteria: temperature & short day criterion
+# End of vegetation period according to Nuske & Albert
 #
-# temperature criterion
-# 7 day moving average of daily mean temperatures
-# end if 5 consecutive days under under 5° C
-# start the search at 1st of July / vegetation start
-#
-# short day criterion
-# last day of the vegetation period is 5th of October
-#
-# Reference for Tmin=5:
-#  Walther, A. and Linderholm, H.W. (2006) A comparison of growing season
-#  indices for the Greater Baltic Area. Int J Biometeorol 51: 107-118
 #==============================================================================
+
+#' Vegetation End Method "NuskeAlbert"
+#'
+#' The method `NuskeAlbert` provides a very simple method which is inspired by
+#' standard climatological procedures but employs a 7 day moving average and
+#' a 5 °C threshold (cf. Walther and Linderholm 2006).
+#'
+#' @section Calculations:
+#' 2 criteria: temperature & short day criterion
+#'
+#' ## Temperature criterion
+#' 7 day moving average of daily mean temperatures
+#' end if 5 consecutive days under under 5° C
+#' start the search at 1st of July / vegetation start
+#'
+#' ## Short day criterion
+#' last day of the vegetation period is 5th of October
+#'
+#' @md
+#' @references
+#'   Walther, A. and Linderholm, H. W. (2006)
+#'   A comparison of growing season indices for the Greater Baltic Area.
+#'   \emph{International Journal of Biometeorology}, \bold{51}(2), 107--118.
+#'   \doi{10.1007/s00484-006-0048-5}.
+#'
+#' @name method_NuskeAlbert
+#' @keywords internal
+NULL
+
 .end_NuskeAlbert <- function(df, start, Tmin=5){
   # Assumptions:
   # - data.frame 'df' contains month, DOY, Tavg
@@ -206,24 +266,10 @@
 
 #==============================================================================
 #
-# End of vegetation periode according to standard meteo procedure
-#  aka 'ETCCDI' indix
+# End of vegetation period according to standard meteo procedure aka 'ETCCDI'
 #
-# first span of at least 6 consecutive days with daily mean temperature TG > 5°C
-# and first span after July 1st of 6 consecutive days with TG < 5°C.
+# first span after July 1st of 6 consecutive days with TG < 5°C.
 #
-# Reference:
-#  often known as Growing season Length (GSL) e.g.
-#   - Definition recommended by the CCl/CLIVAR/JCOMM Expert Team on Climate
-#     Change Detection and Indices (ETCCDI)
-#     http://etccdi.pacificclimate.org/list_27_indices.shtml
-#     http://www.climdex.org/indices.html
-#   - European Climate Assessment (ECA)
-#     http://eca.knmi.nl/indicesextremes/indicesdictionary.php
-#   - Frich, P. et al. (2002) Observed coherent changes in climatic extremes
-#     during the second half of the twentieth century. Climate Research (19):
-#     193-212.   http://www.climateknowledge.org/heat_waves/
-#     Doc2004_Frich_Extremes_Index_ClimResearch_2002.pdf
 #==============================================================================
 .end_std_meteo <- function(df, Tmin=5){
   # Assumptions:
