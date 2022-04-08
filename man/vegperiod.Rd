@@ -10,6 +10,7 @@ vegperiod(
   start.method,
   end.method,
   Tsum.out = FALSE,
+  Tsum.crit = 0,
   species = NULL,
   est.prev = 0
 )
@@ -32,8 +33,13 @@ matching). For further discussion see Details.}
 \code{"ETCCDI"}. Can be abbreviated (partial matching). For further discussion
 see Details.}
 
-\item{Tsum.out}{boolean. Return the sum of day degrees within
-vegetation period.}
+\item{Tsum.out}{boolean. Return the sum of daily mean temperatures above
+\code{Tsum.crit} within vegetation period, also known as growing day degrees.}
+
+\item{Tsum.crit}{threshold for sum of day degrees. Only daily mean temperatures
+\verb{> Tsum.crit} will be tallied. The default of \code{0} prevents negative
+daily temperatures from reducing the sum. Climate change studies often use
+a threshold of \code{5}.}
 
 \item{species}{name of tree species (required if \code{start.method="Menzel"}
 ignored otherwise).

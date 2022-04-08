@@ -56,8 +56,12 @@
 #'   `"vonWilpert"`, `"LWF-BROOK90"`, `"NuskeAlbert"` and `"StdMeteo"` resp.
 #'   `"ETCCDI"`. Can be abbreviated (partial matching). For further discussion
 #'   see Details.
-#' @param Tsum.out boolean. Return the sum of day degrees within
-#'        vegetation period.
+#' @param Tsum.out boolean. Return the sum of daily mean temperatures above
+#'   `Tsum.crit` within vegetation period, also known as growing day degrees.
+#' @param Tsum.crit threshold for sum of day degrees. Only daily mean temperatures
+#'   `> Tsum.crit` will be tallied. The default of `0` prevents negative
+#'   daily temperatures from reducing the sum. Climate change studies often use
+#'   a threshold of `5`.
 #' @param species name of tree species (required if `start.method="Menzel"`
 #'   ignored otherwise).
 #'
@@ -142,7 +146,7 @@
 #' @md
 #' @export
 vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
-                      species=NULL, est.prev=0){
+                      Tsum.crit=0, species=NULL, est.prev=0){
   # Checks
   #----------------------------------------------------------------------------
   start.method <- match.arg(start.method,
@@ -261,7 +265,8 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
     for(i in seq_along(res$Tsum)){
       res$Tsum[i] <- sum(df$Tavg[df$year == years[i] &
                                  df$DOY  >= start[i] &
-                                 df$DOY  <= end[i]])
+                                 df$DOY  <= end[i]   &
+                                 df$Tavg >  Tsum.crit])
     }
   }
 

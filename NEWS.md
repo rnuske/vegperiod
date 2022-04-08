@@ -1,6 +1,7 @@
 # News for Package vegperiod
 
 ## Version 0.3.1.901
+  * introduced threshold `Tsum.crit` for sum of day degrees in function `vegperiod()`
   * acknowledged funder in DESCRIPTION
   * fixed a changed URL
 
