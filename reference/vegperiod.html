@@ -23,7 +23,7 @@ convenience sake."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/aja
       <span class="navbar-toggler-icon"></span>
     </button>
 
-    <div id="navbar" class="collapse navbar-collapse ms-2">
+    <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
 </li>
@@ -74,65 +74,61 @@ convenience sake.</p>
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>dates</dt>
-<dd><p>vector of calendar dates (objects of class <code>Date</code>
-or something understood by <code><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date</a></code>). Must contain
-entire years if <code>est.prev &gt; 0</code> else the first year may
-comprise only November and December.</p></dd>
+<dd><p>vector of calendar dates (objects of class <code>Date</code> or something
+understood by <code><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date()</a></code>). Must contain entire years if <code>est.prev &gt; 0</code>
+else the first year may comprise only November and December.</p></dd>
 <dt>Tavg</dt>
 <dd><p>vector of daily average air temperatures in degree Celsius.
 Same length as <code>dates</code>.</p></dd>
 <dt>start.method</dt>
-<dd><p>name of method to use for vegetation start.
-One of <samp>"Menzel"</samp> (needs additional argument
-<code>species</code>, see below), <samp>"StdMeteo"</samp> resp. <samp>"ETCCDI"</samp>,
-<samp>"Ribes uva-crispa"</samp>. Can be abbreviated (partial matching).
-For further discussion see Details.</p></dd>
+<dd><p>name of method to use for vegetation start. One of
+<code>"Menzel"</code> (needs additional argument <code>species</code>, see below), <code>"StdMeteo"</code>
+resp. <code>"ETCCDI"</code>, <code>"Ribes uva-crispa"</code>. Can be abbreviated (partial
+matching). For further discussion see Details.</p></dd>
 <dt>end.method</dt>
-<dd><p>name of method to use for vegetation end.
-One of <samp>"vonWilpert"</samp>, <samp>"LWF-BROOK90"</samp>,
-<samp>"NuskeAlbert"</samp> and <samp>"StdMeteo"</samp> resp. <samp>"ETCCDI"</samp>.
-Can be abbreviated (partial matching).
-For further discussion see Details.</p></dd>
+<dd><p>name of method to use for vegetation end. One of
+<code>"vonWilpert"</code>, <code>"LWF-BROOK90"</code>, <code>"NuskeAlbert"</code> and <code>"StdMeteo"</code> resp.
+<code>"ETCCDI"</code>. Can be abbreviated (partial matching). For further discussion
+see Details.</p></dd>
 <dt>Tsum.out</dt>
 <dd><p>boolean. Return the sum of day degrees within
 vegetation period.</p></dd>
 <dt>species</dt>
-<dd><p>name of tree species [required if <code>start.method='Menzel'</code>
-       ignored otherwise].</p>
-<p>Must be one of <samp>"Larix decidua"</samp>, <samp>"Picea abies (frueh)"</samp>,
-       <samp>"Picea abies (spaet)"</samp>, <samp>"Picea abies (noerdl.)"</samp>,
-       <samp>"Picea omorika"</samp>, <samp>"Pinus sylvestris"</samp>, <samp>"Betula
-       pubescens"</samp>, <samp>"Quercus robur"</samp>, <samp>"Quercus petraea"</samp>,
-       <samp>"Fagus sylvatica"</samp>.</p></dd>
+<dd><p>name of tree species (required if <code>start.method="Menzel"</code>
+ignored otherwise).</p>
+<p>Must be one of <code>"Larix decidua"</code>, <code>"Picea abies (frueh)"</code>,
+<code>"Picea abies (spaet)"</code>, <code>"Picea abies (noerdl.)"</code>, <code>"Picea omorika"</code>,
+<code>"Pinus sylvestris"</code>, <code>"Betula pubescens"</code>, <code>"Quercus robur"</code>,
+<code>"Quercus petraea"</code>, <code>"Fagus sylvatica"</code>.</p></dd>
 <dt>est.prev</dt>
-<dd><p>number of years to <strong>est</strong>imate <strong>prev</strong>ious year's
-       chill days for the first year
-       [required if <code>start.method='Menzel'</code> ignored otherwise].</p>
-<p><samp>Menzel</samp> requires the number of chill days of previous November
-       and December. If <code>est.prev = 0</code> the first year is used to get
-       the previous year's chill days and dropped afterwards. Thus, a year
-       from the time series is lost. To avoid losing a year,
-       <code>est.prev = n</code> estimates the previous year's chill days for the
-       first year from the average of <code>n</code> first years of the time series.</p></dd>
+<dd><p>number of years to <strong>est</strong>imate <strong>prev</strong>ious year's chill
+days for the first year (required if <code>start.method="Menzel"</code> ignored
+otherwise).</p>
+<p><code>Menzel</code> requires the number of chill days of previous November and
+December. If <code>est.prev = 0</code> the first year is used to get the previous
+year's chill days and dropped afterwards. Thus, a year from the time
+series is lost. To avoid losing a year, <code>est.prev = n</code> estimates the
+previous year's chill days for the first year from the average of <code>n</code>
+first years of the time series.</p></dd>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     <p>A data.frame with year and DOY of start and end day of
-  vegetation period. If <code>Tsum.out=TRUE</code>, the data.frame contains an
-  additional column with the sum of day degrees within vegetation periods.</p>
+vegetation period. If <code>Tsum.out=TRUE</code>, the data.frame contains an
+additional column with the sum of day degrees within vegetation periods.</p>
     </div>
     <div class="section level2">
     <h2 id="start-methods">Start methods<a class="anchor" aria-label="anchor" href="#start-methods"></a></h2>
     
 
-<p>The method <b><samp>"Menzel"</samp></b> implements the algorithm described in
+<p>The method <strong><code><a href="method_Menzel.html">Menzel</a></code></strong> implements the algorithm described in
 Menzel (1997). The method is parameterized for 10 common tree species. It
-needs previous year's chill days. <b><samp>"ETCCDI"</samp></b> resp.
-<samp>"StdMeteo"</samp> is a simple threshold based procedure as defined by the
+needs previous year's chill days. <strong><code><a href="method_ETCCDI.html">ETCCDI</a></code></strong> resp.
+<code>StdMeteo</code> is a simple threshold based procedure as defined by the
 Expert Team on Climate Change Detection and Indices (cf. ETCCDI 2009, Frich
 et al. 2002, Zhang et al. 2011) leading to quite early vegetation starts.
 This method is widely used in climate change studies. The method
-<b><samp>"Ribes uva-crispa"</samp></b> is based on leaf-out of gooseberry (Janssen
+<strong><code><a href="method_Ribes.html">Ribes uva-crispa</a></code></strong> is based on leaf-out of gooseberry (Janssen
 2009). It was developed by the Germany's National Meteorological Service
 (Deutscher Wetterdienst, DWD) and is more robust against early starts than
 common simple meteorological procedures.</p>
@@ -141,17 +137,17 @@ common simple meteorological procedures.</p>
     <h2 id="end-methods">End methods<a class="anchor" aria-label="anchor" href="#end-methods"></a></h2>
     
 
-<p>The end method <b><samp>"vonWilpert"</samp></b> is based on von Wilpert (1990). It
-was originally developed for "Picea abies" in the Black Forest but is
+<p>The end method <strong><code><a href="method_vonWilpert.html">vonWilpert</a></code></strong> is based on von Wilpert (1990). It
+was originally developed for <em>Picea abies</em> in the Black Forest but is
 commonly used for all tree species throughout Germany. As usual, the rules
 regarding the soilmatrix are neglected in this implementation.
-<b><samp>"LWF-BROOK90"</samp></b> is -for the sake of convenience- a
+<strong><code><a href="method_LWF-BROOK90.html">LWF-BROOK90</a></code></strong> is -for the sake of convenience- a
 reimplementation of the LWF-BROOK90 VBA (version 3.4) variant of "vonWilpert"
 (Hammel and Kennel 2001). Their interpretation of von Wilpert (1990) and the
-somewhat lower precision of VBA was mimicked. <b><samp>"NuskeAlbert"</samp></b>
+somewhat lower precision of VBA was mimicked. <strong><code><a href="method_NuskeAlbert.html">NuskeAlbert</a></code></strong>
 provide a very simple method which is inspired by standard climatological
 procedures but employs a 7 day moving average and a 5 °C threshold (cf.
-Walther and Linderholm 2006). <b><samp>"ETCCDI"</samp></b> resp. <samp>"StdMeteo"</samp>
+Walther and Linderholm 2006). <strong><code><a href="method_ETCCDI.html">ETCCDI</a></code></strong> resp. <code>StdMeteo</code>
 is a simple threshold based procedure as defined by the Expert Team on
 Climate Change Detection and Indices (cf. ETCCDI 2009, Frich et al. 2002,
 Zhang et al. 2011) leading to quite late vegetation ends.</p>
@@ -159,44 +155,44 @@ Zhang et al. 2011) leading to quite late vegetation ends.</p>
     <div class="section level2">
     <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a></h2>
     <p>ETCCDI (2009)
-  Climate Change Indices: Definitions of the 27 core indices.
-  <a href="http://etccdi.pacificclimate.org/list_27_indices.shtml" class="external-link">http://etccdi.pacificclimate.org/list_27_indices.shtml</a></p>
+Climate Change Indices: Definitions of the 27 core indices.
+<a href="http://etccdi.pacificclimate.org/list_27_indices.shtml" class="external-link">http://etccdi.pacificclimate.org/list_27_indices.shtml</a></p>
 <p>Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
-  Klein Tank, A. and Peterson, T. (2002)
-  Observed coherent changes in climatic extremes during the second half of
-  the twentieth century.
-  <em>Climate Research</em>, <b>19</b>, 193--212.
-  doi: <a href="https://doi.org/10.3354/cr019193" class="external-link">10.3354/cr019193</a>
+Klein Tank, A. and Peterson, T. (2002)
+Observed coherent changes in climatic extremes during the second half of
+the twentieth century.
+<em>Climate Research</em>, <b>19</b>, 193--212.
+doi: <a href="https://doi.org/10.3354/cr019193" class="external-link">10.3354/cr019193</a>
 .</p>
 <p>Hammel, K. and Kennel, M. (2001)
-  Charakterisierung und Analyse der Wasserverfügbarkeit und des
-  Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
-  BROOK90.
-  <em>Forstliche Forschungsberichte München</em>.</p>
+Charakterisierung und Analyse der Wasserverfügbarkeit und des
+Wasserhaushalts von Waldstandorten in Bayern mit dem Simulationsmodell
+BROOK90.
+<em>Forstliche Forschungsberichte München</em>.</p>
 <p>Janssen, W. (2009)
-  Definition des Vegetationsanfanges.
-  <em>Internal Report, Deutscher Wetterdienst, Abteilung Agrarmeteorologie</em>.</p>
+Definition des Vegetationsanfanges.
+<em>Internal Report, Deutscher Wetterdienst, Abteilung Agrarmeteorologie</em>.</p>
 <p>Menzel, A. (1997)
-  Phänologie von Waldbäumen unter sich ändernden Klimabedingungen -
-  Auswertung der Beobachtungen in den Internationalen Phänologischen Gärten
-  und Möglichkeiten der Modellierung von Phänodaten.
-  <em>Forstliche Forschungsberichte München</em>.</p>
+Phänologie von Waldbäumen unter sich ändernden Klimabedingungen -
+Auswertung der Beobachtungen in den Internationalen Phänologischen Gärten
+und Möglichkeiten der Modellierung von Phänodaten.
+<em>Forstliche Forschungsberichte München</em>.</p>
 <p>von Wilpert, K. (1990)
-  Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
-  auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
-  standortsspezifischer Wasserstreßdispostion.
-  <em>Freiburger Bodenkundliche Abhandlungen</em>.</p>
+Die Jahrringstruktur von Fichten in Abhängigkeit vom Bodenwasserhaushalt
+auf Pseudogley und Parabraunerde: Ein Methodenkonzept zur Erfassung
+standortsspezifischer Wasserstreßdispostion.
+<em>Freiburger Bodenkundliche Abhandlungen</em>.</p>
 <p>Walther, A. and Linderholm, H. W. (2006)
-  A comparison of growing season indices for the Greater Baltic Area.
-  <em>International Journal of Biometeorology</em>, <b>51</b>(2), 107--118.
-  doi: <a href="https://doi.org/10.1007/s00484-006-0048-5" class="external-link">10.1007/s00484-006-0048-5</a>
+A comparison of growing season indices for the Greater Baltic Area.
+<em>International Journal of Biometeorology</em>, <b>51</b>(2), 107--118.
+doi: <a href="https://doi.org/10.1007/s00484-006-0048-5" class="external-link">10.1007/s00484-006-0048-5</a>
 .</p>
 <p>Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
-  Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
-  Indices for monitoring changes in extremes based on daily temperature and
-  precipitation data.
-  <em>Wiley Interdisciplinary Reviews: Climate Change</em>, <b>2</b>(6), 851--870.
-  doi: <a href="https://doi.org/10.1002/wcc.147" class="external-link">10.1002/wcc.147</a>
+Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
+Indices for monitoring changes in extremes based on daily temperature and
+precipitation data.
+<em>Wiley Interdisciplinary Reviews: Climate Change</em>, <b>2</b>(6), 851--870.
+doi: <a href="https://doi.org/10.1002/wcc.147" class="external-link">10.1002/wcc.147</a>
 .</p>
     </div>
 
@@ -246,7 +242,6 @@ Zhang et al. 2011) leading to quite late vegetation ends.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 8  2008    64 322 3270.6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 9  2009    48 321 3195.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 10 2010    88 356 3359.2</span>
-<span class="r-in"></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
@@ -258,7 +253,7 @@ Zhang et al. 2011) leading to quite late vegetation ends.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.1.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
     </footer></div>
