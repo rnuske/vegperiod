@@ -12,7 +12,8 @@ vegperiod(
   Tsum.out = FALSE,
   Tsum.crit = 0,
   species = NULL,
-  est.prev = 0
+  est.prev = 0,
+  check.data = TRUE
 )
 }
 \arguments{
@@ -59,6 +60,10 @@ year's chill days and dropped afterwards. Thus, a year from the time
 series is lost. To avoid losing a year, \code{est.prev = n} estimates the
 previous year's chill days for the first year from the average of \code{n}
 first years of the time series.}
+
+\item{check.data}{Performs plausibility checks on the temperature data to
+ensure that the temperatures have not been multiplied by ten.
+Plausible range is -35 to +40°C.}
 }
 \value{
 A data.frame with year and DOY of start and end day of

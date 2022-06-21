@@ -79,6 +79,9 @@
 #'   series is lost. To avoid losing a year, `est.prev = n` estimates the
 #'   previous year's chill days for the first year from the average of `n`
 #'   first years of the time series.
+#' @param check.data Performs plausibility checks on the temperature data to
+#'   ensure that the temperatures have not been multiplied by ten.
+#'   Plausible range is -35 to +40°C.
 #'
 #' @return A data.frame with year and DOY of start and end day of
 #'   vegetation period. If `Tsum.out=TRUE`, the data.frame contains an
@@ -146,7 +149,7 @@
 #' @md
 #' @export
 vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
-                      Tsum.crit=0, species=NULL, est.prev=0){
+                      Tsum.crit=0, species=NULL, est.prev=0, check.data=TRUE){
   # Checks
   #----------------------------------------------------------------------------
   start.method <- match.arg(start.method,
@@ -173,12 +176,13 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
     stop("The arguments dates and Tavg must be of same length!")
 
   # are the temperatures sound
+  if(isTRUE(check.data)){
   minimax <- range(Tavg)
   if(minimax[1] < -35 | minimax[2] > 40)
-    stop("Daily mean temperatures are too small/large (<-35 or >+40).\n",
-         "Might the temperatures have been multiplied by 10 for storage?",
-         "If you nevertheless consider such extreme daily mean temperatures ",
-         "to be plausible, then please contact the maintainer.")
+    stop("Your input temperature data exceeds the plausible range of -35 to +40\u00b0C.\n",
+         "You may want to double check your data. ",
+         "If you still want to use the given data, set 'check.data' to FALSE")
+  }
 
   if(!inherits(dates, "Date")){
     tryCatch(dates <- as.Date(dates),

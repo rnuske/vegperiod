@@ -2,6 +2,7 @@
 
 ## Version 0.3.1.901
   * introduced threshold `Tsum.crit` for sum of day degrees in function `vegperiod()`
+  * made plausibility check optional via new parameter `check.data`
   * acknowledged funder in DESCRIPTION
   * fixed a changed URL
 
