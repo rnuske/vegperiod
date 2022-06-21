@@ -68,7 +68,8 @@ convenience sake.</p>
   Tsum.out <span class="op">=</span> <span class="cn">FALSE</span>,
   Tsum.crit <span class="op">=</span> <span class="fl">0</span>,
   species <span class="op">=</span> <span class="cn">NULL</span>,
-  est.prev <span class="op">=</span> <span class="fl">0</span>
+  est.prev <span class="op">=</span> <span class="fl">0</span>,
+  check.data <span class="op">=</span> <span class="cn">TRUE</span>
 <span class="op">)</span></code></pre></div>
     </div>
 
@@ -78,27 +79,39 @@ convenience sake.</p>
 <dd><p>vector of calendar dates (objects of class <code>Date</code> or something
 understood by <code><a href="https://rdrr.io/r/base/as.Date.html" class="external-link">as.Date()</a></code>). Must contain entire years if <code>est.prev &gt; 0</code>
 else the first year may comprise only November and December.</p></dd>
+
+
 <dt>Tavg</dt>
 <dd><p>vector of daily average air temperatures in degree Celsius.
 Same length as <code>dates</code>.</p></dd>
+
+
 <dt>start.method</dt>
 <dd><p>name of method to use for vegetation start. One of
 <code>"Menzel"</code> (needs additional argument <code>species</code>, see below), <code>"StdMeteo"</code>
 resp. <code>"ETCCDI"</code>, <code>"Ribes uva-crispa"</code>. Can be abbreviated (partial
 matching). For further discussion see Details.</p></dd>
+
+
 <dt>end.method</dt>
 <dd><p>name of method to use for vegetation end. One of
 <code>"vonWilpert"</code>, <code>"LWF-BROOK90"</code>, <code>"NuskeAlbert"</code> and <code>"StdMeteo"</code> resp.
 <code>"ETCCDI"</code>. Can be abbreviated (partial matching). For further discussion
 see Details.</p></dd>
+
+
 <dt>Tsum.out</dt>
 <dd><p>boolean. Return the sum of daily mean temperatures above
 <code>Tsum.crit</code> within vegetation period, also known as growing day degrees.</p></dd>
+
+
 <dt>Tsum.crit</dt>
 <dd><p>threshold for sum of day degrees. Only daily mean temperatures
 <code>&gt; Tsum.crit</code> will be tallied. The default of <code>0</code> prevents negative
 daily temperatures from reducing the sum. Climate change studies often use
 a threshold of <code>5</code>.</p></dd>
+
+
 <dt>species</dt>
 <dd><p>name of tree species (required if <code>start.method="Menzel"</code>
 ignored otherwise).</p>
@@ -106,6 +119,8 @@ ignored otherwise).</p>
 <code>"Picea abies (spaet)"</code>, <code>"Picea abies (noerdl.)"</code>, <code>"Picea omorika"</code>,
 <code>"Pinus sylvestris"</code>, <code>"Betula pubescens"</code>, <code>"Quercus robur"</code>,
 <code>"Quercus petraea"</code>, <code>"Fagus sylvatica"</code>.</p></dd>
+
+
 <dt>est.prev</dt>
 <dd><p>number of years to <strong>est</strong>imate <strong>prev</strong>ious year's chill
 days for the first year (required if <code>start.method="Menzel"</code> ignored
@@ -116,10 +131,19 @@ year's chill days and dropped afterwards. Thus, a year from the time
 series is lost. To avoid losing a year, <code>est.prev = n</code> estimates the
 previous year's chill days for the first year from the average of <code>n</code>
 first years of the time series.</p></dd>
+
+
+<dt>check.data</dt>
+<dd><p>Performs plausibility checks on the temperature data to
+ensure that the temperatures have not been multiplied by ten.
+Plausible range is -35 to +40°C.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame with year and DOY of start and end day of
+    
+
+<p>A data.frame with year and DOY of start and end day of
 vegetation period. If <code>Tsum.out=TRUE</code>, the data.frame contains an
 additional column with the sum of day degrees within vegetation periods.</p>
     </div>
@@ -168,7 +192,7 @@ Klein Tank, A. and Peterson, T. (2002)
 Observed coherent changes in climatic extremes during the second half of
 the twentieth century.
 <em>Climate Research</em>, <b>19</b>, 193--212.
-doi: <a href="https://doi.org/10.3354/cr019193" class="external-link">10.3354/cr019193</a>
+<a href="https://doi.org/10.3354/cr019193" class="external-link">doi:10.3354/cr019193</a>
 .</p>
 <p>Hammel, K. and Kennel, M. (2001)
 Charakterisierung und Analyse der Wasserverfügbarkeit und des
@@ -191,14 +215,14 @@ standortsspezifischer Wasserstreßdispostion.
 <p>Walther, A. and Linderholm, H. W. (2006)
 A comparison of growing season indices for the Greater Baltic Area.
 <em>International Journal of Biometeorology</em>, <b>51</b>(2), 107--118.
-doi: <a href="https://doi.org/10.1007/s00484-006-0048-5" class="external-link">10.1007/s00484-006-0048-5</a>
+<a href="https://doi.org/10.1007/s00484-006-0048-5" class="external-link">doi:10.1007/s00484-006-0048-5</a>
 .</p>
 <p>Zhang, X., Alexander, L., Hegerl, G. C., Jones, P., Tank, A. K.,
 Peterson, T. C., Trewin, B. and Zwiers, F. W. (2011)
 Indices for monitoring changes in extremes based on daily temperature and
 precipitation data.
 <em>Wiley Interdisciplinary Reviews: Climate Change</em>, <b>2</b>(6), 851--870.
-doi: <a href="https://doi.org/10.1002/wcc.147" class="external-link">10.1002/wcc.147</a>
+<a href="https://doi.org/10.1002/wcc.147" class="external-link">doi:10.1002/wcc.147</a>
 .</p>
     </div>
 
@@ -259,7 +283,7 @@ doi: <a href="https://doi.org/10.1002/wcc.147" class="external-link">10.1002/wcc
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>

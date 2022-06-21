@@ -72,11 +72,15 @@ Meteorological Service (Deutscher Wetterdienst, DWD).</p>
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>id</dt>
 <dd><p>integer. A valid station id (cf. <a href="read.DWDstations.html">read.DWDstations</a>).</p></dd>
+
+
 <dt>type</dt>
 <dd><p>string. Stations can be of type <samp>"climate"</samp> offering a range
 of meteorological parameters or of type <samp>"precipitation"</samp> solely
 recording rainfall. There are about 400 <samp>climate</samp> and 2000
 <samp>precipitation</samp> stations.</p></dd>
+
+
 <dt>period</dt>
 <dd><p>string specifying a time span. The last 1.5 years are
 called <samp>"recent"</samp>. Data from the individual beginning of measurements
@@ -84,16 +88,22 @@ up to a year ago are labelled <samp>"historical"</samp>.
 <samp>"recent"</samp> data have not yet gone through the full quality control
 procedure. <samp>"historical"</samp> data have completed the operational quality
 control. But be aware there still might be gaps and inhomogeneities.</p></dd>
+
+
 <dt>resolution</dt>
 <dd><p>string. Temporal resolution of the data can be
 <samp>"daily"</samp> or <samp>"monthly"</samp>. <samp>"daily"</samp> being the common
 resolution.</p></dd>
+
+
 <dt>file</dt>
 <dd><p>a string specifying the location of a dataset. <samp>"file"</samp>
 may point to a file on a FTP server or on the local file system.
 If the file lives on a FTP server the string must start with
 <code>'ftp://'</code>. If it is NULL (the default), data will be downloaded
 from DWD's FTP server.</p></dd>
+
+
 <dt>destdir</dt>
 <dd><p>directory (string) where intermediate data (downloaded *.zip
 file) are stored. If it is NULL (the default) a subdirectory
@@ -102,15 +112,26 @@ file) are stored. If it is NULL (the default) a subdirectory
 It might be advisable to keep the .zip file since it contains the
 stations documentation and metadata (e.g. station shift, used devices,
 downtimes etc.).</p></dd>
+
+
 <dt>quiet</dt>
 <dd><p>If TRUE, suppress status messages (if any), and the progress bar.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A data.frame with the observed weather data. Beware of gaps and
+    
+
+<p>A data.frame with the observed weather data. Beware of gaps and
   inhomogeneities! <samp>colnames</samp> contains the original header and
-  hence German terms.
-  Content of 'climate'-data.frame:</p><table class="table table"><tr><td><strong>Name</strong></td><td><strong>Description</strong></td></tr><tr><td>STATIONS_ID</td><td>station id</td></tr><tr><td>MESS_DATUM</td><td>date</td></tr><tr><td>QN_3</td><td>quality level of next columns (-)</td></tr><tr><td>FX</td><td>daily maximum of wind gust (m/s)</td></tr><tr><td>FM</td><td>daily mean of wind velocity (m/s)</td></tr><tr><td>QN_4</td><td>quality level of next columns (-)</td></tr><tr><td>RSK</td><td>daily precipitation height (mm)</td></tr><tr><td>RSKF</td><td>precipitation form (-)</td></tr><tr><td>SDK</td><td>daily sunshine duration (h)</td></tr><tr><td>SHK_TAG</td><td>daily snow depth (cm)</td></tr><tr><td>NM</td><td>daily mean of cloud cover (1/8)</td></tr><tr><td>VPM</td><td>daily mean of vapor pressure (hPa)</td></tr><tr><td>PM</td><td>daily mean of pressure (hPa)</td></tr><tr><td>TMK</td><td>daily mean of temperature (°C)</td></tr><tr><td>UPM</td><td>daily mean of relative humidity (%)</td></tr><tr><td>TXK</td><td>daily maximum of temperature at 2m height (°C)</td></tr><tr><td>TNK</td><td>daily minimum of temperature at 2m height (°C)</td></tr><tr><td>TGK</td><td>daily minimum of air temperature at 5cm above ground (°C)</td></tr></table><p>Content of 'precipitation'-data.frame:</p><table class="table table"><tr><td><strong>Name</strong></td><td><strong>Description</strong></td></tr><tr><td>STATIONS_ID</td><td>station id</td></tr><tr><td>MESS_DATUM</td><td>date</td></tr><tr><td>QN_6</td><td>quality level of next columns (-)</td></tr><tr><td>RS</td><td>daily precipitation height (mm)</td></tr><tr><td>RSF</td><td>precipitation form (-)</td></tr><tr><td>SH_TAG</td><td>daily height of snow pack (cm)</td></tr></table></div>
+  hence German terms.</p>
+
+
+<p>Content of 'climate'-data.frame:</p>
+<p></p>
+<table class="table table"><tr><td><strong>Name</strong></td><td><strong>Description</strong></td></tr><tr><td>STATIONS_ID</td><td>station id</td></tr><tr><td>MESS_DATUM</td><td>date</td></tr><tr><td>QN_3</td><td>quality level of next columns (-)</td></tr><tr><td>FX</td><td>daily maximum of wind gust (m/s)</td></tr><tr><td>FM</td><td>daily mean of wind velocity (m/s)</td></tr><tr><td>QN_4</td><td>quality level of next columns (-)</td></tr><tr><td>RSK</td><td>daily precipitation height (mm)</td></tr><tr><td>RSKF</td><td>precipitation form (-)</td></tr><tr><td>SDK</td><td>daily sunshine duration (h)</td></tr><tr><td>SHK_TAG</td><td>daily snow depth (cm)</td></tr><tr><td>NM</td><td>daily mean of cloud cover (1/8)</td></tr><tr><td>VPM</td><td>daily mean of vapor pressure (hPa)</td></tr><tr><td>PM</td><td>daily mean of pressure (hPa)</td></tr><tr><td>TMK</td><td>daily mean of temperature (°C)</td></tr><tr><td>UPM</td><td>daily mean of relative humidity (%)</td></tr><tr><td>TXK</td><td>daily maximum of temperature at 2m height (°C)</td></tr><tr><td>TNK</td><td>daily minimum of temperature at 2m height (°C)</td></tr><tr><td>TGK</td><td>daily minimum of air temperature at 5cm above ground (°C)</td></tr></table><p>Content of 'precipitation'-data.frame:</p>
+<p></p>
+<table class="table table"><tr><td><strong>Name</strong></td><td><strong>Description</strong></td></tr><tr><td>STATIONS_ID</td><td>station id</td></tr><tr><td>MESS_DATUM</td><td>date</td></tr><tr><td>QN_6</td><td>quality level of next columns (-)</td></tr><tr><td>RS</td><td>daily precipitation height (mm)</td></tr><tr><td>RSF</td><td>precipitation form (-)</td></tr><tr><td>SH_TAG</td><td>daily height of snow pack (cm)</td></tr></table></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>An introduction to the data available at the Climate Data Center can be
@@ -168,7 +189,7 @@ of use</a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.4.</p>
 </div>
 
     </footer></div>
