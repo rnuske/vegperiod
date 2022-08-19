@@ -1,8 +1,8 @@
 pandoc: 2.7.3
-pkgdown: 2.0.4
+pkgdown: 2.0.6
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-06-21T14:53Z
+last_built: 2022-08-19T10:35Z
 urls:
   reference: https://rnuske.github.io/vegperiod/reference
   article: https://rnuske.github.io/vegperiod/articles
