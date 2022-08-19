@@ -9,9 +9,9 @@
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
 <!-- badges: end -->
 
-The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package collects methods to calculate climatological or thermal growing seasons solely based on daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
+The vegetation period, or growing season, is the period of the year when the weather conditions are sufficient for plants to grow. This package provides methods to calculate climatological or thermal growing seasons solely based on daily mean temperatures and the day of the year (DOY). Because of their simplicity, they are commonly used in plant growth models and climate change impact assessments.
 
-The concept of a temperature driven vegetation period holds mostly for the temperate climate zone. At lower latitudes, other factors such as precipitation and evaporation can be more decisive. Some methods such as GSL of `ETCCDI` are employed globally (with a half year shift in the southern hemisphere). Others have a smaller area of application as they have been parameterized with local to regional observations. `Menzel` and `vonWilpert` are used throughout Germany.
+The concept of a temperature driven vegetation period holds mostly for the temperate climate zone. At lower latitudes, other factors such as precipitation and evaporation can be more decisive. Some methods such as GSL of `ETCCDI` are employed globally (with a half year shift in the southern hemisphere). Others have a smaller area of application as they have been parameterized with local to regional observations. However, the methods `Menzel` and `vonWilpert` are used throughout Germany.
 
 The package also includes functions for downloading open meteo data from Germany's National Meteorological Service (Deutscher Wetterdienst, DWD).
 
@@ -28,7 +28,7 @@ remotes::install_github("rnuske/vegperiod")
 ```
 
 ### Usage
-Vegetation periods are calculated using the function `vegperiod()`.  One has to choose at least a start and an end method. Some methods, such as 'Menzel', require additional arguments.
+Vegetation periods are calculated using the function `vegperiod()`.  One has to choose at least a start and an end method. Some methods require additional arguments, such as 'Menzel' which needs 'species'.
 
 ```r
 data(goe)
@@ -38,7 +38,7 @@ vegperiod(dates=goe$date, Tavg=goe$t,
 ```
 
 ### Implemented start and end methods
-Some common methods for calculating the onset and end of vegetation periods are already implemented. Popular choices with regard to forest trees in Germany are 'Menzel' and 'vonWilpert'.
+Common methods for determining the onset and end of thermal vegetation periods are provided, for details see next sections and documentation. Suggestions or contributions of additional methods are always welcome. Popular choices with regard to forest trees in Germany are `Menzel` and `vonWilpert`. Climate change impact studies at NW-FVA are frequently conducted using `Menzel` with "Picea abies (frueh)" and `NuskeAlbert` for all tree species; with tree species specifics accounted for in subsequent statistical models.
 
 #### Start methods
 * **Menzel** implemented as described in Menzel (1997). Parameterized for 10 common tree species. Requires previous years chill days, which can be substituted by the average of first years.
@@ -60,4 +60,4 @@ Note: Downloading 'historical' data from DWD with `read.DWDdata()` requires the 
 
 
 ### Contributions
-Implementations of further start and end methods or download functions are more than welcome! 
+Implementations of further start and end methods or download functions are more than welcome! Please suggest suitable candidates via issue or pull request.

@@ -11,10 +11,18 @@
 #'
 #' Calculate start and end date of vegetation periods based on daily average
 #' air temperature and the day of the year (DOY).
-#' The sum of day degrees within vegetation periods is calculated for
-#' convenience sake.
+#' The sum of day degrees within the vegetation period is included for convenience.
 #'
-#' @section Start methods:
+#'
+#' @details
+#' Common methods for determining the onset and end of thermal vegetation
+#' periods are provided, for details see next sections. Popular choices with
+#' regard to forest trees in Germany are `Menzel` and `vonWilpert`. Climate
+#' change impact studies at NW-FVA are frequently conducted using `Menzel` with
+#' "Picea abies (frueh)" and `NuskeAlbert` for all tree species; with tree
+#' species specifics accounted for in subsequent statistical models.
+#'
+#' ## Start methods:
 #' The method **[`Menzel`][method_Menzel]** implements the algorithm described in
 #' Menzel (1997). The method is parameterized for 10 common tree species. It
 #' needs previous year's chill days. **[`ETCCDI`][method_ETCCDI]** resp.
@@ -27,7 +35,7 @@
 #' (Deutscher Wetterdienst, DWD) and is more robust against early starts than
 #' common simple meteorological procedures.
 #'
-#' @section End methods:
+#' ## End methods:
 #' The end method **[`vonWilpert`][method_vonWilpert]** is based on von Wilpert (1990). It
 #' was originally developed for *Picea abies* in the Black Forest but is
 #' commonly used for all tree species throughout Germany. As usual, the rules
