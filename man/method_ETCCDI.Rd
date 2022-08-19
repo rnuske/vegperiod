@@ -10,7 +10,9 @@ The \code{ETCCDI} or \code{StdMeteo} method was defined by  Expert Team on Clima
 
 \subsection{Implementation of start}{
 
-first span of at least 6 consecutive days with daily mean temperature TG > 5°C\preformatted{# mark days warmer than 5°C
+first span of at least 6 consecutive days with daily mean temperature TG > 5°C
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# mark days warmer than 5°C
 df$period <- ifelse(df$Tavg > Tmin, 1, 0)
 
 # find first six day span per year
@@ -19,12 +21,14 @@ start <- tapply(df$period, df$year, FUN=function(x)\{
   doy <- which(!is.na(sixer) & sixer == 6)
   ifelse(length(doy) == 0, NA, min(doy))
 \})
-}
+}\if{html}{\out{</div>}}
 }
 
 \subsection{Implementation of end}{
 
-first span after July 1st of 6 consecutive days with TG < 5°C.\preformatted{# 1. July is DOY 182 and DOY 183 in leap years
+first span after July 1st of 6 consecutive days with TG < 5°C.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# 1. July is DOY 182 and DOY 183 in leap years
 years <- unique(df$year)
 leap_year <- ifelse((years\%\%4==0 & years\%\%100!=0) | years\%\%400==0, TRUE, FALSE)
 jul1 <- ifelse(leap_year, 183L, 182L)
@@ -41,7 +45,7 @@ for(i in seq_along(years))\{
   if(length(possible.end) > 0)
     end[i] <- min(possible.end)
 \}
-}
+}\if{html}{\out{</div>}}
 }
 }
 

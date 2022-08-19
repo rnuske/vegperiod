@@ -13,7 +13,9 @@ common simple meteorological procedures.
 
 
 starting from 18th February sum all day degrees above 0 °C (daily average air
-temperature). Vegetetaion period starts at the day when 164 is crossed.\preformatted{# start day: February 18th == 49 doy
+temperature). Vegetetaion period starts at the day when 164 is crossed.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{# start day: February 18th == 49 doy
 # only Tavg over 0°C are summed
 df[df$DOY < 49 | df$Tavg < 0, 'Tavg'] <- 0
 
@@ -22,7 +24,7 @@ start <- tapply(df$Tavg, df$year, FUN=function(x)\{
   x <- cumsum(x)
   min(which(x > 164))
 \})
-}
+}\if{html}{\out{</div>}}
 }
 
 \references{

@@ -10,13 +10,15 @@ Kennel 2001). Their interpretation of von Wilpert (1990) and the somewhat
 lower precision of VBA was mimicked.
 }
 \section{Calculations}{
-\preformatted{- starting search at June 1st
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{- starting search at June 1st
 - propose end if 7-day moving average temperature is below 10°C
   on 5 consecutive days
 - restart search for end if there is a warm periode (7-day moving average
   temperature above 10°C for 5 consecutive days
 - nevertheless the vegetation periode stops latest at DOY 279
-}
+}\if{html}{\out{</div>}}
 }
 
 \references{

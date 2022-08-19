@@ -12,12 +12,14 @@ The method is parameterized for 10 common tree species ( \emph{Larix decidua},
 \emph{Quercus petraea}, \emph{Fagus sylvatica}). It needs previous year's chill days.
 }
 \section{Calculations}{
-\preformatted{ - counting chill days in Nov & Dec of previous year if previous year available else estimate previous year's chill days
+
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{ - counting chill days in Nov & Dec of previous year if previous year available else estimate previous year's chill days
  - count chill days in current year
  - determine critical temperature per days using regression equation fitted by Menzel 1997
  - calculate HeatSum starting from Feb
  - vegetation start if HeatSum >= criticalTemp
-}
+}\if{html}{\out{</div>}}
 }
 
 \references{

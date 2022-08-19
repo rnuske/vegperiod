@@ -73,10 +73,16 @@ additional column with the sum of day degrees within vegetation periods.
 \description{
 Calculate start and end date of vegetation periods based on daily average
 air temperature and the day of the year (DOY).
-The sum of day degrees within vegetation periods is calculated for
-convenience sake.
+The sum of day degrees within the vegetation period is included for convenience.
 }
-\section{Start methods}{
+\details{
+Common methods for determining the onset and end of thermal vegetation
+periods are provided, for details see next sections. Popular choices with
+regard to forest trees in Germany are \code{Menzel} and \code{vonWilpert}. Climate
+change impact studies at NW-FVA are frequently conducted using \code{Menzel} with
+"Picea abies (frueh)" and \code{NuskeAlbert} for all tree species; with tree
+species specifics accounted for in subsequent statistical models.
+\subsection{Start methods:}{
 
 The method \strong{\code{\link[=method_Menzel]{Menzel}}} implements the algorithm described in
 Menzel (1997). The method is parameterized for 10 common tree species. It
@@ -91,7 +97,7 @@ This method is widely used in climate change studies. The method
 common simple meteorological procedures.
 }
 
-\section{End methods}{
+\subsection{End methods:}{
 
 The end method \strong{\code{\link[=method_vonWilpert]{vonWilpert}}} is based on von Wilpert (1990). It
 was originally developed for \emph{Picea abies} in the Black Forest but is
@@ -108,7 +114,7 @@ is a simple threshold based procedure as defined by the Expert Team on
 Climate Change Detection and Indices (cf. ETCCDI 2009, Frich et al. 2002,
 Zhang et al. 2011) leading to quite late vegetation ends.
 }
-
+}
 \examples{
 data(goe)
 vegperiod(dates=goe$date, Tavg=goe$t,
