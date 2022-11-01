@@ -1,30 +1,5 @@
-CRAN Feedback: 
-For future submissions: Is there some reference about the method you can add in the Description field in the form Authors (year) <doi:.....>? 
+This is a minor update. The maintainer stays the same, but the email address changed.
 
+This package checks okay locally on ubuntu 20.04 R-release, all win-builder flavors, macOS builder, Rhub's check_for_cran suite and Github Actions CI.
 
-## Test environments
-
-* Ubuntu 20.04, R 4.0.3 [local]
-
-* win-builder
-  * R version 4.0.3 (2020-10-10)
-  * R Under development (unstable) (2021-01-31 r79912)
-  * R version 3.6.3 (2020-02-29)
-
-* R-hub
-  * Windows Server 2008 R2 SP1, R-devel, 32/64 bit
-  * Ubuntu Linux 20.04.1 LTS, R-release, GCC
-  * Fedora Linux, R-devel, clang, gfortran
-
-* Continuous Integration Systems
-  * Drone CI: Debian testing, R 4.0.1 (2020-06-06)
-  * Github Actions
-    * Windows Server 2019, R 4.0.3 (2020-10-10)
-    * Mac OS X 10.15.7, R 4.0.3 (2020-10-10)
-    * Ubuntu 20.04.1, R 4.0.3 (2020-10-10)
-    * Ubuntu 20.04.1, R-devel (unstable)  (2021-01-25 r79883)
-
-
-## R CMD check results
-
-0 errors | 0 warnings | 0 notes
+I checked that the reverse dependency compiles and checks --as-cran okay with this version of vegperiod.

@@ -1,11 +1,11 @@
 Package: vegperiod
 Title: Determine Thermal Vegetation Periods
-Version: 0.3.1.901
+Version: 0.4.0
 Authors@R: c(
   person(given="Robert", 
          family="Nuske", 
          role=c("aut", "cre"),
-         email="robert.nuske@nw-fva.de",
+         email="robert.nuske@mailbox.org",
          comment=c(ORCID="0000-0001-9773-2061")),
   person("Nordwestdeutsche Forstliche Versuchsanstalt (NW-FVA)", 
          role=c("cph", "fnd")))
@@ -17,11 +17,7 @@ URL: https://rnuske.github.io/vegperiod/, https://github.com/rnuske/vegperiod
 BugReports: https://github.com/rnuske/vegperiod/issues
 Encoding: UTF-8
 NeedsCompilation: no
-Depends: 
-  R (>= 3.2.0)
-Imports: 
-  utils
-Suggests: 
-  curl, 
-  tinytest
+Depends: R (>= 3.2.0)
+Imports: utils
+Suggests: curl, tinytest
 RoxygenNote: 7.2.1
