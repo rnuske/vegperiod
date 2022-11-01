@@ -2,7 +2,6 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/rnuske/vegperiod/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rnuske/vegperiod/actions/workflows/R-CMD-check.yaml)
-[![Drone Build Status](https://cloud.drone.io/api/badges/rnuske/vegperiod/status.svg)](https://cloud.drone.io/rnuske/vegperiod)
 [![Package-License](https://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html) 
 [![CRAN](https://www.r-pkg.org/badges/version/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![Dependencies](https://tinyverse.netlify.com/badge/vegperiod)](https://cran.r-project.org/package=vegperiod) 
