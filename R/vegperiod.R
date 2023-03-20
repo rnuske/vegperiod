@@ -200,6 +200,10 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
     )
   }
 
+  # check for consecutive days
+  if(any(diff(dates) != 1))
+    stop("The dates are not in sequence.")
+
   # set up the workhorse data.frame
   df <- data.frame(year  = as.integer(format(dates, "%Y")),
                    month = as.integer(format(dates, "%m")),
@@ -208,7 +212,7 @@ vegperiod <- function(dates, Tavg, start.method, end.method, Tsum.out=FALSE,
   rm(dates, Tavg)
 
   # determine leap years
-  years <- unique(df$year)
+  years <- sort(unique(df$year))
   leap <- (years %% 4 == 0 & years %% 100 != 0) | years %% 400 == 0
 
   # est.prev in valid range?
