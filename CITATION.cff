@@ -1,0 +1,29 @@
+cff-version: 1.2.0
+title: 'vegperiod: Determine Thermal Vegetation Periods'
+message: 'To cite package "vegperiod" in publications please use:'
+type: software
+authors:
+  - family-names: Nuske
+    given-names: Robert
+    email: robert.nuske@mailbox.org
+    orcid: 'https://orcid.org/0000-0001-9773-2061'
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.1466541
+repository-code: 'https://github.com/rnuske/vegperiod'
+url: 'https://rnuske.github.io/vegperiod/'
+repository: 'https://cran.r-project.org/package=vegperiod'
+abstract: >-
+  Collection of common methods to determine growing season
+  length in a simple manner. Start and end dates of the
+  vegetation periods are calculated solely based on daily
+  mean temperatures and the day of the year.
+keywords:
+  - vegetation-period
+  - growing-season
+  - dwd
+  - r
+  - r-package
+license: GPL-3.0-or-later
+version: 0.4.0
+date-released: '2022-11-01'

@@ -58,5 +58,12 @@ The Function `read.DWDdata()`deals with all of that and returns a `data.frame`. 
 Note: Downloading 'historical' data from DWD with `read.DWDdata()` requires the package 'curl'.
 
 
+### How to cite this package
+If you use the package `vegperiod` for your publication, please cite it as follows:
+
+> Nuske, R. (2022): vegperiod: Determine Thermal Vegetation Periods [Software]. 
+> Zenodo. Version 0.4.0. https://doi.org/10.5281/zenodo.1466541
+
+
 ### Contributions
 Implementations of further start and end methods or download functions are more than welcome! Please suggest suitable candidates via issue or pull request.
