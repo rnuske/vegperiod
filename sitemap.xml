@@ -1,48 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/404.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/goe.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_ETCCDI.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_LWF-BROOK90.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_Menzel.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_NuskeAlbert.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_Ribes.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/method_vonWilpert.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/read.DWDdata.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/read.DWDstations.html</loc>
-  </url>
-  <url>
-    <loc>https://rnuske.github.io/vegperiod/reference/vegperiod.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://rnuske.github.io/vegperiod/404.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/authors.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/index.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/news/index.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/goe.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/index.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_ETCCDI.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_LWF-BROOK90.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_Menzel.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_NuskeAlbert.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_Ribes.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/method_vonWilpert.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/read.DWDdata.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/read.DWDstations.html</loc></url>
+<url><loc>https://rnuske.github.io/vegperiod/reference/vegperiod.html</loc></url>
 </urlset>
+
