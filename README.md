@@ -4,7 +4,7 @@
 [![R-CMD-check](https://github.com/rnuske/vegperiod/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/rnuske/vegperiod/actions/workflows/R-CMD-check.yaml)
 [![Package-License](https://img.shields.io/badge/license-GPL--3-brightgreen.svg?style=flat)](https://www.gnu.org/licenses/gpl-3.0.html) 
 [![CRAN](https://www.r-pkg.org/badges/version/vegperiod)](https://cran.r-project.org/package=vegperiod) 
-[![Dependencies](https://tinyverse.netlify.com/badge/vegperiod)](https://cran.r-project.org/package=vegperiod) 
+[![Dependencies](https://tinyverse.netlify.app/badge/vegperiod)](https://cran.r-project.org/package=vegperiod) 
 [![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.1466541.svg)](https://doi.org/10.5281/zenodo.1466541)
 <!-- badges: end -->
 
