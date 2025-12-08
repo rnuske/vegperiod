@@ -1,6 +1,6 @@
 Package: vegperiod
 Title: Determine Thermal Vegetation Periods
-Version: 0.4.0.900
+Version: 0.4.0.901
 Authors@R: c(
   person(given="Robert", 
          family="Nuske", 
@@ -20,4 +20,4 @@ NeedsCompilation: no
 Depends: R (>= 3.2.0)
 Imports: utils
 Suggests: curl, tinytest
-RoxygenNote: 7.2.1
+RoxygenNote: 7.3.3

@@ -19,7 +19,8 @@ vegperiod(
 \arguments{
 \item{dates}{vector of calendar dates (objects of class \code{Date} or something
 understood by \code{\link[=as.Date]{as.Date()}}). Must contain entire years if \code{est.prev > 0}
-else the first year may comprise only November and December.}
+else the first year may comprise only November and December.
+Days must be in correct order.}
 
 \item{Tavg}{vector of daily average air temperatures in degree Celsius.
 Same length as \code{dates}.}

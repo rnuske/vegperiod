@@ -54,6 +54,7 @@
 #' @param dates vector of calendar dates (objects of class `Date` or something
 #'   understood by [as.Date()]). Must contain entire years if `est.prev > 0`
 #'   else the first year may comprise only November and December.
+#'   Days must be in correct order.
 #' @param Tavg vector of daily average air temperatures in degree Celsius.
 #'   Same length as `dates`.
 #' @param start.method name of method to use for vegetation start. One of
