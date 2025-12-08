@@ -1,12 +1,12 @@
-citHeader("To cite package vegperiod in publications please use:")
-
-year <- "2022"
+year <- "2025"
 version <- meta$Version
 
-citEntry(
-  entry = "Misc",
+bibentry(
+  bibtype = "Misc",
+  header = "To cite package vegperiod in publications please use:",
   title = "vegperiod: Determine Thermal Vegetation Periods",
-  author = person("Robert", "Nuske"),
+  author = person(given = "Robert", family = "Nuske",
+                  comment = c(ORCID = "0000-0001-9773-2061")),
   year = year,
   publisher = "Zenodo",
   doi = "10.5281/zenodo.1466541",

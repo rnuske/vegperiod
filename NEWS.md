@@ -1,5 +1,8 @@
 # News for Package vegperiod
 
+## Version 0.4.1
+  * Update citation file to match new CRAN requirements. 
+
 ## Version 0.4.0
   * introduced threshold `Tsum.crit` for sum of day degrees in function `vegperiod()`
   * made plausibility check optional via new parameter `check.data` (suggested by @rhabel)
