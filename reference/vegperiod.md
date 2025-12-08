@@ -27,7 +27,7 @@ vegperiod(
   vector of calendar dates (objects of class `Date` or something
   understood by [`as.Date()`](https://rdrr.io/r/base/as.Date.html)).
   Must contain entire years if `est.prev > 0` else the first year may
-  comprise only November and December.
+  comprise only November and December. Days must be in correct order.
 
 - Tavg:
 
