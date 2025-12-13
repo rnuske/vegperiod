@@ -77,11 +77,16 @@ NULL
   if(est.prev == 0){
     # drop first year
     df <- df[df$year != years[1], ]
+    years <- years[-1]
   } else {
     # mean "est.prev number of years" as proxy for first year's previous chill days
     CDNovDec <- rbind(c(mean(CDNovDec$CDprev[1:est.prev]), years[1]),
                       CDNovDec)
   }
+
+  if(!all(years %in% CDNovDec$year))
+    stop("Method Menzel could not establish start dates for all years, ",
+         "because some have no chill days in previous november and december.")
 
   # cumulative sums of chill days per year
   df$CD <- ifelse(df$Tavg <=  Mp$TbCD, 1, 0)
@@ -91,7 +96,6 @@ NULL
   # merge and add to workhorse df
   ChillDays <- merge(ChillDays, CDNovDec, by="year", all.x=TRUE)
   df$CD <- ChillDays$CDprev +  ChillDays$CDcumsum
-  rm(ChillDays, CDNovDec)
 
   # determine vegetation start with Menzel's regression
   #----------------------------------------------------------------------------
@@ -109,6 +113,7 @@ NULL
   # determine first of start candidates
   start <- utils::stack(tapply(df$DOY[df$start],
                         df$year[df$start], FUN=min))$values
+
   return(start)
 }
 

@@ -1,7 +1,8 @@
 # News for Package vegperiod
 
 ## Version 0.4.1
-  * Update citation file to match new CRAN requirements. 
+  * update citation file to match new CRAN requirements. 
+  * introduce check for enough chill days in method Menzel (Thanks @valentingar for reporting)
 
 ## Version 0.4.0
   * introduced threshold `Tsum.crit` for sum of day degrees in function `vegperiod()`

@@ -59,10 +59,10 @@ Note: Downloading 'historical' data from DWD with `read.DWDdata()` requires the 
 
 
 ### How to cite this package
-If you use the package `vegperiod` for your publication, please cite it as follows:
+If you use the package `vegperiod` for your publications, please cite it as follows:
 
-> Nuske, R. (2022): vegperiod: Determine Thermal Vegetation Periods [Software]. 
-> Zenodo. Version 0.4.0. https://doi.org/10.5281/zenodo.1466541
+> Nuske, R. (2025): vegperiod: Determine Thermal Vegetation Periods [Software]. 
+> Zenodo. Version 0.4.1. https://doi.org/10.5281/zenodo.1466541
 
 
 ### Contributions
