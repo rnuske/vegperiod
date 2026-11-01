@@ -13,16 +13,16 @@
 Source:
 [`inst/CITATION`](https://github.com/rnuske/vegperiod/blob/master/inst/CITATION)
 
-Nuske, R. (2025): vegperiod: Determine Thermal Vegetation Periods
-\[Software\]. Zenodo. Version 0.4.0.901.
+Nuske, R. (2026): vegperiod: Determine Thermal Vegetation Periods
+\[Software\]. Zenodo. Version 0.4.1.
 https://doi.org/10.5281/zenodo.1466541
 
     @Misc{,
       title = {vegperiod: Determine Thermal Vegetation Periods},
       author = {Robert Nuske},
-      year = {2025},
+      year = {2026},
       publisher = {Zenodo},
       doi = {10.5281/zenodo.1466541},
       note = {[Software]},
-      version = {0.4.0.901},
+      version = {0.4.1},
     }
