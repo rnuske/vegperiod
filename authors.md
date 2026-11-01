@@ -11,7 +11,7 @@
 ## Citation
 
 Source:
-[`inst/CITATION`](https://github.com/rnuske/vegperiod/blob/master/inst/CITATION)
+[`inst/CITATION`](https://github.com/rnuske/vegperiod/blob/v0.4.1/inst/CITATION)
 
 Nuske, R. (2026): vegperiod: Determine Thermal Vegetation Periods
 \[Software\]. Zenodo. Version 0.4.1.
