@@ -99,7 +99,7 @@
 #' @references
 #'   ETCCDI (2009)
 #'   Climate Change Indices: Definitions of the 27 core indices.
-#'   \url{http://etccdi.pacificclimate.org/list_27_indices.shtml}
+#'   \url{https://etccdi.pacificclimate.org/list_27_indices.shtml}
 #'
 #'   Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
 #'   Klein Tank, A. and Peterson, T. (2002)
