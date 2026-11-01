@@ -148,8 +148,7 @@ ends.
 ## References
 
 ETCCDI (2009) Climate Change Indices: Definitions of the 27 core
-indices.
-[http://etccdi.pacificclimate.org/list_27_indices.shtml](http://etccdi.pacificclimate.org/list_27_indices.smd)
+indices. <https://etccdi.pacificclimate.org/list_27_indices.shtml>
 
 Frich, P., Alexander, L., Della-Marta, P., Gleason, B., Haylock, M.,
 Klein Tank, A. and Peterson, T. (2002) Observed coherent changes in

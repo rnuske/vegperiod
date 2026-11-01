@@ -23,6 +23,7 @@ Germany’s National Meteorological Service (Deutscher Wetterdienst, DWD).
 The stable version can be installed from CRAN
 
 ``` r
+
 install.packages("vegperiod")
 ```
 
@@ -30,6 +31,7 @@ and the development version is available from Github using the package
 `remotes`
 
 ``` r
+
 remotes::install_github("rnuske/vegperiod")
 ```
 
@@ -41,6 +43,7 @@ One has to choose at least a start and an end method. Some methods
 require additional arguments, such as ‘Menzel’ which needs ‘species’.
 
 ``` r
+
 data(goe)
 vegperiod(dates=goe$date, Tavg=goe$t, 
           start.method="Menzel", end.method="vonWilpert", 
